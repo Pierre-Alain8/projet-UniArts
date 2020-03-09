@@ -17,9 +17,44 @@ app.use(cors());
 mongoose.connect('mongodb://localhost/todoList', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
 app.get('/', (request, response) => {
-
     response.send('Hello UniArts')
-})
+});
+
+
+//Récupération des models 
+let User = require('./models/user');  
+
+// Déclaration des routes 
+app.route('/user/register').post(function(req, res) { 
+
+    let user = new User({ 
+        name : req.body.name, 
+        pseudo: req.body.pseudo, 
+        email: req.body.email, 
+        password: req.body.password
+    })
+
+
+    
+    if( user.name !== null && user.pseudo !== null && user.email !== null && user.password) {
+
+        user.save(function(err,data){
+
+            if(err){
+                res.status(204).send(err)
+                console.log('aah...il manque des infos')
+
+            } else {
+                res.status(200).send(data)
+                console.log('vous vous êtes bien enregistré')
+            }
+        })
+        
+    }
+
+});  
+
+
 
 app.listen(8080);
 
