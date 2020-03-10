@@ -25,32 +25,40 @@ app.get('/', (request, response) => {
 let User = require('./models/user');  
 
 // Déclaration des routes 
+//user/register : route pour permettre à l'artiste de s'identifier
 app.route('/user/register').post(function(req, res) { 
 
-    let user = new User({ 
-        name : req.body.name, 
-        pseudo: req.body.pseudo, 
-        email: req.body.email, 
-        password: req.body.password
-    })
+    // hachage du password du user
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
 
-    
-    if(user.name !== null && user.pseudo !== null && user.email !== null && user.password) {
+        let user = new User({ 
+            name : req.body.name, 
+            pseudo: req.body.pseudo, 
+            email: req.body.email, 
+            password: hash
+            
+        });
 
-        user.save(function(err,data){
+        if(user.name !== null && user.pseudo !== null && user.email !== null && user.password !== null) {
 
-            if(err){
-                res.status(204).send(err)
-                console.log('aah...il manque des infos')
+            user.save(function(err,data){
+                
+                if(err){
+                    res.status(204).send(err)
+                    console.log('aah...il manque des infos')
+                
+                } else {
+                    res.status(200).send(data)
+                    console.log('vous vous êtes bien enregistré')
+                }
+            })
+                        
+        }
 
-            } else {
-                res.status(200).send(data)
-                console.log('vous vous êtes bien enregistré')
-            }
-        })
-        
-    }
+    });
 
+   
+  
 });  
 
 
