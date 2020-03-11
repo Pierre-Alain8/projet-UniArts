@@ -10,11 +10,12 @@ app = express();
 // traitement des données dans le corps du bdody des requêtes, traitement des données en json
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
-app.use(cors());
+let corsOption = {origin: 'http://localhost:3000'}
+app.use(cors(corsOption));
 
 
 // Initialisation de la connexion a la base de données
-mongoose.connect('mongodb://localhost/todoList', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect('mongodb://localhost/UniArts', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
 app.get('/', (request, response) => {
     response.send('Hello UniArts')
@@ -35,6 +36,7 @@ app.route('/user/register').post(function(req, res) {
             name : req.body.name, 
             pseudo: req.body.pseudo, 
             email: req.body.email, 
+            // about: req.body.about,
             password: hash
             
         });

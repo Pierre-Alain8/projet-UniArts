@@ -23,15 +23,21 @@ let userSchema = new Schema({
     password: {
         type: 'String', 
         required: 'You need to specifie a password'
-    }, 
+    },
 
+    about: {
+        type: 'string',
+    },
+
+    
     date_register: { 
         type: 'date', 
         default: Date.now()
     }, 
 
     adhesion: {
-        type: 'boolean'
+        type: 'boolean', 
+        default: false
 
     }, 
 
