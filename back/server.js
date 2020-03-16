@@ -26,11 +26,17 @@ app.get('/', (request, response) => {
 let User = require('./models/user');  
 
 // Déclaration des routes 
+
 //user/register : route pour permettre à l'artiste de s'identifier
 app.route('/user/register').post(function(req, res) { 
 
+    // const name =  req.body.name 
+    // const pseudo = req.body.pseudo 
+    // const email = req.body.email
+    // const password = req.body.password
+
     // hachage du password du user
-    bcrypt.hash(req.body.password, 10, function(err, hash) {
+    bcrypt.hash(req.body.password, 10, function(err,hash) {
 
         let user = new User({ 
             name : req.body.name, 
@@ -41,23 +47,37 @@ app.route('/user/register').post(function(req, res) {
             
         });
 
-        if(user.name !== null && user.pseudo !== null && user.email !== null && user.password !== null) {
+
+        if(!user.name || !user.pseudo || !user.email || !user.password  ) {
+            const  message = "Inscription impossible "
+            res.status(400).send(message)
+
+        } else {
 
             user.save(function(err,data){
-                
+                    
                 if(err){
                     res.status(204).send(err)
-                    console.log('aah...il manque des infos')
-                
+                    console.log('Inscription non effectué : veuillez remplir tous les champs ')  
+                    console.log(user)
+                    console.log(data)
+                    
                 } else {
                     res.status(200).send(data)
-                    console.log('vous vous êtes bien enregistré')
+                    console.log('Inscription effectué avec succès')
                 }
-            })
-                        
+            });
         }
-
+        
     });
+
+       
+
+           
+                        
+        
+
+
 
    
   

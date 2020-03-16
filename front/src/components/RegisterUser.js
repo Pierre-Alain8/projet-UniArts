@@ -1,5 +1,4 @@
 import React from 'react'; 
-// import { json } from 'body-parser';
 
 
 class RegisterUser extends React.Component {
@@ -11,7 +10,8 @@ class RegisterUser extends React.Component {
             name: "", 
             pseudo: "", 
             email: "", 
-            password:""
+            password:"",
+            error : ""
             
         }
 
@@ -27,16 +27,11 @@ class RegisterUser extends React.Component {
         const value = target.value;
         // l'évenement event.target est rappelé dans les variables let pour cibler les input
         let name =target.name;
-        let pseudo =target.name;
-        let email =target.name; 
-        let password =target.name;
+        
 
         this.setState({
             // récupération des valeurs de manières indépendantes 
             [name]:value,
-            [pseudo]:value,
-            [email]:value,
-            [password]:value
 
         }, console.log(name))
 
@@ -45,21 +40,36 @@ class RegisterUser extends React.Component {
     handleSubmit(event) { 
         event.preventDefault();
 
-        // options de la requête fetch
-        const options = {
+       
+        const options = {// options de la requête fetch
             method: 'POST', 
-            body: new URLSearchParams(this.state),
-        // les informations que je souhaite récupérer dans le body (les données du user)
+            body: new URLSearchParams(this.state), // les informations que je souhaite récupérer dans le body (les données du user)
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         };
 
         fetch('http://localhost:8080/user/register', options)
-            .then(res => console.log(res ))
-            // .then( res =>{return res.json() })
-            .then(res => console.log(res ))
-            .catch((errors) => {console.log(errors);})
+            .then(res => (res ))
+            // .then(res => res.json() ) 
+            .then( (res )=> {
+                if(res.status === 400 ){
+                    this.setState({
+                        error: "Inscription impossible  : veuillez remplir tous les champs"
+                    })
+                } else{
+                    console.log(res )
+                } 
+
+                if(res.status === 200){
+
+                    this.props.history.push('/loginUser')
+                } else{ 
+                    console.log(res )
+                }
+
+            })
+            // .catch((errors) => {console.log(errors);})
          
 
         // console.log( this.state.pseudo, this.state.name, this.state.email, this.state.pseudo, this.state.password)
@@ -102,7 +112,13 @@ class RegisterUser extends React.Component {
                     
                 </label>
 
-                <input type="submit" />
+                <input type="submit" /> 
+
+                <div className="errorRegister">
+                    <p>
+                        {this.state.error}
+                    </p>
+                </div>
               
             </form>
          

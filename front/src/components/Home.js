@@ -1,4 +1,5 @@
 import React from 'react';
+import PreviewsArticles from './PreviewsArticles'
 import { withRouter} from 'react-router-dom';
 
 
@@ -19,10 +20,13 @@ class Home extends React.Component {
     
     render(){
         return(
-            <section> 
-                <article>
-                    <button onClick={this.handleClick}>Nous rejoindre !</button>
-                </article>
+            <section className="home-uniarts"> 
+                <div className="link-register">
+                    <button className="button-link-register" onClick={this.handleClick}>Nous rejoindre !</button>
+                </div>  
+
+               <PreviewsArticles /> 
+               
             </section>
         )
     }

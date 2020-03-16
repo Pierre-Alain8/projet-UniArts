@@ -23,16 +23,15 @@ class LoginUser extends React.Component {
         const value = target.value;
        
         
-        let email =target.email; 
-        let password =target.value;
+        let name =target.name;
+
     
 
         this.setState({
             // récupération des valeurs de manières indépendantes 
-            [email]:value,
-            [password]:value
+            [name]: value,
 
-        }, console.log(email, password))
+        }, console.log(name))
 
     } 
 

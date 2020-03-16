@@ -16,13 +16,14 @@ let userSchema = new Schema({
     email: {
         type: 'String', 
         required: 'You need to specifie a email',
-        match: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+        // match: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
         unique: true
     },  
 
     password: {
         type: 'String', 
-        required: 'You need to specifie a password'
+        required: 'You need to specifie a password', 
+        // match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
     },
 
     about: {
