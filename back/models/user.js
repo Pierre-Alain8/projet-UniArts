@@ -45,7 +45,19 @@ let userSchema = new Schema({
     role: {
         type: 'string', 
         enum: ['Admin', 'Artiste']
-    }
+    }, 
+
+    projectId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project"
+    }], 
+
+    linkId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Link"
+    }], 
+
+
 
 });
 

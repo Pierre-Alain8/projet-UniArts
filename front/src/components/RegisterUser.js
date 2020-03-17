@@ -55,11 +55,19 @@ class RegisterUser extends React.Component {
             .then( (res )=> {
                 if(res.status === 400 ){
                     this.setState({
-                        error: "Inscription impossible  : veuillez remplir tous les champs"
+                        error: "Veuillez vous inscrire pour vous connecter"
                     })
                 } else{
                     console.log(res )
-                } 
+                }
+                
+                if(res.status === 204){
+                    this.setState({
+                        error: "Inscription impossible  : veuillez remplir tous les champs"
+                    })
+                } else {
+                    console.log(res )
+                }
 
                 if(res.status === 200){
 
