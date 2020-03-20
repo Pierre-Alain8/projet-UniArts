@@ -1,4 +1,6 @@
 import React from 'react'; 
+import { Link } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 
 
 class RegisterUser extends React.Component {
@@ -35,54 +37,43 @@ class RegisterUser extends React.Component {
 
         }, console.log(name))
 
-    } 
+    }; 
 
     handleSubmit(event) { 
         event.preventDefault();
 
-       
-        const options = {// options de la requête fetch
-            method: 'POST', 
-            body: new URLSearchParams(this.state), // les informations que je souhaite récupérer dans le body (les données du user)
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+        fetch(`http://localhost:8080/user/register`, {
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json'  
+            },
+            method: 'POST',
+            body: JSON.stringify(this.state),
+        })
+        .then((res) => {
+
+            if(res.status === 400 ){
+                this.setState({
+                    error: "Inscription impossible  : veuillez remplir tous les champs"
+                });
+            } else{
+                console.log(res )
             }
-        };
+            
+            if(res.status === 200){
 
-        fetch('http://localhost:8080/user/register', options)
-            .then(res => (res ))
-            // .then(res => res.json() ) 
-            .then( (res )=> {
-                if(res.status === 400 ){
-                    this.setState({
-                        error: "Veuillez vous inscrire pour vous connecter"
-                    })
-                } else{
-                    console.log(res )
-                }
-                
-                if(res.status === 204){
-                    this.setState({
-                        error: "Inscription impossible  : veuillez remplir tous les champs"
-                    })
-                } else {
-                    console.log(res )
-                }
+                this.props.history.push('/LoginUser')
+            }
 
-                if(res.status === 200){
-
-                    this.props.history.push('/loginUser')
-                } else{ 
-                    console.log(res )
-                }
-
-            })
-            // .catch((errors) => {console.log(errors);})
+            return res.json()
+            
+        })
+        .catch((errors) => {console.log(errors)})
          
 
         // console.log( this.state.pseudo, this.state.name, this.state.email, this.state.pseudo, this.state.password)
         console.log(this.state)
-    }
+    };
 
     render(){
         return(
@@ -120,7 +111,11 @@ class RegisterUser extends React.Component {
                     
                 </label>
 
-                <input type="submit" /> 
+                <button type="submit">Inscription</button>
+
+                <div>
+                    <Link to="/loginUser"><p>Vous avez déjà un compte ?</p></Link>
+                </div>
 
                 <div className="errorRegister">
                     <p>
@@ -134,4 +129,4 @@ class RegisterUser extends React.Component {
     }
 }
 
-export default RegisterUser
+export default withRouter(RegisterUser)

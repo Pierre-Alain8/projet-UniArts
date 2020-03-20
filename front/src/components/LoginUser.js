@@ -1,4 +1,6 @@
 import React from 'react'; 
+import { Link } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 
 class LoginUser extends React.Component {
 
@@ -7,25 +9,21 @@ class LoginUser extends React.Component {
 
         this.state = {
             email:"", 
-            password:""
+            password:"", 
+            error:""
             
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         
     } 
 
+
     handleChange(event) {
-        
-       
+
         const target = event.target;
         const value = target.value;
-       
-        
-        let name =target.name;
-
-    
+        let name = target.name;
 
         this.setState({
             // récupération des valeurs de manières indépendantes 
@@ -33,25 +31,53 @@ class LoginUser extends React.Component {
 
         }, console.log(name))
 
-    } 
+    };
 
     handleSubmit(event){
-        event.preventDefault() 
+        event.preventDefault();
 
-        const options = {
-            method: 'POST', 
-            body: new URLSearchParams(this.state),
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+        const{email, password } = this.state
+
+        fetch(`http://localhost:8080/user/login`, {
+            headers:{
+                Accept: 'application/json',
+                'Content-Type': 'application/json'  
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                email,
+                password
+            }),
+        })
+        .then((res) => {
+            if(res.status === 201 ){
+                this.setState({
+                    error: "user not found"
+                })
+            } else{
+                // console.log(res )
             }
-        };
+            
+            if(res.status === 400){
+                this.setState({
+                    error: "Veuillez entrez un email et un password existant"
+                })
+            } else {
+                // console.log(res )
+            }
 
-        fetch('http://localhost:8080/user/login', options)
-        .then(res => console.log(res ))
-        .catch((errors) => {console.log(errors);})
+            res.json().then( (res) => {
+            
+                localStorage.setItem('token', res.token); 
+                this.props.history.push('/ProfileUser')
+                console.log(res.token)   
+        
+            })
+    
+        })
+       
 
-
-    }
+    };
 
     render(){
         return(
@@ -73,7 +99,17 @@ class LoginUser extends React.Component {
                     
                 </label>
 
-                <input type="submit" />
+                <button type="submit">Connexion</button>
+
+                <div>
+                    <Link to="/registerUser"><p>Vous n'avez pas de compte ?</p></Link>
+                </div>
+
+                <div className="errorLogin">
+                    <p>
+                        {this.state.error }
+                    </p>
+                </div>
               
             </form>
          
@@ -81,4 +117,4 @@ class LoginUser extends React.Component {
     }
 }; 
 
-export default LoginUser
+export default withRouter(LoginUser)

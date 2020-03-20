@@ -1,28 +1,35 @@
 import React from 'react';
-import PreviewsArticles from './PreviewsArticles'
+import PreviewsArticles from './PreviewsArticles';
 import { withRouter} from 'react-router-dom';
+import '../css/home.css'
 
 
 class Home extends React.Component { 
     constructor(props) {
         super(props)
     
-        this.state = {
-             
-        }
+        let token = localStorage.getItem('token')
+        if(!token)
+            this.props.history.push('/');
+
 
         this.handleClick = this.handleClick.bind(this)
     }
     
-    handleClick = () =>{
-        this.props.history.push('/registerUser')
+    handleClick(){
+        this.props.history.push('/LoginUser')
     }
     
     render(){
         return(
             <section className="home-uniarts"> 
+
+                <div className="title-home">
+                    <h1>UNIARTS</h1>
+                </div>
+
                 <div className="link-register">
-                    <button className="button-link-register" onClick={this.handleClick}>Nous rejoindre !</button>
+                    <button className="button-link-register" onClick={this.handleClick }>Nous rejoindre !</button>
                 </div>  
 
                <PreviewsArticles /> 

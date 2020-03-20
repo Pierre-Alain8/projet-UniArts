@@ -1,5 +1,7 @@
 import React from 'react';
-// import Navbar from './Navbar'
+import '../css/header.css';
+import { withRouter} from 'react-router-dom';
+import Navbar from './Navbar';
 
 class Header extends React.Component {
     constructor(props) {
@@ -8,6 +10,12 @@ class Header extends React.Component {
         this.state = {
              
         }
+
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(){
+        this.props.history.push('/')
     }
 
     render(){
@@ -16,7 +24,7 @@ class Header extends React.Component {
 
                 <div className="header-contenair">
 
-                    <div className="logo-contenair">
+                    <div onClick={this.handleClick } className="logo-contenair">
                         <p>
                             UNIARTS            
                         </p>
@@ -24,7 +32,7 @@ class Header extends React.Component {
                     </div>
 
                     <div className="menu-contenair">
-                        {/* <Navbar /> */}
+                        <Navbar />
                        
                     </div>    
                 </div>
@@ -35,4 +43,4 @@ class Header extends React.Component {
     
 }
 
-export default Header
+export default withRouter(Header)

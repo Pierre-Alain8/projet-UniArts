@@ -3,9 +3,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Header from './components/Header'; 
 import Footer from './components/Footer'
-import loginUser from './components/LoginUser'; 
+import LoginUser from './components/LoginUser'; 
 import RegisterUser from './components/RegisterUser'; 
+import ProfileUserOffice from './components/ProfileUserOffice';
 import './App.css'
+
 
 class App extends React.Component {
   render() {
@@ -15,8 +17,9 @@ class App extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path="/registerUser" component={RegisterUser} />
-          <Route path="/loginUser" component={loginUser} />
+          <Route path="/RegisterUser" component={RegisterUser } />
+          <Route path="/LoginUser" component={LoginUser } />
+          <Route path="/ProfileUserOffice" component={ProfileUserOffice } />
         </Switch>
         <Footer />
 
