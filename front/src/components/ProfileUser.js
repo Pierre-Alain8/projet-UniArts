@@ -17,7 +17,7 @@ class ProfileUser extends React.Component {
             <section className="section-profile"> 
 
                 <div>
-                    Bienvenue sur votre profil !
+                    Bienvenue sur le profile de l'artiste!
                 </div>
                
             </section>

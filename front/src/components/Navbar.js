@@ -22,11 +22,11 @@ class Navbar extends React.Component {
                 <div className="bar3"></div>
             </div>
 
-            <ul>
-                <li><Link to="/">Home</Link></li> 
-                <li><Link to="/">Articles</Link></li>
-                <li><Link to="/">Les Artistes</Link></li>
-                <li><Link to="/">Archive</Link></li>
+            <ul className="navbar">
+                <li><Link to="/">HOME</Link></li> 
+                <li><Link to="/">ARTICLES</Link></li>
+                <li><Link to="/">LES ARTISTES</Link></li>
+                <li><Link to="/">ARCHIVE</Link></li>
             </ul>
         </div>
         )

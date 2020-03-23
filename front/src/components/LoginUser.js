@@ -69,7 +69,7 @@ class LoginUser extends React.Component {
             res.json().then( (res) => {
             
                 localStorage.setItem('token', res.token); 
-                this.props.history.push('/ProfileUser')
+                this.props.history.replace('/OfficeProfileUser')
                 console.log(res.token)   
         
             })
