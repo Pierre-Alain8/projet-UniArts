@@ -8,7 +8,14 @@ jwt_secret = process.env.JWT_SECRET_KEY;
 
 exports.register = function (req, res) {
      // hachage du password du user
-     console.log(req.body.password);
+    
+    const regex = new RegExp("/^(?=.\d)(?=.[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/");
+
+    if(regex.test(req.body.password)){
+        let message = "votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractères spéciacle, 1 caractère numérique et de plus de 8 caractères"  
+        return res.status(401).json(message)
+    }
+    
     let hash = bcrypt.hashSync(req.body.password, 10);
     req.body.password = hash;
 
@@ -24,7 +31,7 @@ exports.register = function (req, res) {
 
 
         if(!user) {
-            const  message = "Inscription impossible "
+            let message = "Inscription impossible "
             
             res.status(400).json(message)
             console.log(user.password)

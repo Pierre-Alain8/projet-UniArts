@@ -12,7 +12,7 @@ class Home extends React.Component {
     }
     
     handleClick(){
-        this.props.history.push('/LoginUser')
+        this.props.history.push('/RegisterUser')
     }
     
     render(){

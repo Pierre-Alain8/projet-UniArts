@@ -107,7 +107,7 @@ class LoginUser extends React.Component {
                 <button type="submit">Connexion</button>
 
                 <div>
-                    <Link to="/registerUser"><p>Vous n'avez pas de compte ?</p></Link>
+                    <Link to="/RegisterUser"><p>Vous n'avez pas de compte ?</p></Link>
                 </div>
 
                 <div className="errorLogin">
