@@ -54,7 +54,7 @@ class RegisterUser extends React.Component {
 
             if(res.status === 401){
                 this.setState({
-                    error:"Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractères spéciacle, 1 caractère numérique et de plus de 8 caractères"
+                    error:"Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"
                 })
             } else {
                 console.log(res)
