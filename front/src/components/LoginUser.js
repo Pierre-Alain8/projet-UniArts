@@ -50,29 +50,33 @@ class LoginUser extends React.Component {
             }),
         })
         .then((res) => {
-            if(res.status === 201 ){
-                this.setState({
-                    error: "user not found"
-                })
-            } else{
-                // console.log(res )
-            }
+            // if(res.status === 201 ){
+            //     this.setState({
+            //         error: "user not found"
+            //     })
+            //     console.log(res)
+            // } else{
+            //     console.log(res)
+            // }
             
             if(res.status === 400){
                 this.setState({
-                    error: "Veuillez entrez un email et un password existant"
+                    error: "Veuillez entrez un password valide"
                 })
             } else {
-                // console.log(res )
+                console.log(res )
             }
 
-            res.json().then( (res) => {
+            if(res.status === 200) {
+
+                res.json().then( (res) => {
+                
+                    localStorage.setItem('token', res.token); 
+                    this.props.history.push('/OfficeUser')
+                    console.log(res.token)   
             
-                localStorage.setItem('token', res.token); 
-                this.props.history.replace('/OfficeProfileUser')
-                console.log(res.token)   
-        
-            })
+                })
+            }
     
         })
        
@@ -82,6 +86,7 @@ class LoginUser extends React.Component {
     render(){
         return(
          
+        <section className="section-login">
             <form onSubmit={this.handleSubmit }>
                 <label> 
                     Email : 
@@ -112,6 +117,7 @@ class LoginUser extends React.Component {
                 </div>
               
             </form>
+        </section>
          
         )
     }

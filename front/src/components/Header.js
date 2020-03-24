@@ -10,12 +10,6 @@ class Header extends React.Component {
         this.state = {
              
         }
-
-        this.handleClick = this.handleClick.bind(this)
-    }
-
-    handleClick(){
-        this.props.history.push('/')
     }
 
     render(){
@@ -23,18 +17,7 @@ class Header extends React.Component {
             <section className="header-Uniarts">
 
                 <div className="header-contenair">
-
-                    <div onClick={this.handleClick } className="logo-contenair">
-                        <p>
-                            UNIARTS            
-                        </p>
-
-                    </div>
-
-                    <div className="menu-contenair">
-                        <Navbar />
-                       
-                    </div>    
+                    <Navbar />
                 </div>
 
             </section>

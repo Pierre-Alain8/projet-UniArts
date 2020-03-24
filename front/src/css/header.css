@@ -1,3 +1,12 @@
+@media all and (min-width: 320px) and (max-width: 480px) {
+
+.header-contenair { 
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .logo-contenair {  
     display: flex;
     justify-content: center;
@@ -13,34 +22,4 @@
     color: #F16462;
 }
 
-.menu-contenair {
-    height: 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.burgerMenu {
-    width: 100%;
-    height: 4rem;
-}
-
-.navbar{
-    width: 100%;
-    display: flex;
-    padding: 0;
-    justify-content: space-evenly;
-    list-style: none;
-}
-
-.navbar li {
-    background-color: #404040;
-    text-decoration: none;
-}
-
-a:link {
-    font-family: 'Source Sans Pro', sans-serif;
-    color: white;
-    background-color: transparent;
-    text-decoration: none
 }

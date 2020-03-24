@@ -10,14 +10,8 @@ export default function requireAuth(ComponentToProtect) {
 
             };
             
-            
             this.getToken = this.getToken.bind(this);
         }
-
-        // decodeToken(){
-        //     var decoded = jwt_decode(token)
-        //     console.log(decoded)
-        // }
         
         
         getToken() {
@@ -33,7 +27,6 @@ export default function requireAuth(ComponentToProtect) {
                 } else {
                     return <Redirect to='/OfficeProfileUser'/>
                 }
-
                 
             } catch (error) {
                 

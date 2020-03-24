@@ -1,15 +1,25 @@
 import React from 'react';
 import { withRouter} from 'react-router-dom';
-// import '../css/home.css'
+import '../css/officeUser.css'
 
 
-class OfficeProfileUser extends React.Component { 
+class OfficeUser extends React.Component { 
     constructor(props) {
         super(props)
     
         this.state = {
              
         }
+
+       
+    } 
+
+    componentDidMount(){
+
+        let token = localStorage.getItem('token')
+        if(!token)
+         this.props.history.push('/');
+
     }
     
     render(){
@@ -25,4 +35,4 @@ class OfficeProfileUser extends React.Component {
     }
 }
 
-export default withRouter(OfficeProfileUser)
+export default withRouter(OfficeUser)

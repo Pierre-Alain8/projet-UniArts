@@ -12,7 +12,7 @@ class RegisterUser extends React.Component {
             name: "", 
             pseudo: "", 
             email: "", 
-            password:"",
+            password: "",
             error : ""
             
         }
@@ -62,6 +62,8 @@ class RegisterUser extends React.Component {
             
             if(res.status === 200){
 
+                console.log(res)
+                console.log(this.state.password)
                 this.props.history.push('/LoginUser')
             }
 
@@ -77,7 +79,7 @@ class RegisterUser extends React.Component {
 
     render(){
         return(
-         
+        <section className="section-register">
             <form onSubmit={this.handleSubmit }>
                 <label> 
                     Name : 
@@ -99,7 +101,7 @@ class RegisterUser extends React.Component {
                     Email : 
                     <input type="email" id="email" name="email" 
                     value={this.state.email} 
-                    onChange={this.handleChange } />
+                    onChange={this.handleChange} />
 
                 </label>
 
@@ -107,7 +109,7 @@ class RegisterUser extends React.Component {
                     password : 
                     <input type="password" id="password" name="password"  
                     value={this.state.password} 
-                    onChange={this.handleChange } />
+                    onChange={this.handleChange} />
                     
                 </label>
 
@@ -124,6 +126,7 @@ class RegisterUser extends React.Component {
                 </div>
               
             </form>
+        </section>
          
         )
     }

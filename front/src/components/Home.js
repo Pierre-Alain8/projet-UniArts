@@ -7,11 +7,6 @@ import '../css/home.css'
 class Home extends React.Component { 
     constructor(props) {
         super(props)
-    
-        let token = localStorage.getItem('token')
-        if(!token)
-            this.props.history.push('/');
-
 
         this.handleClick = this.handleClick.bind(this)
     }

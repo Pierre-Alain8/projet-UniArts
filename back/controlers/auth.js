@@ -8,6 +8,7 @@ jwt_secret = process.env.JWT_SECRET_KEY;
 
 exports.register = function (req, res) {
      // hachage du password du user
+     console.log(req.body.password);
     let hash = bcrypt.hashSync(req.body.password, 10);
     req.body.password = hash;
 
@@ -22,9 +23,11 @@ exports.register = function (req, res) {
         });
 
 
-        if(!user.name || !user.pseudo || !user.email || user.password.length < 8) {
+        if(!user) {
             const  message = "Inscription impossible "
+            
             res.status(400).json(message)
+            console.log(user.password)
 
         } else {
 
@@ -38,6 +41,7 @@ exports.register = function (req, res) {
                     
                 } else {
                     res.status(200).json(data)
+                    console.log(data)
                     console.log('Inscription effectué avec succès')
                 };
             });
@@ -61,10 +65,11 @@ exports.login = function (req, res) {
             bcrypt.compare(req.body.password, user.password, function(err, result) {
                 
                 if(result) {
-                    let token = jwt.sign({id: user._id, admin: user.admin}, jwt_secret)
+                    let token = jwt.sign({id: user._id, admin: user.role}, jwt_secret)
                     let response = {user: user, adhesion: true, token: token}
                     res.status(200).json(response)
                     console.log('vous êtes bien connecté')
+                    console.log(result)
                     console.log(token)
                 } else {
                     res.status(400).json(err)

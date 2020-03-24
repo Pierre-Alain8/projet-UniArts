@@ -11,13 +11,15 @@
 }
 
 .random-articles {
-    /* background-color: orange; */
+    /* background articles */
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('/img/cover-test.jpg');
-    background-position: center;
+    background-position: initial;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     display: flex;
+
+    /* positions */
     flex-direction: column; 
     justify-content: center;
     align-items: center;
@@ -31,6 +33,11 @@
 .random-articles h2,p {
     margin: 0;
     font-size: 0.8em;
+}
+
+.random-articles h2 {
+    font-family: 'Teko', sans-serif;
+    font-size: 1.3em;
 }
 
 .random-articles button {

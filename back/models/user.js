@@ -4,24 +4,24 @@ const Schema = mongoose.Schema;
 let userSchema = new Schema({
 
     name : {
-    type: 'String', 
+    type: 'string', 
     required: 'You need to specifie a name'
     }, 
 
     pseudo : {
-        type: 'String', 
+        type: 'string', 
         required: 'You need to specifie a pseudo' 
     }, 
 
     email: {
-        type: 'String', 
+        type: 'string', 
         required: 'You need to specifie a email',
         // match: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
         unique: true
     },  
 
     password: {
-        type: 'String', 
+        type: 'string', 
         required: 'You need to specifie a password', 
         // match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
     },
