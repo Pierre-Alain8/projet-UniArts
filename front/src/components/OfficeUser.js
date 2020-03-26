@@ -8,10 +8,10 @@ class OfficeUser extends React.Component {
         super(props)
     
         this.state = {
-             
+            nameUser: ""
         }
 
-       
+        this.getUser = this.getUser.bind(this)
     } 
 
     componentDidMount(){
@@ -19,6 +19,11 @@ class OfficeUser extends React.Component {
         let token = localStorage.getItem('token')
         if(!token)
          this.props.history.push('/');
+    };
+    
+    
+    getUser(){
+
 
     }
     
@@ -27,7 +32,7 @@ class OfficeUser extends React.Component {
             <section className="section-profile"> 
 
                 <div>
-                    Bienvenue sur votre profil !
+                    Bienvenue sur votre profil : <span>{this.state.nameUser}</span>!
                 </div>
                
             </section>

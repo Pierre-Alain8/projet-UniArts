@@ -32,8 +32,8 @@ app.route('/user/register').post(AuthController.register);
 //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
 app.route('/user/login').post(AuthController.login); 
 
-// user/myProfile: route accessible par tout type d'user, permettant d'afficher le profile  de l'artiste selon son id
-app.route('user/myProfile').get(UserController.getById);
+// user/myOffice : route permettant d'assurer au user de tomber sur son back-office de son profil utilisateur
+app.route('/user/myOffice').get(UserController.getById);
 
 
 

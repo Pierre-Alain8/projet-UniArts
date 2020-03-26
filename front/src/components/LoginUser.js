@@ -51,14 +51,6 @@ class LoginUser extends React.Component {
             }),
         })
         .then((res) => {
-            // if(res.status === 201 ){
-            //     this.setState({
-            //         error: "user not found"
-            //     })
-            //     console.log(res)
-            // } else{
-            //     console.log(res)
-            // }
             
             if(res.status === 400){
                 this.setState({
