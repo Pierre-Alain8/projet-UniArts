@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
+import '../css/registerUser.css';
 
 
 class RegisterUser extends React.Component {
@@ -13,6 +14,7 @@ class RegisterUser extends React.Component {
             pseudo: "", 
             email: "", 
             password: "",
+            password2:"",
             error : ""
             
         }
@@ -60,6 +62,14 @@ class RegisterUser extends React.Component {
                 console.log(res)
             }
 
+            if(res.status === 409){
+                this.setState({
+                    error:"Votre password ne correspond pas au précédent, veuillez le confirmer"
+                })
+            } else{
+                console.log(res)
+            }
+
             if(res.status === 400 ){
                 this.setState({
                     error: "Inscription impossible  : veuillez remplir tous les champs"
@@ -88,10 +98,29 @@ class RegisterUser extends React.Component {
     render(){
         return(
         <section className="section-register">
-            <form onSubmit={this.handleSubmit }>
+
+            <article className="presentation-uniarts">
+
+                <h1>Un collectif d'artises francophones...</h1>
+
+                <p>
+                    UniArts est un collectif ayant pour but de mettre en avant divers artistes francophones meritent plus de visibilités, UniArtsts présentera chacun des artistes qui souhaitent rejoindre le collectif. 
+                </p> 
+
+                <p> 
+                    Car oui...Libre à vous de le rejoindre comme bon vous semble. Il vous sera aussi possible de présenter vos projets, indiquer les liens où on peut découvrir vos travaux, suivre votre activité !  
+                </p>
+
+            </article>
+
+            <form className="form-register" onSubmit={this.handleSubmit }> 
+
+                <h2>REGISTER</h2>
+
                 <label> 
                     Name : 
-                    <input type="text" id="name" name="name" 
+                    <input type="text" id="name" name="name"  
+                    placeholder="Enter your name"
                     value={this.state.name } 
                     onChange={this.handleChange } />
 
@@ -99,7 +128,8 @@ class RegisterUser extends React.Component {
 
                 <label> 
                     Pseudo : 
-                    <input type="text" id="pseudo" name="pseudo" 
+                    <input type="text" id="pseudo" name="pseudo"  
+                    placeholder="Enter your pseudo"
                     value={this.state.pseudo } 
                     onChange={this.handleChange } />
 
@@ -108,20 +138,31 @@ class RegisterUser extends React.Component {
                 <label> 
                     Email : 
                     <input type="email" id="email" name="email" 
+                    placeholder="Enter your email"
                     value={this.state.email} 
                     onChange={this.handleChange} />
 
                 </label>
 
                 <label> 
-                    password : 
+                    Password : 
                     <input type="password" id="password" name="password"  
+                    placeholder="Enter your password"
                     value={this.state.password} 
                     onChange={this.handleChange} />
                     
                 </label>
 
-                <button type="submit">Inscription</button>
+                <label> 
+                    Password confirm : 
+                    <input type="password" id="password" name="password2"  
+                    placeholder="Enter your password"
+                    value={this.state.password2} 
+                    onChange={this.handleChange} />
+                    
+                </label>
+
+                <button type="submit">INSCRIPTION</button>
 
                 <div>
                     <Link to="/loginUser"><p>Vous avez déjà un compte ?</p></Link>

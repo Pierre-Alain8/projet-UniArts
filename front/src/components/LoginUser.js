@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
+import '../css/loginUser.css';
 
 class LoginUser extends React.Component {
 
@@ -87,10 +88,12 @@ class LoginUser extends React.Component {
         return(
          
         <section className="section-login">
-            <form onSubmit={this.handleSubmit }>
+            <form className="form-login"onSubmit={this.handleSubmit }>
+                <h2>LOGIN</h2>
                 <label> 
                     Email : 
                     <input type="email" name="email" 
+                    placeholder="Enter your email"
                     value={this.state.email } 
                     onChange={this.handleChange } />
 
@@ -98,7 +101,8 @@ class LoginUser extends React.Component {
 
                 <label> 
                     password : 
-                    <input type="password" name="password"  
+                    <input type="password" name="password" 
+                    placeholder="Enter your password" 
                     value={this.state.password } 
                     onChange={this.handleChange } />
                     

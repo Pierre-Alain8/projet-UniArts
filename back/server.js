@@ -3,6 +3,7 @@ const express = require('express'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 cors = require('cors');
+bearerToken = require('express-bearer-token');
 
 require('dotenv').config();
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 let corsOption = {origin: 'http://localhost:3000'}
 app.use(cors(corsOption));
+app.use(bearerToken());
 
 
 // Initialisation de la connexion a la base de données
@@ -20,12 +22,7 @@ mongoose.connect('mongodb://localhost/UniArts', {useNewUrlParser: true, useUnifi
 
 // importation des controllers 
 AuthController = require('./controlers/auth');
-
-
-app.get('/', (request, response) => {
-    response.send('Hello UniArts')
-});
-
+UserController = require('./controlers/user');
 
 
 // Déclaration des routes :
@@ -34,6 +31,9 @@ app.get('/', (request, response) => {
 app.route('/user/register').post(AuthController.register);
 //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
 app.route('/user/login').post(AuthController.login); 
+
+// user/myProfile: route accessible par tout type d'user, permettant d'afficher le profile  de l'artiste selon son id
+app.route('user/myProfile').get(UserController.getById);
 
 
 

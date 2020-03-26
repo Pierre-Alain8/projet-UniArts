@@ -8,20 +8,17 @@ body{
 
 }
 .home-uniarts{
-    height: 32rem;
+    height: 36rem;
     width: 100%;
 }
 
-.title-home{
+.title-home{  
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.title-home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    top: 97px;
+    left: 94px;
     height: 0rem;
     margin: 0;
     padding: 0;
@@ -40,7 +37,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 4rem;
+    height: 8rem;
     width: 100%;
 }
 
@@ -57,7 +54,7 @@ body{
 
 .arrow-link {
     position: absolute;
-    top: 164px;
+    top: 130px;
     left: 189px;
     object-fit: contain;
     height: 5rem;

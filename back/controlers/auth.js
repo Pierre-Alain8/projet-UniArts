@@ -14,13 +14,19 @@ exports.register = function (req, res) {
     console.log(regex.test(req.body.password))
     if(!regex.test(req.body.password)){
         let message = "Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"  
+        console.log(req.body.password)
         return res.status(401).json(message)
-        
+    }
+
+    if(req.body.password !== req.body.password2){
+        let message = "Votre password ne correspond pas au précédent"
+        console.log(req.body.password2)
+        return res.status(409).json(message)    
     }
 
      // hash du password du user
     let hash = bcrypt.hashSync(req.body.password, 10);
-    req.body.password = hash;
+    req.body.password,req.body.password2 = hash;
 
 
     let user = new User({ 
@@ -28,7 +34,8 @@ exports.register = function (req, res) {
             pseudo: req.body.pseudo, 
             email: req.body.email, 
             // about: req.body.about,
-            password: hash
+            password: hash, 
+            password2: hash
             
         });
 
@@ -56,10 +63,7 @@ exports.register = function (req, res) {
                 };
             });
         };
-        
-
   
-
 };
 
 exports.login = function (req, res) {
@@ -74,13 +78,16 @@ exports.login = function (req, res) {
 
             bcrypt.compare(req.body.password, user.password, function(err, result) {
                 
+
                 if(result) {
+                    // console.log(user._id)
+                    // console.log(user.role)
                     let token = jwt.sign({id: user._id, admin: user.role}, jwt_secret)
                     let response = {user: user, adhesion: true, token: token}
                     res.status(200).json(response)
                     console.log('vous êtes bien connecté')
-                    console.log(result)
-                    console.log(token)
+                    console.log(user)
+                    // console.log(token)
                 } else {
                     res.status(400).json(err)
                     console.log('Veuillez entrez un email et un password existant')

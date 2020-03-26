@@ -8,6 +8,7 @@ class ProfileUser extends React.Component {
         super(props)
     
         this.state = {
+            nameUser: ""
              
         }
     }
@@ -17,7 +18,7 @@ class ProfileUser extends React.Component {
             <section className="section-profile"> 
 
                 <div>
-                    Bienvenue sur le profile de l'artiste!
+                    Bienvenue sur le profile de <p className="testProfilUser">{this.state.nameUser} </p>!
                 </div>
                
             </section>

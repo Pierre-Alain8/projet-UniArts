@@ -42,7 +42,8 @@ let userSchema = new Schema({
 
     role: {
         type: 'string', 
-        enum: ['Admin', 'Artiste']
+        enum: ['Admin', 'Artiste'],
+        default: 'Artiste'
     }, 
 
     projectId: [{
