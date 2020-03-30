@@ -8,7 +8,6 @@ let linkSchema = new Schema({
         required: 'You need to specifie the name of your link'
     }, 
 
-
     content: {
         type: 'string', 
         required: 'You need to specifie the adress of your link'

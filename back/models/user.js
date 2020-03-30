@@ -28,7 +28,11 @@ let userSchema = new Schema({
         type: 'string',
     },
 
-    
+    avatar: {
+        type: 'string',
+        required: 'you must upload a image for your avatar'
+    },
+
     date_register: { 
         type: 'date', 
         default: Date.now()

@@ -19,6 +19,8 @@ class OfficeUser extends React.Component {
         let token = localStorage.getItem('token')
         if(!token)
          this.props.history.push('/');
+        
+         fetch()
     };
     
     

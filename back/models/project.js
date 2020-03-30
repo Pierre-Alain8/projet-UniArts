@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 let projectSchema = new Schema({
 
-    nameProject: {
-        type: 'String', 
+    titleProject: {
+        type: 'string', 
         required: 'You need to specifie the name of your project'
     }, 
 
@@ -18,7 +18,7 @@ let projectSchema = new Schema({
         required: 'You need to specifie the content of your project'
     }, 
 
-    image: {
+    cover: {
         type: 'string'
     },
 

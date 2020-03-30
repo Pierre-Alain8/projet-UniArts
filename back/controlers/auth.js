@@ -10,8 +10,8 @@ exports.register = function (req, res) {
    
     // verification du password avant le hash du mot de passe
     const regex = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[A-Za-z\d@$!%*#?&]{8,}$/);
-
     console.log(regex.test(req.body.password))
+
     if(!regex.test(req.body.password)){
         let message = "Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"  
         console.log(req.body.password)
@@ -35,7 +35,6 @@ exports.register = function (req, res) {
             email: req.body.email, 
             // about: req.body.about,
             password: hash, 
-            password2: hash
             
         });
 

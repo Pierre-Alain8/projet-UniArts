@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
 import '../css/registerUser.css';
+// import dotenv from 'dotenv'; 
+
 
 
 class RegisterUser extends React.Component {
@@ -43,8 +45,10 @@ class RegisterUser extends React.Component {
 
     handleSubmit(event) { 
         event.preventDefault();
+        // dotenv.config() 
+        // const port_register = process.env.SCRET_PORT_Register;
 
-        fetch(`http://localhost:8080/user/register`, {
+        fetch(`http://localhost:8080/user/register` , {
             headers:{
                 Accept: 'application/json',
                 'Content-Type': 'application/json'  

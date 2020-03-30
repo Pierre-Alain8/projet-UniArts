@@ -23,6 +23,7 @@ mongoose.connect('mongodb://localhost/UniArts', {useNewUrlParser: true, useUnifi
 // importation des controllers 
 AuthController = require('./controlers/auth');
 UserController = require('./controlers/user');
+ProjectController = require('./controlers/project');
 
 
 // Déclaration des routes :
@@ -32,8 +33,17 @@ app.route('/user/register').post(AuthController.register);
 //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
 app.route('/user/login').post(AuthController.login); 
 
-// user/myOffice : route permettant d'assurer au user de tomber sur son back-office de son profil utilisateur
+// user/myOffice : retourne les infos du user pour son profil (office)
 app.route('/user/myOffice').get(UserController.getById);
+
+// back-office user(artistes)
+
+// user/addProject: permet à l'utilisateur de créer leurs projets
+app.route('/user/addProject').post(ProjectController.newProject); 
+
+// user/updateProject : permet à l'utilisateur de modifier leurs projets
+app.route('/user/updateProject:id').put();
+
 
 
 
