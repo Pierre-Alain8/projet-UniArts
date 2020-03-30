@@ -17,7 +17,7 @@ exports.newProject = function(req, res){
                 description: req.body.description, 
                 content: req.body.content, 
                 cover: req.body.cover,
-                userId: [decoded.id]
+                userId: decoded.id
             }); 
             
             project.save(function(err, data){ //Si l'user remplis les champs requis pour la création d'un projet,MAJ eégalement le profil de l'utilisateur 
@@ -29,7 +29,7 @@ exports.newProject = function(req, res){
                 } else(data)
                     console.log(project)
                     User.updateOne({
-                        id:[decoded.id], 
+                        id: decoded.id, 
                         $set: {projectId: req.body['projectId[]']}},function(err, data){
                             if(err){
                                 console.log(err)
@@ -44,4 +44,24 @@ exports.newProject = function(req, res){
     }); 
 
 
+};
+
+exports.updateProject = function(req, res){
+    jwt.verify(req.token, jwt_secret, function(err,decoded){
+        if(err){
+            console.log(err)
+            return false
+        } else if(decoded.role){
+            Project.updateOne({id: Project.id}, {$set:{userId: decoded.id} }, function(err, data){
+                if(err){
+                    console.log('update du project fail')
+                    res.status(204).json(err)
+                }else {
+                    console.log("l'user a pu modifier son projet avec succès")
+                    res.status(200).json(data)
+                };
+
+            });
+        };
+    });
 };

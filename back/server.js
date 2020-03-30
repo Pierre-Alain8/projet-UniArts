@@ -42,7 +42,7 @@ app.route('/user/myOffice').get(UserController.getById);
 app.route('/user/addProject').post(ProjectController.newProject); 
 
 // user/updateProject : permet à l'utilisateur de modifier leurs projets
-app.route('/user/updateProject:id').put();
+app.route('/user/updateProject:id').put(ProjectController.updateProject);
 
 
 
