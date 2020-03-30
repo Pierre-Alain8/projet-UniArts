@@ -1,4 +1,5 @@
 const Project = require('../models/project'),
+User = require('../models/user'),
 jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY;
 
@@ -9,7 +10,7 @@ exports.newProject = function(req, res){
         if(err){
             console.log(err)
             return false
-        } else if(decoded.role === "Artiste"){
+        } else if(decoded.role){
            
             let project = new Project({
                 titleProject: req.body.titleProject, 
@@ -19,18 +20,28 @@ exports.newProject = function(req, res){
                 userId: [decoded.id]
             }); 
             
-            project.save(function(err, data){
+            project.save(function(err, data){ //Si l'user remplis les champs requis pour la création d'un projet,MAJ eégalement le profil de l'utilisateur 
                 if(err){
-                    // let message = "ah revois ta requête"
                     console.log(project) 
                     console.log(err)
-                    return res.status(204).json(err)
+                    return res.status(400).json(err)
+                    
                 } else(data)
-                    console.log(data)
-                    return res.status(200).json(data)  
+                    console.log(project)
+                    User.updateOne({
+                        id:[decoded.id], 
+                        $set: {projectId: req.body['projectId[]']}},function(err, data){
+                            if(err){
+                                console.log(err)
+                                res.status(204).json(err)
+                            }else {
+                                console.log("post du projet ajouté avec succès, update user :ok")
+                                res.status(200).json(data)
+                            }
+                    });
             });
         };
     }); 
 
-   
+
 };
