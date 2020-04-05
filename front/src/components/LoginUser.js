@@ -39,7 +39,7 @@ class LoginUser extends React.Component {
 
         const{email, password } = this.state
 
-        fetch(`http://localhost:8080/user/login`, {
+        fetch(`http://localhost:5000/user/login`, {
             headers:{
                 Accept: 'application/json',
                 'Content-Type': 'application/json'  
@@ -67,13 +67,9 @@ class LoginUser extends React.Component {
                     localStorage.setItem('token', res.token); 
                     this.props.history.push('/OfficeUser')
                     console.log(res.token)   
-            
                 })
             }
-    
         })
-       
-
     };
 
     render(){

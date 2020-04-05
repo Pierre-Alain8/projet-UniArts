@@ -22,10 +22,7 @@ let projectSchema = new Schema({
         type: 'string'
     },
 
-    userId: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }]
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User"}
 })
 
 module.exports = mongoose.model('Project', projectSchema);

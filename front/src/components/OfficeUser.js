@@ -20,7 +20,6 @@ class OfficeUser extends React.Component {
         if(!token)
          this.props.history.push('/');
         
-         fetch()
     };
     
     

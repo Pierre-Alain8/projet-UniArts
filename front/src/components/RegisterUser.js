@@ -48,7 +48,7 @@ class RegisterUser extends React.Component {
         // dotenv.config() 
         // const port_register = process.env.SCRET_PORT_Register;
 
-        fetch(`http://localhost:8080/user/register` , {
+        fetch(`http://localhost:5000/user/register` , {
             headers:{
                 Accept: 'application/json',
                 'Content-Type': 'application/json'  
@@ -57,38 +57,29 @@ class RegisterUser extends React.Component {
             body: JSON.stringify(this.state),
         })
         .then((res) => {
+            switch (res.status) {
+                case 401:
+                    this.setState({
+                        error:"Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"
+                    })
+                    console.log(res)
+                    break;
 
-            if(res.status === 401){
-                this.setState({
-                    error:"Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"
-                })
-            } else {
-                console.log(res)
-            }
-
-            if(res.status === 409){
-                this.setState({
-                    error:"Votre password ne correspond pas au précédent, veuillez le confirmer"
-                })
-            } else{
-                console.log(res)
-            }
-
-            if(res.status === 400 ){
-                this.setState({
-                    error: "Inscription impossible  : veuillez remplir tous les champs"
-                });
-            } else{
-                console.log(res )
-            }
+                case 409: 
+                    this.setState({
+                        error:"Votre password ne correspond pas au précédent, veuillez le confirmer"
+                    })
+                    console.log(res)
+                    break;
+                case 200:
+                    console.log(res)
+                    console.log(this.state.password)
+                    this.props.history.push('/LoginUser')
+                    break;
             
-            if(res.status === 200){
-
-                console.log(res)
-                console.log(this.state.password)
-                this.props.history.push('/LoginUser')
+                default:
+                    break;
             }
-
             return res.json()
             
         })

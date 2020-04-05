@@ -12,12 +12,13 @@
     justify-content: center;
     align-items: center;
     background-color:#E7EAEF;
-    height: 2rem;
-    width: 24%;
+    height: 2.5rem;
+    width: 27%;
 }
 
 .logo-contenair p {
     font-family: 'Teko', sans-serif;
+    font-weight: bold;
     font-size: 2em;
     color: #F16462;
 }

@@ -3,7 +3,6 @@ jwt = require('jsonwebtoken');
 jwt_secret = process.env.JWT_SECRET_KEY;
 
 exports.getById = function(req, res){
-        
     // verification du token en utilisant bearer token dans les autorisation de la requête
     jwt.verify(req.token, jwt_secret, function(err, decoded){
 

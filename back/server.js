@@ -27,24 +27,17 @@ ProjectController = require('./controlers/project');
 
 
 // Déclaration des routes :
-
-//user/register : route pour permettre à l'artiste de s'identifier
-app.route('/user/register').post(AuthController.register);
-//user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
-app.route('/user/login').post(AuthController.login); 
-
-// user/myOffice : retourne les infos du user pour son profil (office)
-app.route('/user/myOffice').get(UserController.getById);
+app.route('/user/register').post(AuthController.register); //user/register : route pour permettre à l'artiste de s'identifier
+app.route('/user/login').post(AuthController.login); //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
+app.route('/user/myOffice').get(UserController.getById); // user/myOffice : retourne les infos du user pour son profil (office)
 
 // back-office user(artistes)
-
-// user/addProject: permet à l'utilisateur de créer leurs projets
-app.route('/user/addProject').post(ProjectController.newProject); 
-
-// user/updateProject : permet à l'utilisateur de modifier leurs projets
-app.route('/user/updateProject:id').put(ProjectController.updateProject);
+app.route('/user/addProject').post(ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
+// app.route('/user/updateProject/:id').put(ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
+app.route('/user/getAllProject/:id').get(ProjectController.getAllProject); // /user/getAllProject permet d'afficher la liste des projets créé par le user
 
 
 
 
-app.listen(8080);
+
+app.listen(5000);
