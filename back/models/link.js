@@ -3,20 +3,20 @@ const Schema = mongoose.Schema;
 
 let linkSchema = new Schema({
 
-    titleLink: {
+    linkTitle: {
         type: 'String', 
         required: 'You need to specifie the name of your link'
     }, 
 
-    content: {
+    linkContent: {
         type: 'string', 
         required: 'You need to specifie the adress of your link'
     }, 
 
-    userId: [{
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    }]
+    }
 })
 
 module.exports = mongoose.model('Link', linkSchema);

@@ -1,29 +1,27 @@
-const Project = require('../models/project'),
+const Link = require('../models/link'),
 User = require('../models/user'),
 jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY;
 
-exports.newProject = function(req, res){
+exports.newLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
 
         if(err){
             console.log(err)
         }else {
-            let project = new Project({
-                titleProject: req.body.titleProject, 
-                description: req.body.titleProject, 
-                content: req.body.titleProject,
-                cover: req.body.titleProject, 
-            })
+            let link = new Link({
+                linkTitle: req.body.linkTitle, 
+                linkContent: req.body.linkContent,
+            });
             // En paramètre de la fonction save je récupère l'id du user. Dans les paramètres de la fonction callback de save, newData est une variable qui récupèerera les données du nouveau projet
-            project.save({_id: decoded.id}, function(err, newProject){
+            link.save({_id: decoded.id}, function(err, newLink){
                 if(err){
                     res.status(400).json(err);
                 } else if(decoded.role){
-                    console.log("project save:", newProject)
+                    console.log("link save:", newLink)
                     // Avant de pouvoir update le user, je m'assure que celui-ci a bien le rôle "Artiste", ainsi le user pourra être update afin de lier son projet à son profil en récupérant l'id du projet nouvellement créé
-                    User.updateOne({_id: decoded.id},{$push: {projectId: newProject}},function(err, data){
-                        console.log(newProject)
+                    User.updateOne({_id: decoded.id},{$push: {linkId: newLink}},function(err, data){
+                        console.log(newLink)
                         if (err) {
                             console.log(err)
                             res.status(400).json(err)
@@ -41,39 +39,39 @@ exports.newProject = function(req, res){
 
 };
 
-exports.getAllProject = function(req, res){
+
+exports.getAllLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err, decoded){
         if(err){
             res.status(204).json(err)
         }else{
-            User.findOne({_id: decoded.id}).populate('projectId').exec( function(err, project){
+            User.findOne({_id: decoded.id}).populate('linkId').exec( function(err, link){
                 if(err){
                     console.log(res)
                     res.status(400).json(err);
                 }else {
-                    console.log(project)
-                    res.status(200).json(project);
+                    console.log(link)
+                    res.status(200).json(link);
                 }
             });
         }
     });
-
+    
 };
 
-
-exports.updateProject = function(req, res){
+exports.updateLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
         if(err){
             console.log(err)
             return false
         } else if(decoded.id){
-            let {titleProject, description, content, cover} = req.body; 
+            let {linkTitle, linkContent} = req.body; 
 
-            Project.updateOne({_id: req.params.id}, 
-                {$set:{titleProject: titleProject, description: description, content: content, cover: cover} }, 
+            Link.updateOne({_id: req.params.id}, 
+                {$set:{linkTitle: linkTitle, linkContent: linkContent} }, 
                 function(err, data){
                 if(err){
-                    console.log('update du project fail')
+                    console.log('update du lien fail')
                     console.log(err)
                     res.status(204).json(err)
                 }else {
@@ -84,28 +82,26 @@ exports.updateProject = function(req, res){
             });
         };
     });
+    
 };
 
-exports.deleteProject = function(req, res){
+
+exports.deleteLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
         if(err){
             console.log(err)
             return false
         } else if(decoded.role){
-            Project.deleteOne({_id: req.params.id}, function(err, data){
+            Link.deleteOne({_id: req.params.id}, function(err, data){
                 if(err)
                     res.status(400).json(err)
                 else
-                    console.log("le projet a été supprimé avec succès")
+                    console.log("le lien a été supprimé avec succès")
                     res.status(200).json(data)
             })
         }
 
     });
+    
 };
-
-
-
-
-
 
