@@ -33,9 +33,9 @@ app.route('/user/myOffice').get(UserController.getById); // user/myOffice : reto
 
 // back-office user(artistes)
 app.route('/user/addProject').post(ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
-// app.route('/user/updateProject/:id').put(ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
-app.route('/user/getAllProject/:id').get(ProjectController.getAllProject); // /user/getAllProject permet d'afficher la liste des projets créé par le user
-
+app.route('/user/updateProject/:id').put(ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
+app.route('/user/getAllProject/:id').get(ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
+app.route('/user/deleteProject/:id').delete(ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
 
 
 
