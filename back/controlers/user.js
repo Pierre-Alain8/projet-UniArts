@@ -2,23 +2,26 @@ const User = require('../models/user');
 jwt = require('jsonwebtoken');
 jwt_secret = process.env.JWT_SECRET_KEY;
 
-exports.getById = function(req, res){
-    // verification du token en utilisant bearer token dans les autorisation de la requête
-    jwt.verify(req.token, jwt_secret, function(err, decoded){
 
-        if(err) {
-            res.status(204).json(err)
+exports.addProfile = function(req, res){
+    jwt.verify(req.token, jwt_secret, function(err,decoded){
+        let user = new User({
+            avatar: req.file.avatar, 
+            about: req.body.about
+        })
+        if(!decoded.role){
+            res.status(401).json('no token provided')
         } else {
-
-            // decoded : base du token où on récupère l'id du l'utilisateur qui a été inséré
-            User.findOne({_id: decoded.id}, function(err, user) {
-                if (err) {
-                    res.status(400).json(err);
-                } else {
-                    res.status(200).json(user);
-                }
-                
-            })
-        }
-    })
-}
+            if(!req.file)
+                res.status(401).json('no file provided'); 
+            else{
+                User.create({avatar: req.file.avatar, about: req.body.about, _id: decoded.id}, function(err, newAvatar){
+                    if(err)
+                        res.status(400).json(err);
+                    else
+                        res.status(201).json("new Avatar uppload successfily & about create sucessfuly");
+                });
+            };
+        };
+    });
+};

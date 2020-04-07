@@ -4,10 +4,10 @@ jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY;
 
 exports.newProject = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+    jwt.verify(req.token, jwt_secret, function(err,decoded){ // verification du token en utilisant bearer token dans les autorisation de la requête
 
         if(err){
-            console.log(err)
+            res.status(401).json('no token provided')
         }else {
             let project = new Project({
                 titleProject: req.body.titleProject, 
@@ -44,7 +44,7 @@ exports.newProject = function(req, res){
 exports.getAllProject = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err, decoded){
         if(err){
-            res.status(204).json(err)
+            res.status(401).json('no token provided')
         }else{
             User.findOne({_id: decoded.id}).populate('projectId').exec( function(err, project){
                 if(err){
@@ -64,7 +64,7 @@ exports.getAllProject = function(req, res){
 exports.updateProject = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
         if(err){
-            console.log(err)
+            res.status(401).json('no token provided')
             return false
         } else if(decoded.id){
             let {titleProject, description, content, cover} = req.body; 
@@ -89,7 +89,7 @@ exports.updateProject = function(req, res){
 exports.deleteProject = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
         if(err){
-            console.log(err)
+            res.status(401).json('no token provided')
             return false
         } else if(decoded.role){
             Project.deleteOne({_id: req.params.id}, function(err, data){

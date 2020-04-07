@@ -7,7 +7,7 @@ exports.newLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
 
         if(err){
-            console.log(err)
+            res.status(401).json('no token provided')
         }else {
             let link = new Link({
                 linkTitle: req.body.linkTitle, 
@@ -17,7 +17,7 @@ exports.newLink = function(req, res){
             link.save({_id: decoded.id}, function(err, newLink){
                 if(err){
                     res.status(400).json(err);
-                } else if(decoded.role){
+                } else if(!decoded.role){
                     console.log("link save:", newLink)
                     // Avant de pouvoir update le user, je m'assure que celui-ci a bien le rôle "Artiste", ainsi le user pourra être update afin de lier son projet à son profil en récupérant l'id du projet nouvellement créé
                     User.updateOne({_id: decoded.id},{$push: {linkId: newLink}},function(err, data){
@@ -42,8 +42,8 @@ exports.newLink = function(req, res){
 
 exports.getAllLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err, decoded){
-        if(err){
-            res.status(204).json(err)
+        if(!decoded.role){
+            res.status(401).json('no token provided')
         }else{
             User.findOne({_id: decoded.id}).populate('linkId').exec( function(err, link){
                 if(err){
@@ -61,8 +61,8 @@ exports.getAllLink = function(req, res){
 
 exports.updateLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
-        if(err){
-            console.log(err)
+        if(!decoded.role){
+            res.status(401).json('no token provided')
             return false
         } else if(decoded.id){
             let {linkTitle, linkContent} = req.body; 
@@ -88,8 +88,8 @@ exports.updateLink = function(req, res){
 
 exports.deleteLink = function(req, res){
     jwt.verify(req.token, jwt_secret, function(err,decoded){
-        if(err){
-            console.log(err)
+        if(!decoded.role){
+            res.status(401).json('no token provided')
             return false
         } else if(decoded.role){
             Link.deleteOne({_id: req.params.id}, function(err, data){
