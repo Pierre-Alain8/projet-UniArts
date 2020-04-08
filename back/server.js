@@ -4,12 +4,25 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 cors = require('cors');
 bearerToken = require('express-bearer-token'), 
+path = require('path'),
 port = 5000, 
 app = express();  
 require('dotenv').config();
 
 var multer = require('multer'); 
-var upload = multer({ dest: 'uploads/' })
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads');
+    }, // Si je ne trouve pas de fichier upload je retourne null sinon il enregistre bien dans l'upload
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    } // Si il trouve que le nom d'origine existe déjà, en cas doublons 
+}) 
+
+
+
+var upload = multer({storage: storage })
+console.log(upload)
 
 
 
@@ -20,7 +33,7 @@ let corsOption = {origin: 'http://localhost:3000'}
 app.use(cors(corsOption));
 app.use(bearerToken());
 
-app.use(express.static(__dirname + '/uploads')); // fichier upload accessible pour tout les uses
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // fichier upload accessible pour tout les uses
 
 // Initialisation de la connexion a la base de données
 mongoose.connect('mongodb://localhost/UniArts', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
@@ -49,7 +62,7 @@ app.route('/user/getAllLinks/:id').get(LinksController.getAllLink);
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
 
 // back-office user(artistes): Gestion de profil 
-app.route('/user/addProfile', upload.single('avatar')).post(UserController.addProfile);  
+app.put('/user/addProfile', upload.single('avatar'), UserController.addProfile);  
 
 // add file image 
 // add text

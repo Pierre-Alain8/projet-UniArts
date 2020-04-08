@@ -30,6 +30,7 @@ let userSchema = new Schema({
 
     avatar: {
         type: 'string',
+        default: 'mon super avatar'
     },
 
     date_register: { 
