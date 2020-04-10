@@ -79,8 +79,6 @@ exports.login = function (req, res) {
                 
 
                 if(result) {
-                    // console.log(user._id)
-                    // console.log(user.role)
                     let token = jwt.sign({id: user._id, role: user.role}, jwt_secret)
                     let response = {user: user, adhesion: true, token: token}
                     res.status(200).json(response)

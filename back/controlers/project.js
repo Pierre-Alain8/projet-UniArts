@@ -11,9 +11,9 @@ exports.newProject = function(req, res){
         }else {
             let project = new Project({
                 titleProject: req.body.titleProject, 
-                description: req.body.titleProject, 
-                content: req.body.titleProject,
-                cover: req.body.titleProject, 
+                description: req.body.description, 
+                content: req.body.content,
+                cover: req.body.cover, 
             })
             // En paramètre de la fonction save je récupère l'id du user. Dans les paramètres de la fonction callback de save, newData est une variable qui récupèerera les données du nouveau projet
             project.save({_id: decoded.id}, function(err, newProject){

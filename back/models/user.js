@@ -30,7 +30,7 @@ let userSchema = new Schema({
 
     avatar: {
         type: 'string',
-        default: 'mon super avatar'
+        default: '/uploads/avatar-default.png'
     },
 
     date_register: { 

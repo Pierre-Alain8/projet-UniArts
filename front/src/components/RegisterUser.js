@@ -45,8 +45,7 @@ class RegisterUser extends React.Component {
 
     handleSubmit(event) { 
         event.preventDefault();
-        // dotenv.config() 
-        // const port_register = process.env.SCRET_PORT_Register;
+    
 
         fetch(`http://localhost:5000/user/register` , {
             headers:{

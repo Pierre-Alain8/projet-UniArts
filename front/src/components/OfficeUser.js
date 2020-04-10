@@ -1,18 +1,12 @@
 import React from 'react';
 import { withRouter} from 'react-router-dom';
-import '../css/officeUser.css'
+import '../css/officeUser.css'; 
+import OfficeProfile from './OfficeProfile';
+import OfficeProjects from './OfficeProjects';
+import OfficeLinks from './OfficeLinks';
 
 
 class OfficeUser extends React.Component { 
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-            nameUser: ""
-        }
-
-        this.getUser = this.getUser.bind(this)
-    } 
 
     componentDidMount(){
 
@@ -23,18 +17,13 @@ class OfficeUser extends React.Component {
     };
     
     
-    getUser(){
-
-
-    }
-    
     render(){
         return(
-            <section className="section-profile"> 
-
-                <div>
-                    Bienvenue sur votre profil : <span>{this.state.nameUser}</span>!
-                </div>
+            <section className="officeUser"> 
+                <OfficeProfile /> 
+                <OfficeProjects />
+                <OfficeLinks />
+              
                
             </section>
         )

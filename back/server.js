@@ -22,7 +22,6 @@ const storage = multer.diskStorage({
 
 
 var upload = multer({storage: storage })
-console.log(upload)
 
 
 
@@ -62,10 +61,8 @@ app.route('/user/getAllLinks/:id').get(LinksController.getAllLink);
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
 
 // back-office user(artistes): Gestion de profil 
-app.put('/user/addProfile', upload.single('avatar'), UserController.addProfile);  
-
-// add file image 
-// add text
+app.put('/user/updateProfile', upload.single('avatar'), UserController.addProfile);  
+app.route('user/myProfile').get(UserController.getById);
 
 
 
