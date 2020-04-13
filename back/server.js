@@ -61,7 +61,7 @@ app.route('/user/getAllLinks/:id').get(LinksController.getAllLink);
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
 
 // back-office user(artistes): Gestion de profil 
-app.put('/user/updateProfile', upload.single('avatar'), UserController.addProfile);  
+app.put('/user/updateProfile', upload.single('avatar'), UserController.updateProfile);  
 app.route('user/myProfile').get(UserController.getById);
 
 

@@ -6,7 +6,6 @@ class OfficeProfile extends React.Component {
         super(props)
     
         this.state = {
-            name:"",
             avatar: "",
             about:"",
         }
@@ -17,16 +16,17 @@ class OfficeProfile extends React.Component {
     } 
 
     handleChange(event){
-        const target = event.target;
-        const value = target.value;
-        let name = target.name;
+        let about = event.target.name.value; // Je cible des les "valeurs" des éléments du DOM qui ont un attribut name
+        let avatar = event.target.files[0]
         
 
         this.setState({
-            [name]:value,
-            avatar: event.target.files[0]
-
-        })
+            about: about, 
+            avatar: avatar
+        },
+         console.log(avatar),
+         console.log(about)
+        )
     }; 
 
     subFormProfile(event){
@@ -66,12 +66,12 @@ class OfficeProfile extends React.Component {
 
               <form className="form-Profile" onSubmit={this.subFormProfile }> 
                     <label>Avatar</label>
-                    <input type="file" name="avatar" onChange={this.handleChange} />
+                    <input type="file" name="avatar"  onChange={this.handleChange} />
                     <div className="avatar-contain">
                         <img className="avatar" name="avatar" src={avatar} alt="user avatar" />
                     </div>
 
-                    <input type="texte" name="about" placeholder="About..." value={this.state.about } onChange={this.handleChange}  /> 
+                    <input type="text" name="about" placeholder="About..." value={this.state.about } onChange={this.handleChange}  /> 
                     <button type="submit">Enregistrer</button>
               </form>
                
