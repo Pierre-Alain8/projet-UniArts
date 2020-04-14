@@ -16,18 +16,26 @@ class OfficeProfile extends React.Component {
     } 
 
     handleChange(event){
-        let about = event.target.name.value; // Je cible des les "valeurs" des éléments du DOM qui ont un attribut name
-        let avatar = event.target.files[0]
+      
+        // let avatar = event.target.files[0]
+        // let about = event.target.name.value; // Je cible des les "valeurs" des éléments du DOM qui ont un attribut name
+        const target = event.target;
+        const about = target.name.value
+        const files = target.files
+
+        if (files === true) {
+            this.setState({
+               avatar: files[0], 
+            });
+        } else {
+            this.setState({
+                about: about, 
+            });
+        }
+    }
         
 
-        this.setState({
-            about: about, 
-            avatar: avatar
-        },
-         console.log(avatar),
-         console.log(about)
-        )
-    }; 
+    
 
     subFormProfile(event){
         event.preventDefault();
