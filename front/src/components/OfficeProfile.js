@@ -6,47 +6,35 @@ class OfficeProfile extends React.Component {
         super(props)
     
         this.state = {
-            avatar: "",
             about:"",
+            avatar:""
         }
         this.handleChange = this.handleChange.bind(this);
         this.subFormProfile = this.subFormProfile.bind(this)
-
-     
     } 
 
     handleChange(event){
-      
-        // let avatar = event.target.files[0]
-        // let about = event.target.name.value; // Je cible des les "valeurs" des éléments du DOM qui ont un attribut name
-        const target = event.target;
-        const about = target.name.value
-        const files = target.files
-
-        if (files === true) {
-            this.setState({
-               avatar: files[0], 
-            });
-        } else {
-            this.setState({
-                about: about, 
-            });
-        }
-    }
+        let value = event.target.value
+        let name = event.target.name; 
         
-
-    
+        this.setState({
+            [name]: value, 
+           
+        })
+    }; 
 
     subFormProfile(event){
         event.preventDefault();
 
         let token = localStorage.getItem('token');
+
+        let avatar = document.getElementById('avatar');
         let data = new FormData();
-        data.append("avatar", this.state.avatar);
+        data.append("avatar", avatar.files[0]);
         data.append("about", this.state.about);
 
         fetch(`http://localhost:5000/user/updateProfile`, {
-            header:{
+            headers:{
                 "Authorization": "Bearer " + token
             },
             method: 'PUT', 
@@ -74,9 +62,9 @@ class OfficeProfile extends React.Component {
 
               <form className="form-Profile" onSubmit={this.subFormProfile }> 
                     <label>Avatar</label>
-                    <input type="file" name="avatar"  onChange={this.handleChange} />
+                    <input id="avatar" type="file" name="avatar" />
                     <div className="avatar-contain">
-                        <img className="avatar" name="avatar" src={avatar} alt="user avatar" />
+                        <img className="avatar" src={avatar} alt="user avatar" />
                     </div>
 
                     <input type="text" name="about" placeholder="About..." value={this.state.about } onChange={this.handleChange}  /> 

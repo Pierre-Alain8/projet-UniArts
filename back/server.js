@@ -2,8 +2,8 @@
 const express = require('express'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
-cors = require('cors');
-bearerToken = require('express-bearer-token'), 
+cors = require('cors'),
+// bearerToken = require('express-bearer-token')
 path = require('path'),
 port = 5000, 
 app = express();  
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 let corsOption = {origin: 'http://localhost:3000'}
 app.use(cors(corsOption));
-app.use(bearerToken());
+// app.use(bearerToken());
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // fichier upload accessible pour tout les uses
 

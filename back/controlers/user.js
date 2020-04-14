@@ -4,11 +4,17 @@ jwt_secret = process.env.JWT_SECRET_KEY;
 
 
 exports.updateProfile = function(req, res){
-    const about = req.body.about; 
-    const avatar = req.file.path;
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+    const about = req.body.about,
+    avatar = req.file.path,
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    console.log(token)
+
+    jwt.verify(token, jwt_secret, function(err,decoded){
         if(err){
             res.status(400).json(err)
+            console.log(err)
         } else {
             console.log(req.file)
             console.log(decoded.id)
