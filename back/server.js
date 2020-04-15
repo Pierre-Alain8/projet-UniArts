@@ -32,7 +32,7 @@ let corsOption = {origin: 'http://localhost:3000'}
 app.use(cors(corsOption));
 // app.use(bearerToken());
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // fichier upload accessible pour tout les uses
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));  // Permet de rendre le dossier upload public, path.join permet de récupérer da mnière dynamique le chemin d'accès au dossier upload. Afin de savoir où les img sont upload
 
 // Initialisation de la connexion a la base de données
 mongoose.connect('mongodb://localhost/UniArts', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
@@ -61,10 +61,8 @@ app.route('/user/getAllLinks/:id').get(LinksController.getAllLink);
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
 
 // back-office user(artistes): Gestion de profil 
-app.put('/user/updateProfile', upload.single('avatar'), UserController.updateProfile);  
-app.route('user/myProfile').get(UserController.getById);
-
-
+app.put('/user/updateAvatar', upload.single('avatar'), UserController.updateAvatar); 
+app.put('/user/updateAbout', UserController.updateAbout);
 
 
 

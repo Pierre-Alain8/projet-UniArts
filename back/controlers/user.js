@@ -3,9 +3,8 @@ jwt = require('jsonwebtoken');
 jwt_secret = process.env.JWT_SECRET_KEY;
 
 
-exports.updateProfile = function(req, res){
-    const about = req.body.about,
-    avatar = req.file.path,
+exports.updateAvatar = function(req, res){
+    avatar = req.file.filename,
     header = req.headers.authorization;
     const token = header.split(" ")[1];
 
@@ -16,25 +15,50 @@ exports.updateProfile = function(req, res){
             res.status(400).json(err)
             console.log(err)
         } else {
-            console.log(req.file)
-            console.log(decoded.id)
-            User.findOneAndUpdate({_id: decoded.id}, {$set: {avatar:avatar, about: about}}, function(err, data){
+            User.findOneAndUpdate({_id: decoded.id}, {$set: {avatar:avatar}}, function(err, data){
                 if(err){
                     res.status(403).json(err) 
-                    console.log(avatar)
+                    console.log(err)
                 }
                 else{
-                    console.log(avatar)
-                    res.status(200).json(data)
+                    console.log(data)
+                    res.status(200).json(req.file.filename)
                 };
             });
         };
     });
 };
 
+exports.updateAbout = function(req, res){
+    let about = req.body.about; 
+    const header = req.headers.authorization,
+    token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err, decoded){
+        if(err){
+            res.status(400).json(err)
+            console.log(err)
+        }else{
+            User.findOneAndUpdate({_id: decoded.id}, {$set: {about: about}}, function(err, data){
+                if(err){
+                    res.status(403).json(err) 
+                    console.log(err)
+                }else{
+                    console.log(data)
+                    res.status(200).json(data) 
+                };
+            });
+        };
+    });
+
+};
+
 exports.getById = function(req, res){
     // verification du token en utilisant bearer token dans les autorisation de la requête
-    jwt.verify(req.token, jwt_secret, function(err, decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err, decoded){
 
         if(err) {
             res.status(204).json(err)
@@ -49,8 +73,8 @@ exports.getById = function(req, res){
                     res.status(200).json("avatar upload successfuly");
                 }
 
-            })
-        }
+            });
+        };
 
-    })
-}
+    });
+};

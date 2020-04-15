@@ -7,7 +7,8 @@ class OfficeProfile extends React.Component {
     
         this.state = {
             about:"",
-            avatar:""
+            avatar:"", 
+            defaultAvatar:"http://localhost:5000/uploads/avatar-default.png"
         }
         this.handleChange = this.handleChange.bind(this);
         this.subFormProfile = this.subFormProfile.bind(this)
@@ -43,9 +44,8 @@ class OfficeProfile extends React.Component {
         .then((res) => {
 
             if(res.status === 200) {
-
-                res.json().then( (res) => {
-                    console.log(res)   
+                this.setState({
+                    defaultAvatar: avatar
                 })
             }
         })
@@ -56,7 +56,6 @@ class OfficeProfile extends React.Component {
     
     
     render(){
-        let avatar = "http://localhost:5000/uploads/avatar-default.png";
         return(
             <section className="office-profile"> 
 
@@ -64,7 +63,7 @@ class OfficeProfile extends React.Component {
                     <label>Avatar</label>
                     <input id="avatar" type="file" name="avatar" />
                     <div className="avatar-contain">
-                        <img className="avatar" src={avatar} alt="user avatar" />
+                        <img className="avatar" src={this.state.defaultAvatar} alt="user avatar" />
                     </div>
 
                     <input type="text" name="about" placeholder="About..." value={this.state.about } onChange={this.handleChange}  /> 

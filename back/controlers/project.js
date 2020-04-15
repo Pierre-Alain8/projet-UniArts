@@ -4,7 +4,10 @@ jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY;
 
 exports.newProject = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){ // verification du token en utilisant bearer token dans les autorisation de la requête
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err,decoded){ // verification du token en utilisant bearer token dans les autorisation de la requête
 
         if(err){
             res.status(401).json('no token provided')
@@ -42,7 +45,10 @@ exports.newProject = function(req, res){
 };
 
 exports.getAllProject = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err, decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err, decoded){
         if(err){
             res.status(401).json('no token provided')
         }else{
@@ -62,7 +68,10 @@ exports.getAllProject = function(req, res){
 
 
 exports.updateProject = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err,decoded){
         if(err){
             res.status(401).json('no token provided')
             return false
@@ -87,7 +96,10 @@ exports.updateProject = function(req, res){
 };
 
 exports.deleteProject = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err,decoded){
         if(err){
             res.status(401).json('no token provided')
             return false
