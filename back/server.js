@@ -42,6 +42,7 @@ AuthController = require('./controlers/auth');
 UserController = require('./controlers/user');
 ProjectController = require('./controlers/project'); 
 LinksController = require('./controlers/links');
+BackOfficeController = require('./controlers/backOffice');
 
 
 // Déclaration des routes :
@@ -61,9 +62,9 @@ app.route('/user/getAllLinks/:id').get(LinksController.getAllLink);
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
 
 // back-office user(artistes): Gestion de profil 
-app.put('/user/updateAvatar', upload.single('avatar'), UserController.updateAvatar); 
-app.put('/user/updateAbout', UserController.updateAbout);
-
+app.put('/user/updateAvatar', upload.single('avatar'), BackOfficeController.updateAvatar); 
+app.put('/user/updateAbout', BackOfficeController.updateAbout);
+app.get('/user/getAvatar/:id', BackOfficeController.getAvatar);
 
 
 app.listen(port);
