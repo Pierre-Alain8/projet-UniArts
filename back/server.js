@@ -13,7 +13,7 @@ var multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads');
-    }, // Si je ne trouve pas de fichier upload je retourne null sinon il enregistre bien dans l'upload
+    }, // Si il ne trouve pas de fichier upload je retourne null sinon il enregistre bien dans l'upload
     filename: (req, file, cb) => {
         cb(null, file.originalname);
     } // Si il trouve que le nom d'origine existe déjà, en cas doublons 
@@ -48,6 +48,7 @@ BackOfficeController = require('./controlers/backOffice');
 // Déclaration des routes :
 app.route('/user/register').post(AuthController.register); //user/register : route pour permettre à l'artiste de s'identifier
 app.route('/user/login').post(AuthController.login); //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
+app.route('/user/getById').get(UserController.getById);
 
 // back-office user(artistes): Gestion de projets
 app.route('/user/addProject').post(ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets

@@ -15,7 +15,7 @@ exports.updateAvatar = function(req, res){
             res.status(400).json(err)
             console.log(err)
         } else {
-            User.findOneAndUpdate({_id: decoded.id}, {$set: {avatar:avatar}}, function(err, data){
+            User.findOneAndUpdate({_id: decoded.id}, {$set: {avatar: avatar}}, function(err, data){
                 if(err){
                     res.status(403).json(err) 
                     console.log(err)

@@ -10,12 +10,10 @@ let projectSchema = new Schema({
 
     description: {
         type: 'string', 
-        required: 'You need to specifie the description of your project' 
     }, 
 
     content: {
         type: 'string', 
-        required: 'You need to specifie the content of your project'
     }, 
 
     cover: {
