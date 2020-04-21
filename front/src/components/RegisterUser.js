@@ -26,15 +26,13 @@ class RegisterUser extends React.Component {
         
     } 
 
-    handleChange(event) {
-        
+    handleChange(event) { 
         // l'évenement permettant de ciblier les valeurs des inputs
         const target = event.target;
         const value = target.value;
         // l'évenement event.target est rappelé dans les variables let pour cibler les input
         let name =target.name;
         
-
         this.setState({
             // récupération des valeurs de manières indépendantes 
             [name]:value,

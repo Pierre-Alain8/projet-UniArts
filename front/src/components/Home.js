@@ -24,7 +24,7 @@ class Home extends React.Component {
                 </div>
 
                 <div className="link-register">
-                    <button className="button-link-register" onClick={this.handleClick }>Nous rejoindre !</button> 
+                    <button className="button-link-register" onClick={this.handleClick }>Rejoindre le collectif</button> 
                     <div className="arrow-link">
                         <img src="img/arrow-right.png" alt="Vous voulez rejoindre le collectif ?" />
                     </div>

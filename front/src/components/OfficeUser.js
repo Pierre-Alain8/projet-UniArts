@@ -20,6 +20,7 @@ class OfficeUser extends React.Component {
     render(){
         return(
             <section className="officeUser"> 
+            
                 <OfficeProfile /> 
                 <OfficeProjects />
                 <OfficeLinks />

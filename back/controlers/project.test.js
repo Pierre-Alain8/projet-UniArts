@@ -16,8 +16,13 @@ describe("Test project", () => {
             }
         }
 
-        const res = {};
-        res.status = 200;
+        const data = response (response => {
+            if (response.status === 200){
+                return data
+            }
+        })
+
+       
     
         // Act: La fonction ou l'élément à tester
         let resProject = await newProject(req, res)

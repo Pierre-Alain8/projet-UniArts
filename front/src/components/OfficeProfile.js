@@ -7,12 +7,13 @@ class OfficeProfile extends React.Component {
     
         this.state = {
             about:"",
+            fliedAbout:"",
             file:"",
             avatar:"", 
         }
         this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        // this.subFormAvatar = this.subFormAvatar.bind(this);     
+        this.subFormProfile = this.subFormProfile.bind(this);     
         
     } 
 
@@ -26,7 +27,6 @@ class OfficeProfile extends React.Component {
             method: 'GET', 
         })
         .then((res) =>{
-            // console.log("getByid :", res.json())
             return res.json()
         })
         .then((res) =>{
@@ -41,11 +41,6 @@ class OfficeProfile extends React.Component {
                 })
             }
         })
-    //Au chargement du component:  Je récupère les donées liées au user avec l'id (contenu dans le token),
-    //  dans la première promesse je retorune les données de la réponse au format json.
-    // Ensuite dans le second promesse, si l'utilisateur n'a aps d'avatar je luui setState un avatar par défault
-    // Sinon je concataine l'adresse où sont upload les imagesavec le filename de l'avatar contenu dans la réponse
-
     }
 
 
@@ -63,7 +58,6 @@ class OfficeProfile extends React.Component {
             body: data,
         })
         .then((res) =>{
-            // console.log("getByid :", res.json())
             return res.json()
         })
         .then((res) =>{
@@ -84,10 +78,33 @@ class OfficeProfile extends React.Component {
         let name = event.target.name; 
         
         this.setState({
-            [name]: value, 
+            [name]: value 
            
-        })
+        },console.log(value))
     }; 
+
+    subFormProfile(event){
+        event.preventDefault()
+        let token = localStorage.getItem('token');
+        const {about} = this.state.about
+
+        fetch(`http://localhost:5000/user/updateProfile`,{
+            headers:{
+                "Authorization": "Bearer " + token
+            },
+            method: 'PUT', 
+            body: JSON.stringify({about:about}),
+        })
+        .then((res) =>{
+            return res.json(about)
+        })
+        .then((res) =>{
+            this.setState({
+                fliedAbout: res.about
+            },console.log("response: " + res.name),
+            console.log("updateProfile: " + res.about))
+        })
+    }
 
     
     render(){
@@ -103,8 +120,12 @@ class OfficeProfile extends React.Component {
                     {/* <button type="submit">Enregistrer</button> */}
                 </form>
 
-                <form className="form-profile">
-                    <input type="text" name="about" placeholder="About..." value={this.state.about } onChange={this.handleChange}  /> 
+                <form className="form-profile" onSubmit={this.subFormProfile }>
+                    <input type="text" name="about" placeholder="About..." 
+                    value={this.state.about } 
+                    onChange={this.handleChange} 
+                    /> 
+                    <p>{this.state.fliedAbout }</p>
                     <button type="submit">Enregistrer</button>
                 </form>
 
