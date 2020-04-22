@@ -3,9 +3,12 @@ User = require('../models/user'),
 jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY;
 
-exports.newLink = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+exports.addLink = function(req, res){
+    console.log(" Test entrée addLink ")
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
 
+    jwt.verify(token, jwt_secret, function(err,decoded){
         if(err){
             res.status(401).json('no token provided')
         }else {
@@ -13,15 +16,16 @@ exports.newLink = function(req, res){
                 linkTitle: req.body.linkTitle, 
                 linkContent: req.body.linkContent,
             });
-            // En paramètre de la fonction save je récupère l'id du user. Dans les paramètres de la fonction callback de save, newData est une variable qui récupèerera les données du nouveau projet
             link.save({_id: decoded.id}, function(err, newLink){
+                console.log(" entrée newLink: " + newLink)
                 if(err){
+                    console.log(err)
                     res.status(400).json(err);
-                } else if(!decoded.role){
-                    console.log("link save:", newLink)
-                    // Avant de pouvoir update le user, je m'assure que celui-ci a bien le rôle "Artiste", ainsi le user pourra être update afin de lier son projet à son profil en récupérant l'id du projet nouvellement créé
+                } else if(decoded.role){
+                    console.log("link save:" + newLink)
+    
                     User.updateOne({_id: decoded.id},{$push: {linkId: newLink}},function(err, data){
-                        console.log(newLink)
+                        // console.log("update: " + linkId)
                         if (err) {
                             console.log(err)
                             res.status(400).json(err)
@@ -41,7 +45,10 @@ exports.newLink = function(req, res){
 
 
 exports.getAllLink = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err, decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err, decoded){
         if(!decoded.role){
             res.status(401).json('no token provided')
         }else{
@@ -60,7 +67,10 @@ exports.getAllLink = function(req, res){
 };
 
 exports.updateLink = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err,decoded){
         if(!decoded.role){
             res.status(401).json('no token provided')
             return false
@@ -87,7 +97,10 @@ exports.updateLink = function(req, res){
 
 
 exports.deleteLink = function(req, res){
-    jwt.verify(req.token, jwt_secret, function(err,decoded){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err,decoded){
         if(!decoded.role){
             res.status(401).json('no token provided')
             return false

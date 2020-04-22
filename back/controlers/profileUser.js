@@ -60,13 +60,14 @@ exports.updateProfile = function(req, res){
             res.status(400).json(err)
             console.log(err)
         }else{
-            User.findOneAndUpdate({_id: decoded.id}, {$set: {about: about}}, function(err, data){
+            console.log("req.body.about:" + about)
+            User.findOneAndUpdate({_id: decoded.id}, {$set: {about: about}}, {new: true}, function(err, data){
                 if(err){
                     res.status(403).json(err) 
                     console.log(err)
                 }else{
-                    console.log(data)
-                    res.status(200).json(data) 
+                    console.log("data result: " + data)
+                    res.status(200).send(data) 
                 };
             });
         };

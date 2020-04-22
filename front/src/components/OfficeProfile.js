@@ -19,16 +19,15 @@ class OfficeProfile extends React.Component {
 
     componentDidMount(){
         let token = localStorage.getItem('token');
-        console.log(token);
         fetch('http://localhost:5000/user/getById',{
             headers:{
                 "Authorization": "Bearer " + token
             },
-            method: 'GET', 
+            method: 'GET'
         })
         .then((res) =>{
-            return res.json()
-        })
+           return res.json()
+    })
         .then((res) =>{
             console.log("getByid :", res)
             if (res.avatar === "") {
@@ -80,42 +79,47 @@ class OfficeProfile extends React.Component {
         this.setState({
             [name]: value 
            
-        },console.log(value))
+        },console.log(name))
     }; 
 
     subFormProfile(event){
         event.preventDefault()
         let token = localStorage.getItem('token');
-        const {about} = this.state.about
+        const {about} = this.state;
 
         fetch(`http://localhost:5000/user/updateProfile`,{
             headers:{
+                'Content-Type' : 'application/json',
+                Accept: 'application/json',
                 "Authorization": "Bearer " + token
             },
-            method: 'PUT', 
-            body: JSON.stringify({about:about}),
+            method: 'PUT',
+            body: JSON.stringify({"about": about})
         })
         .then((res) =>{
-            return res.json(about)
+            console.log(about)
+           return res.json()
         })
-        .then((res) =>{
+        .then((res) => {
+            console.log(res)
             this.setState({
-                fliedAbout: res.about
-            },console.log("response: " + res.name),
-            console.log("updateProfile: " + res.about))
+                fliedAbout: about
+            })
         })
+        .catch((errors) => {console.log(errors)})
+        
     }
 
     
     render(){
         return(
-            <section className="office-profile"> 
+            <div className="office-profile"> 
 
                 <form className="form-Avatar" onSubmit={this.subFormAvatar } > 
                     <label>Avatar</label>
                     <input id="avatar" type="file" name="avatar" onChange={this.handleChangeAvatar }/>
                     <div className="avatar-contain">
-                        <img className="avatar" src={this.state.avatar} alt="user avatar" />
+                        <img className="avatar" src={this.state.avatar} alt="avatar" />
                     </div>
                     {/* <button type="submit">Enregistrer</button> */}
                 </form>
@@ -128,44 +132,11 @@ class OfficeProfile extends React.Component {
                     <p>{this.state.fliedAbout }</p>
                     <button type="submit">Enregistrer</button>
                 </form>
-
-                  
-              
                
-            </section>
+            </div>
         )
     }
 }
 
 export default OfficeProfile
 
-// subFormAvatar(event){
-//     event.preventDefault();
-
-//     let token = localStorage.getItem('token');
-
-//     let data = new FormData();
-//     data.append("avatar", this.state.file);
-
-//     fetch(`http://localhost:5000/user/updateAvatar`, {
-//         headers:{
-//             "Authorization": "Bearer " + token
-//         },
-//         method: 'PUT', 
-//         body: data,
-//     })
-//     .then((res) =>{
-//         // console.log("getByid :", res.json())
-//         return res.json()
-//     })
-//     .then((res) =>{
-//         console.log(res)
-//         this.setState({
-//             avatar:"http://localhost:5000/uploads/" + res
-//         })
-//         // Je récupère la reponse de l'update, et comme celle-ci contient le filename
-//         // Je setState en concatenant l'adresse d' l'upload des images avec la réponse
-        
-//     })
-//     .catch(error => console.log(error))
-// };

@@ -3,7 +3,6 @@ const express = require('express'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 cors = require('cors'),
-// bearerToken = require('express-bearer-token')
 path = require('path'),
 port = 5000, 
 app = express();  
@@ -57,10 +56,13 @@ app.route('/user/getAllProjects/:id').get(ProjectController.getAllProject); // u
 app.route('/user/deleteProject/:id').delete(ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
 
 //back-office user(artistes): Gestion des liens
-app.route('/user/addLink').post(LinksController.newLink); 
+app.post('/user/addLink', LinksController.addLink); 
 app.route('/user/updateLink/:id').put(LinksController.updateLink); 
 app.route('/user/getAllLinks/:id').get(LinksController.getAllLink); 
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
+// app.get('/addLink', function(req, res) {
+//     res.send(' ici test route addLink ');
+//   });
 
 // back-office user(artistes): Gestion de profil 
 app.put('/user/updateAvatar', upload.single('avatar'), ProfileUserController.updateAvatar); 

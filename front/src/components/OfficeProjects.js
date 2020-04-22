@@ -8,8 +8,8 @@ class OfficeProjects extends React.Component {
         this.state = {
             titleProject:"",
             description:"",
-            content:""
-            // project:[]
+            content:"",
+            message:""
            
         }
         this.handleChange = this.handleChange.bind(this);
@@ -42,6 +42,9 @@ class OfficeProjects extends React.Component {
         .then((res) =>{
             if(res.status === 200){
                 res.json().then( (res) => {
+                    this.setState({
+                        message:"votre " + this.state.titleProject +" a été enregistré avec succès !"
+                    })
                     console.log(res)
                 })
             }
@@ -52,7 +55,7 @@ class OfficeProjects extends React.Component {
     
     render(){
         return(
-            <section className="office-projects"> 
+            <div id="projects" className="office-projects tab-content"> 
                 <form className="form-projects" onSubmit={this.subformProject}>
                     <input type="text" name="titleProject" 
                         onChange={this.handleChange}
@@ -72,11 +75,17 @@ class OfficeProjects extends React.Component {
                     />
 
                     <button type="submit">Enregistrer</button> 
-                    {/* <button type="submit">Modifier</button>
-                    <button type="submit">Supprimer</button> */}
+                    <p>{this.state.message}</p>
                 </form>
+               
+            </div>
+        )
+    }
+}
 
-{/* 
+export default OfficeProjects
+
+/* 
                 {
                     this.state.project.map((item, index) => {
                         return(
@@ -88,11 +97,4 @@ class OfficeProjects extends React.Component {
                             </div>
                         )
                     })
-                } */}
-               
-            </section>
-        )
-    }
-}
-
-export default OfficeProjects
+                } */

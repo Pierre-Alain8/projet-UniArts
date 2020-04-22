@@ -8,7 +8,6 @@ exports.newProject = function(req, res){
     const token = header.split(" ")[1];
 
     jwt.verify(token, jwt_secret, function(err,decoded){ // verification du token en utilisant bearer token dans les autorisation de la requête
-
         if(err){
             res.status(401).json('no token provided')
         }else {

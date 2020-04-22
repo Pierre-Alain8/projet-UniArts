@@ -22,9 +22,16 @@ class OfficeUser extends React.Component {
             <section className="officeUser"> 
             
                 <OfficeProfile /> 
+                <div className="tabs">
+                    <button className="tabsLink active"  data-office="projects">
+                        <p data-title="Projects">PROJETS</p>
+                    </button>
+                    <button className="tabsLink" data-office="links">
+                        <p data-title="Links">LINKS</p>
+                    </button>
+                </div>
                 <OfficeProjects />
                 <OfficeLinks />
-              
                
             </section>
         )
