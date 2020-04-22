@@ -7,6 +7,14 @@ import OfficeLinks from './OfficeLinks';
 
 
 class OfficeUser extends React.Component { 
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            active: "active"
+        }
+        // this.showTabs = this.showTabs.bind(this);     
+    } 
 
     componentDidMount(){
 
@@ -15,6 +23,13 @@ class OfficeUser extends React.Component {
          this.props.history.push('/');
         
     };
+
+    // showTabs(event){
+    //     event.preventDefault()
+    //     const target = event.currentTarget;
+    //     const office = target.dataset.office;
+    //     console.log(office)
+    // }
     
     
     render(){
@@ -23,10 +38,10 @@ class OfficeUser extends React.Component {
             
                 <OfficeProfile /> 
                 <div className="tabs">
-                    <button className="tabsLink active"  data-office="projects">
+                    <button className="tabsLink active">
                         <p data-title="Projects">PROJETS</p>
                     </button>
-                    <button className="tabsLink" data-office="links">
+                    <button className="tabsLink">
                         <p data-title="Links">LINKS</p>
                     </button>
                 </div>

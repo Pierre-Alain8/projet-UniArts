@@ -48,8 +48,9 @@ class OfficeLinks extends React.Component {
 
     
     render(){
+
         return(
-            <div id="links" className="office-links tab-content"> 
+            <section className="office-links tab-content"> 
                 <form className="form-links" onSubmit={this.subformLink}>  
                     <input type="text" name="linkTitle" 
                         onChange={this.handleChange} 
@@ -65,9 +66,11 @@ class OfficeLinks extends React.Component {
                     <button type="submit">Enregistrer</button> 
                     <p>{this.state.message}</p>
                 </form>
-              
-               
-            </div>
+
+                <div className="links-content">
+
+                </div>
+            </section>
         )
     }
 }

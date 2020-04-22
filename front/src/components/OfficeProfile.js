@@ -1,4 +1,5 @@
 import React from 'react';
+// import port from '../port/port'
 
 
 class OfficeProfile extends React.Component { 
@@ -27,7 +28,7 @@ class OfficeProfile extends React.Component {
         })
         .then((res) =>{
            return res.json()
-    })
+        })
         .then((res) =>{
             console.log("getByid :", res)
             if (res.avatar === "") {

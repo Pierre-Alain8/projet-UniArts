@@ -52,13 +52,13 @@ app.route('/user/getById').get(UserController.getById);
 // back-office user(artistes): Gestion de projets
 app.route('/user/addProject').post(ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
 app.route('/user/updateProject/:id').put(ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
-app.route('/user/getAllProjects/:id').get(ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
+app.route('/user/getAllProjects').get(ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
 app.route('/user/deleteProject/:id').delete(ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
 
 //back-office user(artistes): Gestion des liens
 app.post('/user/addLink', LinksController.addLink); 
 app.route('/user/updateLink/:id').put(LinksController.updateLink); 
-app.route('/user/getAllLinks/:id').get(LinksController.getAllLink); 
+app.route('/user/getAllLinks').get(LinksController.getAllLink); 
 app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
 // app.get('/addLink', function(req, res) {
 //     res.send(' ici test route addLink ');

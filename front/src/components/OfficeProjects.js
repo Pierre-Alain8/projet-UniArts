@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Projects from './Projects'
 
 class OfficeProjects extends React.Component { 
     constructor(props) {
@@ -9,6 +9,7 @@ class OfficeProjects extends React.Component {
             titleProject:"",
             description:"",
             content:"",
+            projects:[],
             message:""
            
         }
@@ -16,6 +17,26 @@ class OfficeProjects extends React.Component {
         this.subformProject = this.subformProject.bind(this);
      
     } 
+
+    componentDidMount(){
+        let token = localStorage.getItem('token');
+
+        fetch('http://localhost:5000/getAllProjects',{
+            headers:{
+                "Authorization": "Bearer " + token
+            },
+            method: 'GET'
+        })
+        .then((res) =>{
+            return res.json()
+        })
+        .then((res) =>{
+            this.setState({
+                projects: res.projectId
+            })
+            console.log(res);
+        })
+    }
 
     handleChange(event){
         let value = event.target.value
@@ -28,8 +49,16 @@ class OfficeProjects extends React.Component {
     }; 
 
     subformProject(event){
-        let token = localStorage.getItem('token');
         event.preventDefault();
+        let token = localStorage.getItem('token');
+        const newProject = {
+                id: "ProjectId", 
+                titleProject: this.state.titleProject, 
+                description: this.state.description,
+                content: this.state.content
+            };
+        let projects = [...this.state.projects, newProject]
+        
 
         fetch(`http://localhost:5000/user/addProject`, {
             headers:{
@@ -43,7 +72,8 @@ class OfficeProjects extends React.Component {
             if(res.status === 200){
                 res.json().then( (res) => {
                     this.setState({
-                        message:"votre " + this.state.titleProject +" a été enregistré avec succès !"
+                        message:"votre " + this.state.titleProject +" a été enregistré avec succès !",
+                        projects
                     })
                     console.log(res)
                 })
@@ -51,11 +81,10 @@ class OfficeProjects extends React.Component {
         })
     }
 
-
     
     render(){
         return(
-            <div id="projects" className="office-projects tab-content"> 
+            <section className="office-projects tab-content"> 
                 <form className="form-projects" onSubmit={this.subformProject}>
                     <input type="text" name="titleProject" 
                         onChange={this.handleChange}
@@ -76,25 +105,27 @@ class OfficeProjects extends React.Component {
 
                     <button type="submit">Enregistrer</button> 
                     <p>{this.state.message}</p>
-                </form>
-               
-            </div>
+                </form> 
+
+                <div className="list-projects">
+                    {
+                        this.state.projects.map((item, index) =>{
+                            return(
+                                <Projects
+                                    key={item.id}
+                                    id={item.id}
+                                    titleProject={this.state.titleProject}
+                                    descriptionProject={this.state.description}
+                                    contentProject={this.state.content}
+                                />
+                            )
+                            
+                        })
+                    }
+                </div>
+            </section>
         )
     }
 }
 
 export default OfficeProjects
-
-/* 
-                {
-                    this.state.project.map((item, index) => {
-                        return(
-                            <div className="project-contain" key={item.id}>
-                                <h1>{item.titleProject}</h1>
-                                <h3>{item.description}</h3>
-
-                                <p>{item.content}</p>
-                            </div>
-                        )
-                    })
-                } */
