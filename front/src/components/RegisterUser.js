@@ -4,8 +4,7 @@ import { withRouter} from 'react-router-dom';
 import '../css/registerUser.css';
 
 
-
-const RegisterUser =(props) =>{
+const RegisterUser = (props) =>{
     // Les states
     const [values, setValues] = useState({
         name: "", 

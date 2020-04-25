@@ -10,7 +10,7 @@ const OfficeUser = (props) =>{
    useEffect(() =>{
         let token = localStorage.getItem('token')
         if(!token)
-        this.props.history.push('/');
+        props.history.push('/');
    })
 
    return(

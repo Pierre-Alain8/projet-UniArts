@@ -23,7 +23,7 @@ const OfficeProfile = (props) =>{
         .then((res) =>{
             console.log("getByid :", res)
             if (res.avatar === "") {
-                setAvatar("http://localhost:5000/uploads/avatar-default.png")
+                setAvatar("http://localhost:5000/uploads/avatar-default.PNG")
             }else{
                 setAvatar("http://localhost:5000/uploads/" + res.avatar) 
             }
