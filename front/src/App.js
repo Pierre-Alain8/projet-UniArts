@@ -20,7 +20,6 @@ class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route path="/RegisterUser" component={RegisterUser} />
           <Route path="/LoginUser" component={LoginUser} />
-          {/* <Route path="/OfficeUser" component={RequireAuth(OfficeUser)} /> */}
           <Route path="/OfficeUser" component={OfficeUser} />
           <Route path="/ProfileUser" component={ProfileUser} />
         </Switch>

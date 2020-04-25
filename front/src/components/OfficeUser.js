@@ -12,8 +12,7 @@ class OfficeUser extends React.Component {
     
         this.state = {
             active: "active"
-        }
-        // this.showTabs = this.showTabs.bind(this);     
+        }   
     } 
 
     componentDidMount(){
@@ -23,13 +22,6 @@ class OfficeUser extends React.Component {
          this.props.history.push('/');
         
     };
-
-    // showTabs(event){
-    //     event.preventDefault()
-    //     const target = event.currentTarget;
-    //     const office = target.dataset.office;
-    //     console.log(office)
-    // }
     
     
     render(){

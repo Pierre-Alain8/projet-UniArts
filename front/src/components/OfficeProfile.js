@@ -13,7 +13,7 @@ class OfficeProfile extends React.Component {
             avatar:"", 
         }
         this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeProfile = this.handleChangeProfile.bind(this);
         this.subFormProfile = this.subFormProfile.bind(this);     
         
     } 
@@ -73,7 +73,7 @@ class OfficeProfile extends React.Component {
     };
      
 
-    handleChange(event){
+    handleChangeProfile(event){
         let value = event.target.value
         let name = event.target.name; 
         
@@ -128,7 +128,7 @@ class OfficeProfile extends React.Component {
                 <form className="form-profile" onSubmit={this.subFormProfile }>
                     <input type="text" name="about" placeholder="About..." 
                     value={this.state.about } 
-                    onChange={this.handleChange} 
+                    onChange={this.handleChangeProfile} 
                     /> 
                     <p>{this.state.fliedAbout }</p>
                     <button type="submit">Enregistrer</button>

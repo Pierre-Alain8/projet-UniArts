@@ -12,10 +12,11 @@ exports.newProject = function(req, res){
             res.status(401).json('no token provided')
         }else {
             let project = new Project({
-                titleProject: req.body.titleProject, 
+                title: req.body.title, 
                 description: req.body.description, 
                 content: req.body.content,
             })
+            console.log(project)
             // En paramètre de la fonction save je récupère l'id du user. Dans les paramètres de la fonction callback de save, newData est une variable qui récupèerera les données du nouveau projet
             project.save({_id: decoded.id}, function(err, newProject){
                 if(err){
@@ -74,10 +75,11 @@ exports.updateProject = function(req, res){
             res.status(401).json('no token provided')
             return false
         } else if(decoded.id){
-            let {titleProject, description, content, cover} = req.body; 
+            let {title, description, content} = req.body; 
+            let cover = req.file.filename;
 
             Project.updateOne({_id: req.params.id}, 
-                {$set:{titleProject: titleProject, description: description, content: content, cover: cover} }, 
+                {$set:{title:title, description: description, content: content} }, 
                 function(err, data){
                 if(err){
                     console.log('update du project fail')

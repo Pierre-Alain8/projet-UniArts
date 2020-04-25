@@ -7,7 +7,7 @@ class OfficeProjects extends React.Component {
         super(props)
     
         this.state = {
-            titleProject:"",
+            title:"",
             description:"",
             content:"",
             projects:[],
@@ -56,8 +56,7 @@ class OfficeProjects extends React.Component {
         event.preventDefault();
         let token = localStorage.getItem('token');
         const newProject = {
-                id: "ProjectId", 
-                titleProject: this.state.titleProject, 
+                title: this.state.title, 
                 description: this.state.description,
                 content: this.state.content
             };
@@ -76,7 +75,7 @@ class OfficeProjects extends React.Component {
             if(res.status === 200){
                 res.json().then( (res) => {
                     this.setState({
-                        message:"votre " + this.state.titleProject +" a été enregistré avec succès !",
+                        message:"votre " + this.state.title +" a été enregistré avec succès !",
                         projects
                     })
                     console.log(res)
@@ -92,9 +91,9 @@ class OfficeProjects extends React.Component {
         return(
             <section className="office-projects tab-content"> 
                 <form className="form-projects" onSubmit={this.subformProject}>
-                    <input type="text" name="titleProject" 
+                    <input type="text" name="title" 
                         onChange={this.handleChange}
-                        value={this.state.titleProject } 
+                        value={this.state.title } 
                         placeholder="title of project"
                         className="project-input"
                     />
@@ -138,7 +137,7 @@ export default OfficeProjects
 // const OfficeProjects = (props) =>{
 //     const [projects, setProjects] = useState([])
 //     const [message, setMessage] = useState("")
-//     const [values, setValues] = useState({ titleProject: "", description: "", content: ""})
+//     const [values, setValues] = useState({title: "", description: "", content: ""})
 
 
 //     useEffect(() => {
@@ -179,7 +178,7 @@ export default OfficeProjects
 //         let token = localStorage.getItem('token');
 //         // const newProject = {
 //         //         id: "ProjectId", 
-//         //          titleProject, 
+//         //         title, 
 //         //          description,
 //         //         content
 //         //     };

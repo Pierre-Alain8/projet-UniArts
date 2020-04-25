@@ -45,24 +45,21 @@ ProfileUserController = require('./controlers/profileUser');
 
 
 // Déclaration des routes :
-app.route('/user/register').post(AuthController.register); //user/register : route pour permettre à l'artiste de s'identifier
-app.route('/user/login').post(AuthController.login); //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
-app.route('/user/getById').get(UserController.getById);
+app.post('/user/register', AuthController.register); //user/register : route pour permettre à l'artiste de s'identifier
+app.post('/user/login', AuthController.login); //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
+app.get('/user/getById', UserController.getById);
 
 // back-office user(artistes): Gestion de projets
-app.route('/user/addProject').post(ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
-app.route('/user/updateProject/:id').put(ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
-app.route('/user/getAllProjects').get(ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
-app.route('/user/deleteProject/:id').delete(ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
+app.post('/user/addProject',ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
+app.put('/user/updateProject/:id', ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
+app.get('/user/getAllProjects', ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
+app.delete('/user/deleteProject/:id',ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
 
 //back-office user(artistes): Gestion des liens
 app.post('/user/addLink', LinksController.addLink); 
-app.route('/user/updateLink/:id').put(LinksController.updateLink); 
-app.route('/user/getAllLinks').get(LinksController.getAllLink); 
-app.route('/user/deleteLink/:id').delete(LinksController.deleteLink);
-// app.get('/addLink', function(req, res) {
-//     res.send(' ici test route addLink ');
-//   });
+app.put('/user/updateLink/:id', LinksController.updateLink); 
+app.get('/user/getAllLinks', LinksController.getAllLink); 
+app.delete('/user/deleteLink/:id', LinksController.deleteLink);
 
 // back-office user(artistes): Gestion de profil 
 app.put('/user/updateAvatar', upload.single('avatar'), ProfileUserController.updateAvatar); 
