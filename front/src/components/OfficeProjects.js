@@ -22,9 +22,6 @@ const OfficeProjects = (props) =>{
                 return res.json()
             })
             .then((res) =>{
-                // this.setState({
-                //     projects: res.projectId
-                // })
                 setProjects(res.projectId)
                 
                 console.log("getAllProjects: ",res);
