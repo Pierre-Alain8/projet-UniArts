@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 
 const Project = (props) =>{
+    
     const {project} = props;
     // Ce sont les useState qui remplace le this.state et le This.setSate
-    const [values, setValues] = useState({title: "", description: "", content: ""}) ;
+    const [values, setValues] = useState({title: "", description: "", content: ""});
+    const [file, setFile] = useState("")
    
     // Les méthodes
     // Modal:
@@ -18,21 +20,23 @@ const Project = (props) =>{
         setOpen(false);
     };
 
+    const handleChangeCover = (event) =>{
+        setFile(event.target.files[0])
+    }
 
     const handleChangeProject = (event) =>{
         const {name, value} = event.target // création de l'event 
         setValues({...values, [name]: value}) // setState de values en créant une nouvelle entrée dans ls state values  cibler les valeurs des inputs possédant l'attribut name
-
+        
     }
 
     const subUpdateProject = (event) =>{
         event.preventDefault();
         let token = localStorage.getItem('token');
-        let cover = document.getElementById('cover')
       
         
         let data = new FormData()
-        data.append("cover", cover.files[0])
+        data.append("cover", file)
         data.append("title", values.title)
         data.append("description", values.description)
         data.append("content", values.content)
@@ -50,8 +54,7 @@ const Project = (props) =>{
         .then((res) =>{
             console.log("title:" + values.title, 
             "description: " +values.description, 
-            "content: " + values.content,
-            "cover: " + cover.files[0])
+            "content: " + values.content)
             return res.json()
         })
         .then((res) =>{
@@ -83,6 +86,7 @@ const Project = (props) =>{
     return(  
         <div className="projects">
             <div className="modal-button">
+                <h1>{project.title}</h1>
                 <img src={"http://localhost:5000/uploads/" + project.cover} alt="project" />
 
                 <button className="update-project" onClick={handleOpen} >
@@ -106,10 +110,10 @@ const Project = (props) =>{
                 <div data-id={project._id} id={project._id} className="projects-modal">
                     <div className="cover-contain">
                         <img className="cover" src={"http://localhost:5000/uploads/" + project.cover} alt="cover" />
-                </div> 
+                    </div> 
 
                     <form onSubmit={subUpdateProject} className="projects-content">
-                        <input id="cover" type="file" name="cover" />
+                        <input id="cover" type="file" name="cover" onChange={handleChangeCover}  />
 
                             <h1>{project.title}</h1>
 

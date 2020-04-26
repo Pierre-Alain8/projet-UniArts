@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 
 const OfficeLinks = (props) =>{
+    const [links, setLinks] = useState([])
+    const [message, setMessage] = useState("")
     const [values, setValues] = useState({linkTitle: "", linkContent: ""})
 
     const handleChangeLink = (event) => {
@@ -10,6 +12,7 @@ const OfficeLinks = (props) =>{
 
     const subformLink = (event) => {
         let token = localStorage.getItem('token'); 
+        let newLinks = [...links, values]
         event.preventDefault();
 
         fetch(`http://localhost:5000/user/addLink`, {
@@ -26,7 +29,10 @@ const OfficeLinks = (props) =>{
 
         })
         .then((res) =>{
-            console.log(res)
+            if(res.status === 200){
+                setMessage("votre lien a été enregistré avec succès !")
+                setLinks(newLinks)
+            }
         })
     }
 
@@ -45,7 +51,7 @@ const OfficeLinks = (props) =>{
                         placeholder="add the content of link" 
                     />
                     <button type="submit">Enregistrer</button> 
-                    <p></p>
+                    <p>{message}</p>
                 </form>
 
             </section>

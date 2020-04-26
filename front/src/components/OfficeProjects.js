@@ -6,6 +6,7 @@ const OfficeProjects = (props) =>{
         // les states & setStates:
         const [projects, setProjects] = useState([])
         const [message, setMessage] = useState("")
+        const [file, setFile] = useState("")
         const [values, setValues] = useState({title: "", description: "", content: ""})
     
         // ComponentDitMount & ComponentDitUpdate:
@@ -26,12 +27,16 @@ const OfficeProjects = (props) =>{
                 
                 console.log("getAllProjects: ",res);
                 console.log("projects: ",res.projectId);
+                console.log("cover: ", res.cover)
                
             })
             .catch(error => console.log(error))
         }, [])
     
     
+        const handleChangeCover = (event) =>{
+            setFile(event.target.files[0])
+        }
     
         const handleChangeProject = (event) =>{
             const {name, value} = event.target
@@ -42,10 +47,9 @@ const OfficeProjects = (props) =>{
             event.preventDefault();
             let token = localStorage.getItem('token');
             let newProjects = [...projects, values]
-            let cover = document.getElementById('cover')
             
             let data = new FormData()
-            data.append("cover", cover.files[0])
+            data.append("cover", file)
             data.append("title", values.title)
             data.append("description", values.description)
             data.append("content", values.content)
@@ -82,7 +86,7 @@ const OfficeProjects = (props) =>{
                                     className="project-input"
                                 />
 
-                                <input id="cover" type="file" name="cover" />
+                                <input id="cover" type="file" name="cover" onChange={handleChangeCover}  />
             
                                 <input type="text" name="description" 
                                     onChange={handleChangeProject} 
@@ -101,7 +105,7 @@ const OfficeProjects = (props) =>{
                                 <p>{message}</p>
                             </form> 
             
-                            <div data-hello={"hello"} className="list-projects">
+                            <div className="list-projects">
                                 {
                                     projects.map((project, index)=>{
                                         return(
