@@ -1,104 +1,101 @@
-// import React, {useState} from 'react';
-// import Modal from '@material-ui/core/Modal';
+import React, {useState} from 'react';
 
 
-// const Project = (props) =>{
+const Links = (props) =>{
     
-//     const {link} = props;
-//     // Ce sont les useState qui remplace le this.state et le This.setSate
-//     const [values, setValues] = useState({title: "", description: "", content: ""}) ;
+    const {link} = props;
+    // Ce sont les useState qui remplace le this.state et le This.setSate
+    const [values, setValues] = useState({linkTitle: "", linkContent: ""}) ;
    
-//     // Les méthodes
-//     // Modal:
-//     const [open, setOpen] = React.useState(false);
+    // Les méthodes
 
-//     const handleOpen = () => {
-//         setOpen(true);
-//     };
+    
+    const handleChangeLink = (event) =>{
+        const {name, value} = event.target // création de l'event 
+        setValues({...values, [name]: value}) // setState de values en créant une nouvelle entrée dans ls state values  cibler les valeurs des inputs possédant l'attribut name
 
-//     const handleClose = () => {
-//         setOpen(false);
-//     };
+    }
 
+    const subUpdateLink = (event) =>{
+        event.preventDefault();
+        let token = localStorage.getItem('token');
 
-//     const handleChangeProject = (event) =>{
-//         const {name, value} = event.target // création de l'event 
-//         setValues({...values, [name]: value}) // setState de values en créant une nouvelle entrée dans ls state values  cibler les valeurs des inputs possédant l'attribut name
-
-//     }
-
-//     const subUpdateProject = (event) =>{
-//         event.preventDefault();
-//         let token = localStorage.getItem('token');
-//         let cover = document.getElementById('cover')
-      
+        fetch(`http://localhost:5000/user/updateLink/` + link._id, {
+            headers:{
+                "Authorization": "Bearer " + token,
+                'Content-Type': 'application/json'  
+            },
+            method: 'PUT',
+            body: JSON.stringify(values),
+        })
         
-//         let data = new FormData()
-//         data.append("cover", cover.files[0])
-//         data.append("title", values.title)
-//         data.append("description", values.description)
-//         data.append("content", values.content)
-        
-        
+        .then((res) =>{
+            console.log("linkTitle:" + values.linkTitle, 
+            "content: " + values.linkcontent)
 
-//         fetch(`http://localhost:5000/user/updateProject/` + project._id, {
-//             headers:{
-//                 "Authorization": "Bearer " + token,
-//             },
-//             method: 'PUT',
-//             body: data,
-//         })
-        
-//         .then((res) =>{
-//             console.log("title:" + values.title, 
-//             "description: " +values.description, 
-//             "content: " + values.content,
-//             "cover: " + cover.files[0])
-//             return res.json()
-//         })
-//         .then((res) =>{
-//             console.log("response:", res)
-//         })
-//     }
+            return res.json()
+        })
+        .then((res) =>{
+            console.log("response:", res)
+        })
+    }
 
-//     const deleteProject = (event) => {
-//         let token = localStorage.getItem('token');
+    const deleteLink= (event) => {
+        event.preventDefault()
+        let token = localStorage.getItem('token');
 
-//         fetch(`http://localhost:5000/user/deleteProject/` + project._id, {
-//             headers:{
-//                 "Authorization": "Bearer " + token,
-//             },
-//             method: 'DELETE',
-//         })
-//         .then((res) =>{
-//             return res.json()
-//         })
-//         .then((res) =>{
-//             console.log('removed success: ', res)
-//         })
-//     }
+        fetch(`http://localhost:5000/user/deleteLink/` + link._id, {
+            headers:{
+                "Authorization": "Bearer " + token,
+            },
+            method: 'DELETE',
+        })
+        .then((res) =>{
+            return res.json()
+        })
+        .then((res) =>{
+            console.log('removed success: ', res)
+        })
+    }
 
-  
+    return(  
+        <div className="links-container">
+            <form onSubmit={subUpdateLink}>
+                <ul className="Link" id={link._id} >
+                    <li>
+                        <p>{link.linkTitle}</p>
+                        <input type="text" name="linkTitle" 
+                            onChange={handleChangeLink} 
+                            value={values.linkTitle} 
+                            placeholder="add title of links" 
+                        />
 
+                        <p>{link.linkContent}</p>
+                            <input type="text" name="linkContent"
+                            onChange={handleChangeLink} 
+                            value={values.linkContent} 
+                            placeholder="add the content of link" 
+                        />
 
+                        <button  type="submit" className="validate-link">
+                            <img src="img/button-validate.png" alt="button-validate"/>
+                            Actualisé
+                        </button>
+                    </li>
+                </ul>
+           </form>
 
-//     return(  
-//         <div className="links">
-//            <ul>
-//                <li>
-
-//                </li>
-//                <li>
-
-//                </li>
-//            </ul>
-//         </div>
+           <button className="delete-link" onClick={deleteLink} >
+                <img src="img/button-delete.png" alt="button-delete"/> 
+                Supprimer
+            </button>
+        </div>
 
         
    
 
-// )
-// }
+)
+}
 
 
-// export default Project
+export default Links

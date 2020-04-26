@@ -78,45 +78,45 @@ const OfficeProjects = (props) =>{
     
         return(
             <section className="office-projects tab-content"> 
-                    <form className="form-projects" onSubmit={subformProject}>
-                                 <input type="text" name="title" 
-                                    onChange={handleChangeProject}
-                                    value={values.title} 
-                                    placeholder="title of project"
-                                    className="project-input"
-                                />
+                <form className="form-projects" onSubmit={subformProject}>
+                    <input type="text" name="title" 
+                        onChange={handleChangeProject}
+                        value={values.title} 
+                        placeholder="title of project"
+                        className="project-input"
+                    />
 
-                                <input id="cover" type="file" name="cover" onChange={handleChangeCover}  />
+                    <input id="cover" type="file" name="cover" onChange={handleChangeCover}  />
             
-                                <input type="text" name="description" 
-                                    onChange={handleChangeProject} 
-                                    value={values.description } 
-                                    placeholder="description of project" 
-                                    className="project-input"
-                                />
-                                <input type="text" name="content" 
-                                    onChange={handleChangeProject} 
-                                    value={values.content}
-                                    placeholder="content of project" 
-                                    className="project-input"
-                                />
+                    <input type="text" name="description" 
+                        onChange={handleChangeProject} 
+                        value={values.description } 
+                        placeholder="description of project" 
+                        className="project-input"
+                    />
+
+                    <input type="text" name="content" 
+                        onChange={handleChangeProject} 
+                        value={values.content}
+                        placeholder="content of project" 
+                        className="project-input"
+                    />
             
-                                <button type="submit">Enregistrer</button> 
-                                <p>{message}</p>
-                            </form> 
+                    <button type="submit">Enregistrer</button> 
+                    <p>{message}</p>
+                </form> 
             
-                            <div className="list-projects">
-                                {
-                                    projects.map((project, index)=>{
-                                        return(
-                                            <Project key={index} project={project}/>
-                                        )
-                                    })
-                                }
-                                {/* {console.log(projects)} */}
-                            </div>
+                <div className="list-projects">
+                    {
+                        projects.map((project, index)=>{
+                            return(
+                                <Project key={index} project={project}/>
+                            )
+                        })
+                    }
+                </div>
             
-                        </section>
+            </section>
         )
     }
 

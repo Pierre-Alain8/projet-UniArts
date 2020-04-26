@@ -1,9 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Links from './Links';
 
 const OfficeLinks = (props) =>{
     const [links, setLinks] = useState([])
     const [message, setMessage] = useState("")
     const [values, setValues] = useState({linkTitle: "", linkContent: ""})
+
+     // ComponentDitMount & ComponentDitUpdate:
+     useEffect(() => {
+        let token = localStorage.getItem('token');
+
+        fetch(`http://localhost:5000/user/getAllLinks`,{
+            headers:{
+                "Authorization": "Bearer " + token
+            },
+            method: 'GET',
+        })
+        .then((res) =>{
+            return res.json()
+        })
+        .then((res) =>{
+            setLinks(res.linkId)
+            
+            console.log("getAllLinks: ",res);
+            console.log("Links: ",res.linkId);
+           
+        })
+        .catch(error => console.log(error))
+    },[])
+
 
     const handleChangeLink = (event) => {
         const {name, value} = event.target
@@ -24,14 +49,15 @@ const OfficeLinks = (props) =>{
             body: JSON.stringify(values),
         })
         .then((res) =>{
-            console.log(res)
-            return res.json()
-
-        })
-        .then((res) =>{
             if(res.status === 200){
-                setMessage("votre lien a été enregistré avec succès !")
-                setLinks(newLinks)
+                res.json().then( (res) => {
+                    setMessage("votre lien a été enregistré avec succès !")
+                    setLinks(newLinks)
+                    console.log(res)
+                })
+            }else{
+                console.log(res)
+                console.log("hello")
             }
         })
     }
@@ -53,6 +79,16 @@ const OfficeLinks = (props) =>{
                     <button type="submit">Enregistrer</button> 
                     <p>{message}</p>
                 </form>
+
+                <div className="list-links">
+                    {
+                        links.map((link, index)=>{
+                            return(
+                                <Links key={index} link={link}/>
+                            )
+                        })
+                    }
+                </div>
 
             </section>
 

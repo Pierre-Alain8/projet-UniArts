@@ -84,7 +84,7 @@ const Project = (props) =>{
 
 
     return(  
-        <div className="projects">
+        <div className="projects-container">
             <div className="modal-button">
                 <h1>{project.title}</h1>
                 <img src={"http://localhost:5000/uploads/" + project.cover} alt="project" />
