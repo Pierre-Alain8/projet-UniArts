@@ -15,6 +15,7 @@ exports.newProject = function(req, res){
                 title: req.body.title, 
                 description: req.body.description, 
                 content: req.body.content,
+                cover: req.file.filename
             })
             console.log(project)
             // En paramètre de la fonction save je récupère l'id du user. Dans les paramètres de la fonction callback de save, newData est une variable qui récupèerera les données du nouveau projet
@@ -79,11 +80,11 @@ exports.updateProject = function(req, res){
             let cover = req.file.filename;
 
             Project.updateOne({_id: req.params.id}, 
-                {$set:{title:title, description: description, content: content} }, 
+                {$set:{title: title, description: description, content: content, cover: cover} }, 
                 function(err, data){
                 if(err){
                     console.log('update du project fail')
-                    console.log(err)
+                    console.log("error data:", data)
                     res.status(204).json(err)
                 }else {
                     console.log(data)
@@ -105,11 +106,14 @@ exports.deleteProject = function(req, res){
             return false
         } else if(decoded.role){
             Project.deleteOne({_id: req.params.id}, function(err, data){
-                if(err)
+                if(err){
+                    console.log(err)
                     res.status(400).json(err)
-                else
+                }
+                else{
                     console.log("le projet a été supprimé avec succès")
                     res.status(200).json(data)
+                }
             })
         }
 

@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 let projectSchema = new Schema({
 
     title: {
-        type: 'string', 
-        required: 'You need to specifie the name of your project'
+        type: 'string',
     }, 
 
     description: {

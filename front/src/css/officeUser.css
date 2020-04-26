@@ -33,7 +33,7 @@
 
 .office-projects{
     width: 100%;
-    height: 31rem;
+    height: 34rem;
     background-color: paleturquoise;
 }
 
@@ -81,6 +81,21 @@
     width: 72%;
 }
 
+.cover-contain{
+    width: 26rem;
+    height: 14rem;
+}
+
+.cover-contain img{
+    height: 100%;
+    width: 100%;
+}
+
+.projects{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .list-projects{   
     display: flex;
     flex-direction: column;
@@ -89,7 +104,17 @@
     overflow: scroll;
 }
 
-.projects-content{
+.modal-button{
+    width: 70%;
+    height: 70%;
+}
+
+.modal-button img{
+    height: 100%;
+    width: 100%;
+}
+
+.projects-modal{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -97,7 +122,20 @@
     justify-content: center;
 }
 
+.projects-content{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #E7EAEF;
+}
+
 .button-container{
+    position: relative;
+    bottom: 5rem;
+    left: 4rem;
     width: 66%;
     display: flex;
     align-items: center;
@@ -111,9 +149,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    bottom: 12.5rem;
+    left: 16rem;
     font-size: 0.70em;
-    width: 4rem;
+    width: 5rem;
     height: 3.5rem;
+    
 }
 
 
@@ -124,9 +166,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    bottom: 12rem;
+    left: 16rem;
     font-size: 0.70em;
     width: 5rem;
     height: 3.5rem;
+   
 }
 
 .validate-project{
@@ -136,6 +182,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    bottom: 28rem;
     font-size: 0.70em;
     width: 4.5rem;
     height: 3.5rem;
@@ -168,22 +216,3 @@
 }
 
 
-
-/* 
-display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.70em;
-    color: #404040;
-    width: 37%;
-    background-color: #E7EAEF;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.70em;
-    color: #404040;
-    width: 37%;
-    background-color: #E7EAEF; */

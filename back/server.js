@@ -50,10 +50,10 @@ app.post('/user/login', AuthController.login); //user/login: route pour permettr
 app.get('/user/getById', UserController.getById);
 
 // back-office user(artistes): Gestion de projets
-app.post('/user/addProject',ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
-app.put('/user/updateProject/:id', ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
+app.post('/user/addProject',upload.single('cover') ,ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
+app.put('/user/updateProject/:id',upload.single('cover') ,ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
 app.get('/user/getAllProjects', ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
-app.delete('/user/deleteProject/:id',ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
+app.delete('/user/deleteProject/:id', ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
 
 //back-office user(artistes): Gestion des liens
 app.post('/user/addLink', LinksController.addLink); 

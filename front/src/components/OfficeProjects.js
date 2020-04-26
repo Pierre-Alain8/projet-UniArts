@@ -41,17 +41,22 @@ const OfficeProjects = (props) =>{
         const subformProject = (event) =>{
             event.preventDefault();
             let token = localStorage.getItem('token');
-    
             let newProjects = [...projects, values]
+            let cover = document.getElementById('cover')
+            
+            let data = new FormData()
+            data.append("cover", cover.files[0])
+            data.append("title", values.title)
+            data.append("description", values.description)
+            data.append("content", values.content)
             
     
             fetch(`http://localhost:5000/user/addProject`, {
                 headers:{
                     "Authorization": "Bearer " + token,
-                    'Content-Type': 'application/json'  
                 },
                 method: 'POST',
-                body: JSON.stringify(values),
+                body: data,
             })
             .then((res) =>{
                 if(res.status === 200){
@@ -61,6 +66,7 @@ const OfficeProjects = (props) =>{
                         console.log(res)
                     })
                 }else{
+                    console.log(res)
                     console.log("hello")
                 }
             })
@@ -75,6 +81,8 @@ const OfficeProjects = (props) =>{
                                     placeholder="title of project"
                                     className="project-input"
                                 />
+
+                                <input id="cover" type="file" name="cover" />
             
                                 <input type="text" name="description" 
                                     onChange={handleChangeProject} 
@@ -93,7 +101,7 @@ const OfficeProjects = (props) =>{
                                 <p>{message}</p>
                             </form> 
             
-                            <div className="list-projects">
+                            <div data-hello={"hello"} className="list-projects">
                                 {
                                     projects.map((project, index)=>{
                                         return(
