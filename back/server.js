@@ -45,9 +45,15 @@ ProfileUserController = require('./controlers/profileUser');
 
 
 // Déclaration des routes :
+// authentification user: 
 app.post('/user/register', AuthController.register); //user/register : route pour permettre à l'artiste de s'identifier
 app.post('/user/login', AuthController.login); //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
 app.get('/user/getById', UserController.getById);
+
+// // authentification admin
+// app.post('/adm/auth/register', AuthController.admRegister);
+// app.post('/adm/auth/login', AuthController.admLogin);
+
 
 // back-office user(artistes): Gestion de projets
 app.post('/user/addProject',upload.single('cover') ,ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
@@ -65,6 +71,13 @@ app.delete('/user/deleteLink/:id', LinksController.deleteLink);
 app.put('/user/updateAvatar', upload.single('avatar'), ProfileUserController.updateAvatar); 
 app.put('/user/updateProfile', ProfileUserController.updateProfile);
 app.get('/user/getAvatar/:id', ProfileUserController.getAvatar);
+
+// Gallery images (artistes)
+app.post('/gallery/upload', upload.single('media'), UserController.addMediaGallery);
+
+
+
+
 
 
 app.listen(port);

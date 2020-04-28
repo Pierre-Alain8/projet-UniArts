@@ -2,7 +2,9 @@
 const User = require('../models/user'),
 bcrypt = require('bcrypt'),
 jwt = require('jsonwebtoken'),
-jwt_secret = process.env.JWT_SECRET_KEY;
+jwt_secret = process.env.JWT_SECRET_KEY,
+adm_login = process.env.ADMIN_LOGIN,
+adm_password = process.env.ADMIN_PASSWORD;
 
 
 
@@ -27,7 +29,7 @@ exports.register = function (req, res) {
      // hash du password du user
     let hash = bcrypt.hashSync(req.body.password, 10);
     req.body.password,req.body.password2 = hash;
-
+    req.body.role = "arttiste";
 
     let user = new User({ 
             name : req.body.name, 
@@ -65,6 +67,8 @@ exports.register = function (req, res) {
   
 };
 
+
+
 exports.login = function (req, res) {
     User.findOne({email : req.body.email}, function(err, user){
         console.log(req.body.email);
@@ -84,14 +88,38 @@ exports.login = function (req, res) {
                     res.status(200).json(response)
                     console.log('vous êtes bien connecté')
                     console.log(user)
-                    // console.log(token)
                 } else {
                     res.status(400).json(err)
                     console.log('Veuillez entrez un email et un password existant')
 
                 };
-            });
-        
+               
+            });  
         }
     });
 };
+
+// exports.admRegister = function (req, res) {
+   
+//     if (req.body.admLogin == adm_login && req.body.admPassword == adm_password){
+//         // hash du password du user
+//         let hash = bcrypt.hashSync(req.body.password, 10, function(err, hash){});
+//         req.body.password = hash;
+//         req.body.role = "Admin";
+//         User.create(req.body, function(err, newUser) {
+//             if (err){
+//                 console.log(newUser)
+//                 res.status(400).json(err);
+//             } else
+//             res.status(200).json(newUser);
+//         });
+//     }      
+  
+// };
+
+// exports.admLogin= function (req, res) {
+//    if(res.body.name == adm_login && req.body.password == adm_password){
+//       let token = jwt.sign({id: null, role: "Admin"}, jwt_secret)
+//    }else
+//         res.status(400).json({auth:"Artiste", message: "wrong username or password"})         
+// };

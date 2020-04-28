@@ -37,17 +37,11 @@ const RegisterUser = (props) =>{
             switch (res.status) {
                 case 401:
                     setError("Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères")
-                    // this.setState({
-                    //     error:"Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"
-                    // })
                     console.log(res)
                     break;
 
                 case 409: 
                 setError("Votre password ne correspond pas au précédent, veuillez le confirmer")
-                    // this.setState({
-                    //     error:"Votre password ne correspond pas au précédent, veuillez le confirmer"
-                    // })
                     console.log(res)
                     break;
                 case 200:
