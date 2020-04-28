@@ -9,6 +9,7 @@ app = express();
 require('dotenv').config();
 
 var multer = require('multer'); 
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './uploads');
@@ -17,6 +18,14 @@ const storage = multer.diskStorage({
         cb(null, file.originalname);
     } // Si il trouve que le nom d'origine existe déjà, en cas doublons 
 }) 
+
+var upload = multer({
+    storage: storage,
+    limits: { 
+        fileSize: 1024 * 1024 * 8 
+    }
+    // fileFilter: fileFilter
+  });
 
 
 
@@ -74,6 +83,8 @@ app.get('/user/getAvatar/:id', ProfileUserController.getAvatar);
 
 // Gallery images (artistes)
 app.post('/gallery/upload', upload.single('media'), UserController.addMediaGallery);
+app.get('/gallery', UserController.getGallery)
+app.delete('/gallery/deleteMedia/:id', UserController.deleteMediaGallery);
 
 
 

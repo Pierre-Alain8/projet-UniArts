@@ -80,3 +80,27 @@ exports.getGallery = function (req, res){
         };
     });
 }
+
+exports.deleteMediaGallery = function(req, res){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err,decoded){
+        if(err){
+            res.status(401).json('no token provided')
+            return false
+        } else if(decoded.role){
+            Gallery.deleteOne({_id: req.params.id}, function(err, data){
+                if(err){
+                    console.log(err)
+                    res.status(400).json(err)
+                }
+                else{
+                    console.log("l'image a été supprimé avec succès")
+                    res.status(200).json(data)
+                }
+            })
+        }
+
+    });
+}
