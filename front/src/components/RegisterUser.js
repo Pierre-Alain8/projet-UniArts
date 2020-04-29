@@ -46,7 +46,6 @@ const RegisterUser = (props) =>{
                     break;
                 case 200:
                     console.log(res)
-                    console.log(values.password)
                     props.history.push('/LoginUser')
                     break;
             

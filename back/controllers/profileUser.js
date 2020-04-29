@@ -21,6 +21,7 @@ exports.updateAvatar = function(req, res){
                     console.log(err)
                 }
                 else{
+                    console.log("size: " , req.file.size)
                     console.log(data)
                     res.status(200).json(req.file.filename)
                 };

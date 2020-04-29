@@ -25,10 +25,11 @@ var upload = multer({storage: storage })
 ProfileUserController = require('../controllers/profileUser');
 
 
-// Déclaration des routes :
+// Intitulé des routes :
+
 // back-office user(artistes): Gestion de profil 
-profile.put('/user/updateAvatar', upload.single('avatar'), ProfileUserController.updateAvatar); 
-profile.put('/user/updateProfile', ProfileUserController.updateProfile);
-profile.get('/user/getAvatar/:id', ProfileUserController.getAvatar);
+profile.put('/updateAvatar', upload.single('avatar'), ProfileUserController.updateAvatar); 
+profile.put('/updateProfile', ProfileUserController.updateProfile);
+profile.get('/getAvatar/:id', ProfileUserController.getAvatar);
 
 module.exports	= profile;

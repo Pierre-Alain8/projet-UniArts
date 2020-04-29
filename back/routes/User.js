@@ -1,5 +1,5 @@
 const express = require('express'); 
-const users = express.Router()
+const user = express.Router()
 var multer = require('multer'); 
 
 const storage = multer.diskStorage({
@@ -24,12 +24,11 @@ var upload = multer({storage: storage })
 // importation du controller
 UserController = require('../controllers/user');
 
-// Déclaration des routes:
+// Intitulé des routes :
 
 // Gallery images (artistes)
-users.get('/user/getById', UserController.getById);
-users.post('/gallery/upload', upload.single('media'), UserController.addMediaGallery);
-users.get('/user/getById', UserController.getById);
-users.delete('/gallery/deleteMedia/:id', UserController.deleteMediaGallery);
+user.get('/getById', UserController.getById);
+user.post('/gallery/upload', upload.single('media'), UserController.addMediaGallery);
+user.delete('/gallery/deleteMedia/:id', UserController.deleteMediaGallery);
 
-module.exports	= users;
+module.exports	= user;

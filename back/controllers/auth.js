@@ -83,7 +83,9 @@ exports.login = function (req, res) {
                 
 
                 if(result) {
-                    let token = jwt.sign({id: user._id, role: user.role}, jwt_secret)
+                    let token = jwt.sign({id: user._id, role: user.role}, jwt_secret, {
+                        expiresIn : "24h"
+                    })
                     let response = {user: user, adhesion: true, token: token}
                     res.status(200).json(response)
                     console.log('vous êtes bien connecté')
@@ -99,27 +101,23 @@ exports.login = function (req, res) {
     });
 };
 
-// exports.admRegister = function (req, res) {
+exports.admRegister = function (req, res) {
+    console.log(adm_login, adm_password, "login:" + req.body.admLogin, "password:" + req.body.admPassword)
    
-//     if (req.body.admLogin == adm_login && req.body.admPassword == adm_password){
-//         // hash du password du user
-//         let hash = bcrypt.hashSync(req.body.password, 10, function(err, hash){});
-//         req.body.password = hash;
-//         req.body.role = "Admin";
-//         User.create(req.body, function(err, newUser) {
-//             if (err){
-//                 console.log(newUser)
-//                 res.status(400).json(err);
-//             } else
-//             res.status(200).json(newUser);
-//         });
-//     }      
+    if (req.body.admLogin == adm_login && req.body.admPassword == adm_password){
+        // hash du password du user
+        let hash = bcrypt.hashSync(req.body.password, 10);
+        req.body.password = hash;
+        req.body.role = "Admin";
+        User.create(req.body, function(err, newUser) {
+            if (err){
+                console.log(newUser)
+                res.status(400).json(err);
+            } else
+            res.status(200).json(newUser);
+        });
+    } else{
+        res.status(400).json("indentifiant incorrect")
+    }  
   
-// };
-
-// exports.admLogin= function (req, res) {
-//    if(res.body.name == adm_login && req.body.password == adm_password){
-//       let token = jwt.sign({id: null, role: "Admin"}, jwt_secret)
-//    }else
-//         res.status(400).json({auth:"Artiste", message: "wrong username or password"})         
-// };
+};

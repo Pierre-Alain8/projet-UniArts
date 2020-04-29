@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
 import '../css/loginUser.css';
-
+import decode from "jwt-decode"; 
 
 const LoginUser = (props) => {
     // Les states
@@ -43,8 +43,20 @@ const LoginUser = (props) => {
                 res.json().then( (res) => {
                 
                     localStorage.setItem('token', res.token); 
-                    props.history.push('/OfficeUser')
-                    console.log(res.token)   
+                    
+                    let getToken = localStorage.getItem('token')
+                    const decoded = decode(getToken);
+                    console.log(decoded)
+
+                    if (decoded.role === "Artiste") {
+                        props.history.push('/OfficeUser')
+                        console.log(res.token)  
+
+                    } else if(decoded.role === "Admin"){
+                        props.history.push('/ArtsUnit/power/admin/auth')
+                        console.log(res.token)   
+                    }
+                   
                 })
             }
         })

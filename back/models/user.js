@@ -9,8 +9,7 @@ let userSchema = new Schema({
     }, 
 
     pseudo : {
-        type: 'string', 
-        required: 'You need to specifie a pseudo' 
+        type: 'string'
     }, 
 
     email: {
