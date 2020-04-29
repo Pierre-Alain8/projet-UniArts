@@ -4,33 +4,9 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 cors = require('cors'),
 path = require('path'),
-port = 5000, 
+port = process.env.PORT, 
 app = express();  
 require('dotenv').config();
-
-var multer = require('multer'); 
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './uploads');
-    }, // Si il ne trouve pas de fichier upload je retourne null sinon il enregistre bien dans l'upload
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    } // Si il trouve que le nom d'origine existe déjà, en cas doublons 
-}) 
-
-var upload = multer({
-    storage: storage,
-    limits: { 
-        fileSize: 1024 * 1024 * 8 
-    }
-    // fileFilter: fileFilter
-  });
-
-
-
-var upload = multer({storage: storage })
-
 
 
 // traitement des données dans le corps du bdody des requêtes, traitement des données en json
@@ -45,46 +21,21 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));  // Permet
 // Initialisation de la connexion a la base de données
 mongoose.connect('mongodb://localhost/UniArts', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
-// importation des controllers 
-AuthController = require('./controlers/auth');
-UserController = require('./controlers/user');
-ProjectController = require('./controlers/project'); 
-LinksController = require('./controlers/links');
-ProfileUserController = require('./controlers/profileUser');
-
 
 // Déclaration des routes :
-// authentification user: 
-app.post('/user/register', AuthController.register); //user/register : route pour permettre à l'artiste de s'identifier
-app.post('/user/login', AuthController.login); //user/login: route pour permettre à l'artiste de procéder à la connexion à son profil
-app.get('/user/getById', UserController.getById);
+var Auth = require('./routes/Auth');
+var Users = require('./routes/Users');
 
-// // authentification admin
-// app.post('/adm/auth/register', AuthController.admRegister);
-// app.post('/adm/auth/login', AuthController.admLogin);
+// back-office user(artistes):
+var Project = require('./routes/Project');
+var Link = require('./routes/Link');
+var Profile = require('./routes/Profile');
 
-
-// back-office user(artistes): Gestion de projets
-app.post('/user/addProject',upload.single('cover') ,ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
-app.put('/user/updateProject/:id',upload.single('cover') ,ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
-app.get('/user/getAllProjects', ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
-app.delete('/user/deleteProject/:id', ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
-
-//back-office user(artistes): Gestion des liens
-app.post('/user/addLink', LinksController.addLink); 
-app.put('/user/updateLink/:id', LinksController.updateLink); 
-app.get('/user/getAllLinks', LinksController.getAllLink); 
-app.delete('/user/deleteLink/:id', LinksController.deleteLink);
-
-// back-office user(artistes): Gestion de profil 
-app.put('/user/updateAvatar', upload.single('avatar'), ProfileUserController.updateAvatar); 
-app.put('/user/updateProfile', ProfileUserController.updateProfile);
-app.get('/user/getAvatar/:id', ProfileUserController.getAvatar);
-
-// Gallery images (artistes)
-app.post('/gallery/upload', upload.single('media'), UserController.addMediaGallery);
-app.get('/gallery', UserController.getGallery)
-app.delete('/gallery/deleteMedia/:id', UserController.deleteMediaGallery);
+app.use('/auth', Auth);
+app.use('/users', Users);
+app.use('/project', Project);
+app.use('/link', Link);
+app.use('/profile', Profile);
 
 
 
