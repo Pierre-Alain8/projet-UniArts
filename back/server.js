@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); 
 let corsOption = {origin: 'http://localhost:3000'}
 app.use(cors(corsOption));
-// app.use(bearerToken());
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));  // Permet de rendre le dossier upload public, path.join permet de récupérer da mnière dynamique le chemin d'accès au dossier upload. Afin de savoir où les img sont upload
 

@@ -1,33 +1,55 @@
 const {newProject }= require('./project'); 
+const fetch = require('node-fetch');
 
 describe("Test project", () => {
-    test("test newProject", async () =>{
+    test.skip("test newProject", async () =>{
         // arrange : l'ensemble des paramètres nécéssaires
-        var req = {
-            headers:{
-                authorization: "Baerer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlOGUwNmIyYjEwZDFmMDA2ZWFkYTM3NyIsInJvbGUiOiJBcnRpc3RlIiwiaWF0IjoxNTg3MTE1MjM0fQ.IwIR4Fvn9w4hYvkkJbw_AqBXzwDw8fk9abcsu2F3sCA"
-            },
+      
 
-            body:{
-                titleProject: "testTitle",
-                description: "descriptionTitle",
-                content: "contentProject",
-                userId:"5e8e06b2b10d1f006eada377"
-            }
-        }
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYTQzOTk4NzA2YWJlMDA1YTZlYzNjZCIsInJvbGUiOiJBcnRpc3RlIiwiaWF0IjoxNTg4MjYzMTM1LCJleHAiOjE1ODgzNDk1MzV9.L21M6ypFi6Xx7TZ3FZIYjZ8i_dII-dSp2XP0kvJjR_A"
+        
+        const data = {
+            titleProject: "testTitle",
+            description: "descriptionTitle",
+            content: "contentProject",
+            cover: "popo.jpg",
+            userId:"5ea43998706abe005a6ec3cd"
+        };
 
-        const data = response (response => {
-            if (response.status === 200){
-                return data
-            }
-        })
-
-       
     
         // Act: La fonction ou l'élément à tester
-        let resProject = await newProject(req, res)
-        console.log(resProject)
+       const resProject = await fetch(`http://localhost:5000/user/addProject`, {
+                headers:{
+                    "Authorization": "Bearer " + token,
+                },
+                method: 'POST',
+                body: data,
+                file:{filename: "popo.jpg"}
+            })
+        
+        console.log(resProject.status)
+            
         // Assert: Le résultat attendu
-        expect(resProject).toBeTruthy();
+        expect(resProject.status).toBeTruthy();
+        expect(resProject.status).toBe(200)
+    });
+
+    test.only("test newProject", async () =>{
+        // arrange : l'ensemble des paramètres nécéssaires
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYTQzOTk4NzA2YWJlMDA1YTZlYzNjZCIsInJvbGUiOiJBcnRpc3RlIiwiaWF0IjoxNTg4MjY2MjU1LCJleHAiOjE1ODgzNTI2NTV9.CjAgv5YEBmbGsEoFh9B8vg8trJqxPNkih5RvvKHg4oc"
+
+    
+        // Act: La fonction ou l'élément à tester
+       const resProject = await Promise.resolve( fetch('http://localhost:5000/user/getById',{
+            headers:{
+                "Authorization": "Bearer " + token
+            },
+            method: 'GET'
+        }))
+       
+        console.log(resProject.json())
+        // Assert: Le résultat attendu
+        expect(resProject).toBeTruthy(); //Cela existe bien 
+        expect(resProject.status).toBe(200) //Permet de voir quelle data est pertinente à tester 
     });
 });
