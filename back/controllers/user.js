@@ -17,6 +17,7 @@ exports.getById = function(req, res){
         } else {
             // decoded : base du token où on récupère l'id du l'utilisateur qui a été inséré
             User.findOne({_id: decoded.id}, function(err, user) {
+                // console.log("id decoded: ", decoded.id)
                 if (err) {
                     res.status(400).json(err);
                 } else {

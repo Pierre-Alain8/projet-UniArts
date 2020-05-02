@@ -123,6 +123,8 @@
     width: 100%;
 }
 
+/* projects: */
+
 .projects-modal{
     position: fixed;
     top: 26px;
@@ -216,6 +218,22 @@
     height: 2rem;
     width: 2rem;
     margin-bottom: 0.10rem
+}
+
+.close-modal-project{
+    background-color: none;
+    background-color: transparent;
+    height: 5rem;
+    width: 5rem;
+    object-fit: contain;
+    position: absolute;
+    bottom: 36rem;
+    left: 22rem;
+}
+
+.close-modal-project img{
+    height: 100%;
+    width: 100%;
 }
 
 .form-links {

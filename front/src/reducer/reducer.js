@@ -1,5 +1,6 @@
 
 const initialState = {
+    modalDeletePoject: false,
     modalProjectBool: false,
     project:{}
 }
@@ -12,18 +13,29 @@ function reducer(state = initialState, action) {
                 modalProjectBool: true,
                 project: action.project
             }
-            // break;
+
         case "CLOSE_MODAL_PROJECT_BOOL":
             return {
                 modalProjectBool: false,
                 project: {}
+            };
+
+        case "OPEN_MODAL_DELETE_PROJECT": 
+            return{
+                modalDeletePoject: true
             }
-            // break;
+
+        case "CLOSE_MODAL_DELETE_PROJECT": 
+            return{
+                modalDeletePoject: false
+            };
+
+            
     
         default: 
         return state
-            
-    }
+    };
+
 }
 
 export default reducer

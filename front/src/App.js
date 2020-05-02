@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RequireAuth from './components/RequireAuth';
-import Home from './components/Home';
-import Header from './components/Header'; 
-import Footer from './components/Footer';
-import LoginUser from './components/LoginUser'; 
-import RegisterUser from './components/RegisterUser'; 
-import OfficeUser from './components/OfficeUser';
-import ProfileUser from './components/ProfileUser';
-import OfficeAdmin from './components/OfficeAdmin';
+import RequireAuth from './components/Auth/RequireAuth';
+import Home from './components/Home/Home';
+import Header from './components/Home/Header'; 
+import Footer from './components/Home/Footer';
+import LoginUser from './components/Auth/LoginUser'; 
+import RegisterUser from './components/Auth/RegisterUser'; 
+import OfficeUser from './components/BackOfficeUser/OfficeUser';
+import ProfileUser from './components/BackOfficeUser/ProfileUser';
+import OfficeAdmin from './components/BackOfficeAdmin/OfficeAdmin';
 
 
 const App = () => {

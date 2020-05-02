@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import {useSelector, useDispatch} from 'react-redux';
 
-const ModalEditProject = () =>{
+const ModalEditProject = (props) =>{
 
+    
+    
     // Ce sont les useState qui remplace le this.state et le This.setSate
     const [values, setValues] = useState({title: "", description: "", content: ""});
     const [file, setFile] = useState("");
@@ -12,11 +14,18 @@ const ModalEditProject = () =>{
     const modalProjectBool = useSelector(state => state.modalProjectBool)
     const project = useSelector(state => state.project)
 
+    // Rappel des actions Redux:
     const dispatch = useDispatch()
     console.log("modalProjectBool:", modalProjectBool) 
 
+    // Les méthodes:
     const handleChangeCover = (event) =>{
         setFile(event.target.files[0])
+    }
+    
+    // Modal material-ui:
+    const closeModal = () => {
+        dispatch({type: 'CLOSE_MODAL_PROJECT_BOOL'})
     }
 
     const handleChangeProject = (event) => {
@@ -50,23 +59,28 @@ const ModalEditProject = () =>{
             return res.json()
         })
         .then((res) =>{
-            console.log("response:", res)
+            console.log("response:", res.projectId)
         })
     }
 
 
     return(
         <Modal
-        open={modalProjectBool}
-        onClose={  () => dispatch({type:"CLOSE_MODAL_PROJECT_BOOL"})}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+            open={modalProjectBool}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
         >   
        
         <div data-id={project._id} id={project._id} className="projects-modal">
             <div className="cover-contain">
                 <img className="cover" src={"http://localhost:5000/uploads/" + project.cover} alt="cover" />
-            </div> 
+        </div> 
+
+        
+        <button onClick={closeModal} className="close-modal-project" >
+            <img src="img/button-close.png" alt="close modal" />
+        </button>
+ 
 
             <form onSubmit={subUpdateProject} className="projects-content">
                 <input id="cover" type="file" name="cover" onChange={handleChangeCover}  />
