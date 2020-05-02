@@ -1,7 +1,7 @@
 import React, { useState } from 'react'; 
 import { Link } from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
-import '../../css/registerUser.css';
+import '../css/registerUser.css';
 
 
 const RegisterUser = (props) =>{

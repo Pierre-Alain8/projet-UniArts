@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import { withRouter} from 'react-router-dom';
-import '../../css/officeUser.css'; 
-import OfficeProfile from '../BackOfficeUser/OfficeProfile';
-import OfficeProjects from '../BackOfficeUser/OfficeProjects';
-import OfficeLinks from '../BackOfficeUser/OfficeLinks';
+import '../css/officeUser.css'; 
+import OfficeProfile from './OfficeProfile';
+import OfficeProjects from './OfficeProjects';
+import OfficeLinks from './OfficeLinks';
 
 const OfficeUser = (props) =>{
 

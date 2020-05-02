@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom'; 
 import { withRouter} from 'react-router-dom';
-import '../../css/navbar.css';
+import '../css/navbar.css';
 
 const Navbar = (props) =>{
     const [display] = useState("none")

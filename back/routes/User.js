@@ -27,7 +27,8 @@ UserController = require('../controllers/user');
 // Intitulé des routes :
 
 // Gallery images (artistes)
-user.get('/getById', UserController.getById);
+user.get('/getById/:id', UserController.getById);
+user.get('/getByUser/', UserController.getByUser);
 user.post('/gallery/upload', upload.single('media'), UserController.addMediaGallery);
 user.delete('/gallery/deleteMedia/:id', UserController.deleteMediaGallery);
 

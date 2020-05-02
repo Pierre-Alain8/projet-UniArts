@@ -8,13 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 
-const DeleteModalProject = () =>{
-
-    // Ce sont les useState qui remplace le this.state et le This.setSate
+const DeleteModalProject = (props) =>{
+    // state
 
 
     // useSelector consiste à rappeler un state général définis dans le store
     const  modalDeletePoject = useSelector(state => state.modalDeletePoject)
+    const project = useSelector(state => state.project)
+    console.log("delete modal project.id: ", project._id)
 
     // Rappel des actions Redux:
     const dispatch = useDispatch()
@@ -25,34 +26,48 @@ const DeleteModalProject = () =>{
         dispatch({type: 'CLOSE_MODAL_DELETE_PROJECT'})
     }
 
+    const deleteProject = () => {
+        let token = localStorage.getItem('token');
+    
+        fetch(`http://localhost:5000/user/deleteProject/` + project._id, {
+            headers:{
+                "Authorization": "Bearer " + token,
+            },
+            method: 'DELETE',
+        })
+        .then((res) =>{
+            return res.json()
+        })
+        .then((res) =>{
+            dispatch({type: 'CLOSE_MODAL_DELETE_PROJECT'})
+            console.log('removed success: ', res)
+        })
+    }
     
     
     // Modal material-ui:
     return (
         <div >
-
-            <p>hello</p>
-            {/* <Dialog
+            <Dialog
                 open={modalDeletePoject}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Suppression du projet"}</DialogTitle>
                 <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Let Google help apps determine location. This means sending anonymous location data to
-                    Google, even when no apps are running.
+                  Ête-vous sûr de vouloir suprimmer votre projet ?
                 </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                <button onClick={closeModalDelete} color="primary">
+                <button onClick={deleteProject} color="primary">
                     Oui
                 </button>
                 <button onClick={closeModalDelete} color="primary" autoFocus>
                     None
                 </button>
                 </DialogActions>
-            </Dialog> */}
+            </Dialog>
         </div>
         
       );

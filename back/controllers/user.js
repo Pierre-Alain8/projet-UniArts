@@ -5,23 +5,49 @@ jwt_secret = process.env.JWT_SECRET_KEY;
 
 
 exports.getById = function(req, res){
-    // verification du token en utilisant bearer token dans les autorisation de la requête
     header = req.headers.authorization;
     const token = header.split(" ")[1];
 
     jwt.verify(token, jwt_secret, function(err, decoded){
-        console.log(decoded.role)
+    
+        if(err) {
+            res.status(204).json(err)
+        } else {
+            // decoded : base du token où on récupère l'id du l'utilisateur qui a été inséré
+            User.findOne({_id: req.params.id}, function(err, user) {
+                console.log("id decoded: ", decoded.id)
+                if (err) {
+                    console.log(err)
+                    res.status(400).json(err);
+                } else {
+                    console.log("user:", user)
+                    console.log("Artiste role: ", decoded.role)
+                    res.status(200).json(user);
+                }
 
+            });
+        };
+
+    });
+};
+
+exports.getByUser = function(req, res){
+    header = req.headers.authorization;
+    const token = header.split(" ")[1];
+
+    jwt.verify(token, jwt_secret, function(err, decoded){
+    
         if(err) {
             res.status(204).json(err)
         } else {
             // decoded : base du token où on récupère l'id du l'utilisateur qui a été inséré
             User.findOne({_id: decoded.id}, function(err, user) {
-                // console.log("id decoded: ", decoded.id)
+                console.log("id decoded: ", decoded.id)
                 if (err) {
+                    console.log(err)
                     res.status(400).json(err);
                 } else {
-                    console.log(user)
+                    console.log("user:", user)
                     console.log("Artiste role: ", decoded.role)
                     res.status(200).json(user);
                 }

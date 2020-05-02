@@ -11,7 +11,7 @@ const OfficeProfile = (props) =>{
     useEffect(() =>{ // ComponentDitMount & ComponentDitUpdate:
         let token = localStorage.getItem('token');
 
-        fetch('http://localhost:5000/user/getById',{
+        fetch('http://localhost:5000/user/getByUser',{
             headers:{
                 "Authorization": "Bearer " + token
             },

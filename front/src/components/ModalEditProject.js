@@ -13,6 +13,7 @@ const ModalEditProject = (props) =>{
      // useSelector consiste à rappeler un state général définis dans le store
     const modalProjectBool = useSelector(state => state.modalProjectBool)
     const project = useSelector(state => state.project)
+    console.log("project reducer: " + project)
 
     // Rappel des actions Redux:
     const dispatch = useDispatch()

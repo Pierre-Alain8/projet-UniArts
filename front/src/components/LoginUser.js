@@ -1,7 +1,7 @@
 import React, {useState} from 'react'; 
 import { Link } from 'react-router-dom';
 import { withRouter} from 'react-router-dom';
-import '../../css/loginUser.css';
+import '../css/loginUser.css';
 import decode from "jwt-decode"; 
 
 const LoginUser = (props) => {
