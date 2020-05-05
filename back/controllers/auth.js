@@ -1,6 +1,7 @@
 //Récupération des models :
 const User = require('../models/user'),
 bcrypt = require('bcrypt'),
+validateRegister = require('../validator/validateRegister'),
 jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY,
 adm_login = process.env.ADMIN_LOGIN,
@@ -9,65 +10,58 @@ adm_password = process.env.ADMIN_PASSWORD;
 
 
 exports.register = function (req, res) {
-   
-    // verification du password avant le hash du mot de passe
+
+    const {error, isValid} = validateRegister(req.body);
     const regex = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[A-Za-z\d@$!%*#?&]{8,}$/);
-    console.log(regex.test(req.body.password))
+
+    if(!isValid) {
+        res.status(400).json(error)
+        console.log(error)
+    } 
 
     if(!regex.test(req.body.password)){
-        let message = "Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"  
         console.log(req.body.password)
-        return res.status(401).json(message)
+        return res.status(401).json({
+            error: "Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères"
+        })
     }
-
-    if(req.body.password !== req.body.password2){
-        let message = "Votre password ne correspond pas au précédent"
-        console.log(req.body.password2)
-        return res.status(409).json(message)    
-    }
-
-     // hash du password du user
+    // hash du password du user
     let hash = bcrypt.hashSync(req.body.password, 10);
-    req.body.password,req.body.password2 = hash;
+    req.body.password, req.body.password2 = hash;
     req.body.role = "arttiste";
 
-    let user = new User({ 
-            name : req.body.name, 
-            pseudo: req.body.pseudo, 
-            email: req.body.email, 
-            // about: req.body.about,
-            password: hash, 
-            
-        });
-
-
-        if(!user) {
-            let message = "Inscription impossible "
-            
-            res.status(400).json(message)
-            console.log(user.password)
-
-        } else {
-
-            user.save(function(err,data){
-                    
-                if(err){
-                    res.status(400).json(err)
-                    console.log('Inscription non effectué : veuillez remplir tous les champs ')  
-                    console.log(user)
-                    console.log(data)
-                    
-                } else {
-                    res.status(200).json(data)
-                    console.log(data)
-                    console.log('Inscription effectué avec succès')
-                };
+    User.findOne({email: req.body.email}).then((user) =>{
+        if(user){
+            res.status(400).json({
+                error: "Email déjà existant"
             });
-        };
-  
+        }else {
+            let user = new User({ 
+                firstName : req.body.firstName,
+                lastName: req.body.lastName,
+                pseudo: req.body.pseudo, 
+                email: req.body.email, 
+                password: hash, 
+                    
+            });
+        
+            user.save().then((data) =>{
+                res.status(200).json(data)
+                console.log(data)
+                console.log('Inscription effectué avec succès')
+                
+            })
+            .catch((err) =>{
+                res.status(400).json(err)
+                console.log('Inscription non effectué : veuillez remplir tous les champs ')  
+                console.log(user)
+                console.log(data)
+            });
+        }
+    });
+
 };
-
-
+ 
 
 exports.login = function (req, res) {
     User.findOne({email : req.body.email}, function(err, user){

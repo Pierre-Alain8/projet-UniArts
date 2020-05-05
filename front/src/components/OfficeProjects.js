@@ -9,7 +9,7 @@ const OfficeProjects = (props) =>{
         const [file, setFile] = useState("")
         const [values, setValues] = useState({title: "", description: "", content: ""})
     
-        // ComponentDitMount & ComponentDitUpdate:
+        // ComponentDitMount, ComponentWillMount & ComponentDitUpdate:
         useEffect(() => {
             let token = localStorage.getItem('token');
     

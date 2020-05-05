@@ -2,6 +2,7 @@
 const express = require('express'),
 bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
+validator = require('validator'),
 cors = require('cors'),
 path = require('path'),
 port = 5000, 

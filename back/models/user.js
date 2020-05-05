@@ -3,10 +3,15 @@ const Schema = mongoose.Schema;
 
 let userSchema = new Schema({
 
-    name : {
-    type: 'string', 
-    required: 'You need to specifie a name'
+    firstName : {
+        type: 'string', 
+        required: true
     }, 
+
+    lastName : {
+        type: 'string', 
+        required: true
+        }, 
 
     pseudo : {
         type: 'string'
@@ -14,13 +19,13 @@ let userSchema = new Schema({
 
     email: {
         type: 'string', 
-        required: 'You need to specifie a email',
+        required: true,
         unique: true
     },  
 
     password: {
         type: 'string', 
-        required: 'You need to specifie a password'
+        required: true,
     },
 
     about: {
