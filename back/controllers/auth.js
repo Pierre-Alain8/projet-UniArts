@@ -2,14 +2,14 @@
 const User = require('../models/user'),
 bcrypt = require('bcrypt'),
 validateRegister = require('../validator/validateRegister'),
+validateLogin = require('../validator/validateLogin'),
 jwt = require('jsonwebtoken'),
 jwt_secret = process.env.JWT_SECRET_KEY,
 adm_login = process.env.ADMIN_LOGIN,
 adm_password = process.env.ADMIN_PASSWORD;
 
 
-
-exports.register = function (req, res) {
+exports.register = (req, res) => {
 
     const {error, isValid} = validateRegister(req.body);
     const regex = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[A-Za-z\d@$!%*#?&]{8,}$/);
@@ -41,11 +41,11 @@ exports.register = function (req, res) {
                 lastName: req.body.lastName,
                 pseudo: req.body.pseudo, 
                 email: req.body.email, 
-                password: hash, 
-                    
+                password: hash,   
             });
         
-            user.save().then((data) =>{
+            user.save()
+            .then((data) =>{
                 res.status(200).json(data)
                 console.log(data)
                 console.log('Inscription effectué avec succès')
@@ -57,42 +57,48 @@ exports.register = function (req, res) {
                 console.log(user)
                 console.log(data)
             });
-        }
+        };
     });
 
 };
  
 
-exports.login = function (req, res) {
-    User.findOne({email : req.body.email}, function(err, user){
-        console.log(req.body.email);
+exports.login = (req, res) => {
+    const {error, isValid} = validateLogin(req.body);
 
-        if(err)
-            res.status(400).json({adhesion: false, message: err}); 
-        else if(!user)
-            res.status(201).json({adhesion: false, message: "user not found"})
-        else{
+    if(!isValid) {
+        res.status(400).json(error)
+        console.log(error)
+    }
 
-            bcrypt.compare(req.body.password, user.password, function(err, result) {
-                
-
-                if(result) {
-                    let token = jwt.sign({id: user._id, role: user.role}, jwt_secret, {
-                        expiresIn : "24h"
-                    })
-                    let response = {user: user, adhesion: true, token: token}
-                    res.status(200).json(response)
-                    console.log('vous êtes bien connecté')
-                    console.log(user)
-                } else {
-                    res.status(400).json(err)
-                    console.log('Veuillez entrez un email et un password existant')
-
-                };
-               
-            });  
+    User.findOne({email: req.body.email}).then((user) => {
+        if(!user){
+            error.email ="user not found"
+            res.status(201).json({ adhesion: false, error: error})
         }
-    });
+   
+        bcrypt.compare(req.body.password, user.password, (err,result) => {
+            if(result) {
+                let token = jwt.sign({id: user._id, role: user.role}, jwt_secret, {
+                    expiresIn : "24h"
+                })
+                let response = {user: user, adhesion: true, token: token}
+                res.status(200).json(response)
+                console.log('vous êtes bien connecté')
+                console.log(user)
+            }else{
+                console.log("error result", result)
+                res.status(400).json({ err: "Veuillez entrez un email ou un password existant"})
+            }
+        })
+    })
+    .catch((err) =>{
+        console.log("error:", err)
+        res.status(400).json(err)
+    })
+
+    
+   
 };
 
 exports.admRegister = function (req, res) {
