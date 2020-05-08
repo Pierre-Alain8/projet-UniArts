@@ -1,7 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import ModalEditProject from './ModalEditProject';
-import DeleteModalProject from './DeleteModalProject';
+import PropTypes from 'prop-types';
 
 const Project = (props) =>{
     
@@ -39,38 +38,15 @@ const Project = (props) =>{
                     Supprimer
                 </button>
             </div>
-
-           <ModalEditProject  />
-           <DeleteModalProject />
-
         </div>
-
-        
-   
 
 )
 }
-
+Project.propTypes = {
+    project: PropTypes.object
+};
+Project.defaultProps = {
+    project: {}
+};
 
 export default Project
-
-// const dispatch = useDispatch(); //  useDispatch consiste à activer les actions du reducer (liste de nos actions)
-// const modalProjectBool = useSelector(state => state.modalProjectBool) // useSelector consiste à rappeler un state général définis dans le store
-// console.log("modalProjectBool: ", modalProjectBool) 
-
- /* <div className="button-container">
-                            <button className="update-project" >
-                                <img src="img/button-update.png" alt="button-update"/>
-                                Modifier
-                            </button>
-
-                            <button  type="submit" className={"validate-project" }>
-                                <img src="img/button-validate.png" alt="button-validate"/>
-                                Actualisé
-                            </button>
-
-                            <button type="submit" className="delete-project">
-                                <img src="img/button-delete.png" alt="button-delete"/> 
-                                Supprimer
-                            </button>
-                        </div> */

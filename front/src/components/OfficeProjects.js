@@ -1,17 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Project from './Project';
-
-
-const getProjects = () => {
-    let token = localStorage.getItem('token');
-    
-    return fetch(`http://localhost:5000/user/getAllProjects`,{
-        headers:{
-            "Authorization": "Bearer " + token
-        },
-        method: 'GET',
-    }) 
-}
+import ModalEditProject from './ModalEditProject';
+import DeleteModalProject from './DeleteModalProject';
 
 
 const OfficeProjects = (props) =>{
@@ -20,7 +10,30 @@ const OfficeProjects = (props) =>{
         const [message, setMessage] = useState("")
         const [file, setFile] = useState("")
         const [values, setValues] = useState({title: "", description: "", content: ""})
-    
+
+        const getProjects = () => {
+            let token = localStorage.getItem('token');
+            
+            return fetch(`http://localhost:5000/user/getAllProjects`,{
+                headers:{
+                    "Authorization": "Bearer " + token
+                },
+                method: 'GET',
+            }) 
+            .then((res) =>{
+                return res.json()
+            })
+            .then((res) =>{
+                setProjects(res.projectId)
+                
+                console.log("getAllProjects: ",res);
+                console.log("projects: ",res.projectId);
+                console.log("cover: ", res.cover)
+               
+            })
+           .catch(error => console.log(error))
+        }
+
         // ComponentDitMount, ComponentWillMount & ComponentDitUpdate:
         useEffect(() => {
     
@@ -84,20 +97,8 @@ const OfficeProjects = (props) =>{
                     console.log("hello")
                 }
             })
-            .then((res) =>{
+            .then(() =>{
                 getProjects()
-                .then((res) =>{
-                    return res.json()
-                })
-                .then((res) =>{
-                    setProjects(res.projectId)
-                    
-                    console.log("getAllProjects: ",res);
-                    console.log("projects: ",res.projectId);
-                    console.log("cover: ", res.cover)
-                   
-                })
-                .catch(error => console.log(error))
             })
         }
     
@@ -135,11 +136,14 @@ const OfficeProjects = (props) =>{
                     {
                         projects.map((project, index)=>{
                             return(
-                                <Project key={index} project={project}/>
+                                <Project key={index} project={project} />
                             )
                         })
                     }
+                     <ModalEditProject  getProjects={getProjects} />
+                    <DeleteModalProject getProjects={getProjects} />
                 </div>
+                
             
             </section>
         )

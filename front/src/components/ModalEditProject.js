@@ -3,8 +3,6 @@ import Modal from '@material-ui/core/Modal';
 import {useSelector, useDispatch} from 'react-redux';
 
 const ModalEditProject = (props) =>{
-
-    
     
     // Ce sont les useState qui remplace le this.state et le This.setSate
     const [values, setValues] = useState({title: "", description: "", content: ""});
@@ -60,7 +58,9 @@ const ModalEditProject = (props) =>{
             return res.json()
         })
         .then((res) =>{
+            props.getProjects()
             console.log("response:", res.projectId)
+            dispatch({type: 'CLOSE_MODAL_PROJECT_BOOL'})
         })
     }
 
