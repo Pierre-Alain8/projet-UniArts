@@ -19,7 +19,7 @@ const Project = (props) =>{
     }; 
 
     const handleOpenDelete = () => {
-        dispatch({type: 'OPEN_MODAL_DELETE_PROJECT'})
+        dispatch({type: 'OPEN_MODAL_DELETE_PROJECT', project: props.project})
     }
    
 

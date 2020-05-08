@@ -1,10 +1,7 @@
 const Validator = require("validator");
-// Permet de vérifier si le champs est vide ou non
 const isEmpty = require("./isEmpty");
 
-
 module.exports = function validateRegister(data) {
-    // Si les champs suivant sont vides, retourne un champ vide
     data.firstName = !isEmpty(data.firstName) ? data.firstName: "";
     data.lastName = !isEmpty(data.lastName) ? data.lastName: "";
     data.pseudo = !isEmpty(data.pseudo) ? data.pseudo: "";
@@ -13,7 +10,6 @@ module.exports = function validateRegister(data) {
     data.password2 = !isEmpty(data.password2) ? data.password2: "";
 
     let error = {}
-
 
     if(Validator.isEmpty(data.lastName)){
         error.lastName = "Veuillez spécifier un nom"
@@ -48,5 +44,4 @@ module.exports = function validateRegister(data) {
         isValid: isEmpty(error)
     };
 
-   
 }

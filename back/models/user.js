@@ -63,8 +63,6 @@ let userSchema = new Schema({
         ref: "Link"
     }], 
 
-
-
 });
 
 module.exports = mongoose.model('User', userSchema);

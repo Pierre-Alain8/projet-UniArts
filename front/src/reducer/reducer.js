@@ -25,13 +25,15 @@ function reducer(state = initialState, action) {
         case "OPEN_MODAL_DELETE_PROJECT": 
             return{
                 ...state,
-                modalDeletePoject: true
+                modalDeletePoject: true,
+                project: action.project
             }
 
         case "CLOSE_MODAL_DELETE_PROJECT": 
             return{
                 ...state,
-                modalDeletePoject: false
+                modalDeletePoject: false,
+                project: {}
             };
 
         default: 

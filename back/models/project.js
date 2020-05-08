@@ -5,6 +5,7 @@ let projectSchema = new Schema({
 
     title: {
         type: 'string',
+        required: true
     }, 
 
     description: {
@@ -13,6 +14,7 @@ let projectSchema = new Schema({
 
     content: {
         type: 'string', 
+        required: true
     }, 
 
     cover: {

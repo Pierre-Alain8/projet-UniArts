@@ -2,6 +2,18 @@ import React, {useState, useEffect} from 'react';
 import Project from './Project';
 
 
+const getProjects = () => {
+    let token = localStorage.getItem('token');
+    
+    return fetch(`http://localhost:5000/user/getAllProjects`,{
+        headers:{
+            "Authorization": "Bearer " + token
+        },
+        method: 'GET',
+    }) 
+}
+
+
 const OfficeProjects = (props) =>{
         // les states & setStates:
         const [projects, setProjects] = useState([])
@@ -11,14 +23,8 @@ const OfficeProjects = (props) =>{
     
         // ComponentDitMount, ComponentWillMount & ComponentDitUpdate:
         useEffect(() => {
-            let token = localStorage.getItem('token');
     
-            fetch(`http://localhost:5000/user/getAllProjects`,{
-                headers:{
-                    "Authorization": "Bearer " + token
-                },
-                method: 'GET',
-            })
+            getProjects()
             .then((res) =>{
                 return res.json()
             })
@@ -45,6 +51,7 @@ const OfficeProjects = (props) =>{
     
         const subformProject = (event) =>{
             event.preventDefault();
+            console.log(event.target.value)
             let token = localStorage.getItem('token');
             let newProjects = [...projects, values]
             
@@ -69,10 +76,28 @@ const OfficeProjects = (props) =>{
                         setProjects(newProjects)
                         console.log(res)
                     })
+                   setValues({title: "", description: "", content: ""}); 
+                   setFile("")
+                   document.getElementById("cover").value = ""
                 }else{
                     console.log(res)
                     console.log("hello")
                 }
+            })
+            .then((res) =>{
+                getProjects()
+                .then((res) =>{
+                    return res.json()
+                })
+                .then((res) =>{
+                    setProjects(res.projectId)
+                    
+                    console.log("getAllProjects: ",res);
+                    console.log("projects: ",res.projectId);
+                    console.log("cover: ", res.cover)
+                   
+                })
+                .catch(error => console.log(error))
             })
         }
     
@@ -86,7 +111,7 @@ const OfficeProjects = (props) =>{
                         className="project-input"
                     />
 
-                    <input id="cover" type="file" name="cover" onChange={handleChangeCover}  />
+                    <input id="cover"  type="file" name="cover" onChange={handleChangeCover}  />
             
                     <input type="text" name="description" 
                         onChange={handleChangeProject} 
