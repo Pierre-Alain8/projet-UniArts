@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import Links from './Links';
 
 const OfficeLinks = (props) =>{
@@ -6,16 +7,15 @@ const OfficeLinks = (props) =>{
     const [message, setMessage] = useState("")
     const [values, setValues] = useState({linkTitle: "", linkContent: ""})
 
-     // ComponentDitMount & ComponentDitUpdate:
-     useEffect(() => {
+    const getLink = () => {
         let token = localStorage.getItem('token');
-
-        fetch(`http://localhost:5000/user/getAllLinks`,{
+        
+        return fetch(`http://localhost:5000/user/getAllLinks`,{
             headers:{
                 "Authorization": "Bearer " + token
             },
             method: 'GET',
-        })
+        }) 
         .then((res) =>{
             return res.json()
         })
@@ -27,6 +27,25 @@ const OfficeLinks = (props) =>{
            
         })
         .catch(error => console.log(error))
+    }
+
+
+
+     // ComponentDitMount & ComponentDitUpdate:
+     useEffect(() => {
+        getLink()
+        .then((res) =>{
+            return res.json()
+        })
+        .then((res) =>{
+            setLinks(res.linkId)
+            
+            console.log("getLinks: ",res);
+            console.log("Links: ",res.linkId);
+           
+        })
+        .catch(error => console.log(error))
+        
     },[])
 
 
@@ -60,6 +79,9 @@ const OfficeLinks = (props) =>{
                 console.log("hello")
             }
         })
+        .then(() =>{
+            getLink()
+        })
     }
 
     return(
@@ -84,7 +106,7 @@ const OfficeLinks = (props) =>{
                     {
                         links.map((link, index)=>{
                             return(
-                                <Links key={index} link={link}/>
+                                <Links key={index} link={link} getLink={getLink}/>
                             )
                         })
                     }
@@ -94,80 +116,12 @@ const OfficeLinks = (props) =>{
 
     )
 }
+OfficeLinks.propTypes = {
+    link: PropTypes.any
+};
 
-
-// class OfficeLinks extends React.Component { 
-//     constructor(props) {
-//         super(props)
-    
-//         this.state = {
-//             linkTitle:"",
-//             linkContent:"",
-//             message:""
-//         }
-//         this.handleChange = this.handleChange.bind(this);
-//         this.subformLink = this.subformLink.bind(this);
-//     } 
-
-//     handleChange(event){
-//         let value = event.target.value
-//         let name = event.target.name; 
-        
-//         this.setState({
-//             [name]: value 
-           
-//         },console.log(name))
-//     };
-
-//     subformLink(event){
-//         let token = localStorage.getItem('token'); 
-//         event.preventDefault();
-
-//         fetch(`http://localhost:5000/user/addLink`, {
-//             headers:{
-//                 'Content-Type' : 'application/json',
-//                 "Authorization": "Bearer " + token,
-//             },
-//             method: 'POST',
-//             body: JSON.stringify(this.state),
-//         })
-//         .then((res) =>{
-//             console.log(res)
-//             return res.json()
-
-//         })
-//         .then((res) =>{
-//             console.log(res)
-//         })
-//     }
-
-    
-//     render(){
-
-//         return(
-//             <section className="office-links tab-content"> 
-//                 <form className="form-links" onSubmit={this.subformLink}>  
-//                     <input type="text" name="linkTitle" 
-//                         onChange={this.handleChange} 
-//                         value={this.state.linkTitle} 
-//                         placeholder="add title of links" 
-//                     />
-
-//                     <input type="text" name="linkContent"
-//                         onChange={this.handleChange} 
-//                         value={this.state.linkContent} 
-//                         placeholder="add the link" 
-//                     />
-//                     <button type="submit">Enregistrer</button> 
-//                     <p>{this.state.message}</p>
-//                 </form>
-
-//                 <div className="links-content">
-
-//                 </div>
-//             </section>
-//         )
-//     }
-// }
+OfficeLinks.defaultProps = {
+    link: []
+};
 
 export default OfficeLinks

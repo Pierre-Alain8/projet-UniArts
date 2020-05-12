@@ -38,7 +38,14 @@
 }
 
 .nav-links {
-    color: white;
+    color:#404040;
+}
+
+.nav-logOut {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #F16462;
+    font-size: 1rem;
+    background: transparent;
 }
 
 .nav-links:link {

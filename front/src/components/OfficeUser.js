@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+// import PropTypes from 'prop-types';
 import { withRouter} from 'react-router-dom';
 import '../css/officeUser.css'; 
 import OfficeProfile from './OfficeProfile';
@@ -22,36 +23,7 @@ const OfficeUser = (props) =>{
    )
 }
 
+// propsType
+
 export default withRouter(OfficeUser)
 
-
-// class OfficeUser extends React.Component { 
-//     constructor(props) {
-//         super(props)
-    
-//         this.state = {
-//             active: "active"
-//         }   
-//     } 
-
-//     componentDidMount(){
-
-//         let token = localStorage.getItem('token')
-//         if(!token)
-//          this.props.history.push('/');
-        
-//     };
-    
-    
-//     render(){
-//         return(
-//             <section className="officeUser"> 
-            
-//                 <OfficeProfile /> 
-//                 <OfficeProjects />
-//                 <OfficeLinks />
-               
-//             </section>
-//         )
-//     }
-// }

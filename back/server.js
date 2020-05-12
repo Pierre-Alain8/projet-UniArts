@@ -26,19 +26,24 @@ mongoose.connect('mongodb://localhost/UniArts', {
 
 
 // Déclaration des routes :
-var auth = require('./routes/Auth');
-var user = require('./routes/User');
+const auth = require('./routes/Auth');
+const user = require('./routes/User');
 
 // back-office user(artistes):
-var project = require('./routes/Project');
-var link = require('./routes/Link');
-var profile = require('./routes/Profile');
+const project = require('./routes/Project');
+const link = require('./routes/Link');
+const profile = require('./routes/Profile');
+
+// back-office user(admin)
+const article = require('./routes/Article');
+
 
 app.use('/user', auth);
 app.use('/user', user);
 app.use('/user', project);
 app.use('/user', link);
 app.use('/user', profile);
+app.use('/user/adm', article);
 
 
 app.listen(port);

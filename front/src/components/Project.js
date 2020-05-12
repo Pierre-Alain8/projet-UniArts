@@ -7,7 +7,6 @@ const Project = (props) =>{
     // props:
     const {project} = props;
     
-
     const dispatch = useDispatch(); // useDispatch consiste à activer les actions du reducer (liste de nos actions)
    
     // Les méthodes:

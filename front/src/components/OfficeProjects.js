@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import Project from './Project';
 import ModalEditProject from './ModalEditProject';
 import DeleteModalProject from './DeleteModalProject';
 
 
 const OfficeProjects = (props) =>{
+
         // les states & setStates:
         const [projects, setProjects] = useState([])
         const [message, setMessage] = useState("")
@@ -149,5 +151,12 @@ const OfficeProjects = (props) =>{
         )
     }
 
-
+    OfficeProjects.propTypes = {
+        project: PropTypes.any
+    };
+    
+    OfficeProjects.defaultProps = {
+        project: []
+    };
+    
 export default OfficeProjects

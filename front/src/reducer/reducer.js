@@ -2,7 +2,8 @@
 const initialState = {
     modalDeletePoject: false,
     modalProjectBool: false,
-    project:{}
+    project:{},
+    navMenuBool: false
 }
 
 // la fonction reducer englobe toute les actions de l'appli
@@ -36,6 +37,18 @@ function reducer(state = initialState, action) {
                 project: {}
             };
 
+        case "OPEN_NAV_MENU_BOOL":
+            return {
+                ...state,
+                navMenuBool: true
+            }
+
+        case "CLOSE_NAV_MENU_BOOL": 
+            return {
+                ...state,
+                navMenuBool: false
+            }
+            
         default: 
         return state
     };

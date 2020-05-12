@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import PropTypes from 'prop-types';
 
 const Links = (props) =>{
     
@@ -36,6 +36,7 @@ const Links = (props) =>{
             return res.json()
         })
         .then((res) =>{
+            props.getLink()
             console.log("response:", res)
         })
     }
@@ -54,6 +55,7 @@ const Links = (props) =>{
             return res.json()
         })
         .then((res) =>{
+            props.getLink()
             console.log('removed success: ', res)
         })
     }
@@ -96,6 +98,13 @@ const Links = (props) =>{
 
 )
 }
+
+Links.propTypes = {
+   link: PropTypes.object
+};
+Links.defaultProps = {
+   link: {}
+};
 
 
 export default Links

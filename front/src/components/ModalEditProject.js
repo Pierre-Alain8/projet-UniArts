@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Modal from '@material-ui/core/Modal';
 import {useSelector, useDispatch} from 'react-redux';
+import PropTypes from 'prop-types';
 
 const ModalEditProject = (props) =>{
     
@@ -8,7 +9,7 @@ const ModalEditProject = (props) =>{
     const [values, setValues] = useState({title: "", description: "", content: ""});
     const [file, setFile] = useState("");
 
-     // useSelector consiste à rappeler un state général définis dans le store
+    // useSelector consiste à rappeler un state général définis dans le store
     const modalProjectBool = useSelector(state => state.modalProjectBool)
     const project = useSelector(state => state.project)
     console.log("project reducer: " + project)
@@ -123,6 +124,14 @@ const ModalEditProject = (props) =>{
             
     </Modal>
     )
+}
+
+ModalEditProject.propsTypes = {
+    getProjects: PropTypes.func
+}
+
+ModalEditProject.defaultProps = {
+    getProjects: () =>{}
 }
 
 export default ModalEditProject;

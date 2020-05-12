@@ -61,8 +61,12 @@ let userSchema = new Schema({
     linkId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Link"
-    }], 
+    }],
 
+    articleId: [{
+        type: mongoose.Schema.Types.ObjectId,  
+        ref: "Article"
+    }]
 });
 
 module.exports = mongoose.model('User', userSchema);

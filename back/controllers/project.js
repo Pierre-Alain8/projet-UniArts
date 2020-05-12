@@ -16,32 +16,26 @@ exports.newProject = function(req, res){
                 description: req.body.description, 
                 content: req.body.content,
                 cover: req.file.filename
-            })
-            console.log(project)
-            // En paramètre de la fonction save je récupère l'id du user. Dans les paramètres de la fonction callback de save, newData est une variable qui récupèerera les données du nouveau projet
-            project.save({_id: decoded.id}, function(err, newProject){
-                if(err){
-                    res.status(400).json(err);
-                } else if(decoded.role){
-                    console.log("project save:", newProject)
-                    // Avant de pouvoir update le user, je m'assure que celui-ci a bien le rôle "Artiste", ainsi le user pourra être update afin de lier son projet à son profil en récupérant l'id du projet nouvellement créé
-                    User.updateOne({_id: decoded.id},{$push: {projectId: newProject}},function(err, data){
-                        console.log(newProject)
-                        if (err) {
-                            console.log(err)
-                            res.status(400).json(err)
-                        } else {
+            });
+            project.save({_id: decoded.id}).then((newProject)=>{
+                    if(decoded.role){  // verificaion rôle, récupération de l'id du projet créé
+                        User.updateOne({_id: decoded.id},{$push: {projectId: newProject}})
+                        .then((data) =>{
                             console.log(data)
                             res.status(200).json(data)
-                        };
-                    });
-                };
+                        })
+                        .catch((err) =>{
+                            console.log(err)
+                            res.status(400).json(err)
+                        });
+                    };
+                    console.log("project.cover", project.cover)
+            })
+            .catch((err) =>{
+                res.status(400).json(err)
             });
         };
-
     }); 
-
-
 };
 
 exports.getAllProject = function(req, res){
@@ -52,18 +46,16 @@ exports.getAllProject = function(req, res){
         if(err){
             res.status(401).json('no token provided')
         }else{
-            User.findOne({_id: decoded.id}).populate('projectId').exec( function(err, project){
-                if(err){
-                    console.log(res)
-                    res.status(400).json(err);
-                }else {
-                    console.log(project)
-                    res.status(200).json(project);
-                }
+            User.findOne({_id: decoded.id}).populate('projectId').exec().then((project) =>{
+                console.log(project)
+                res.status(200).json(project);  
+            })
+            .catch((err)=>{
+                console.log(res)
+                res.status(400).json(err);
             });
-        }
+        };
     });
-
 };
 
 
