@@ -29,7 +29,7 @@ ProjectController = require('../controllers/project');
 // back-office user(artistes): Gestion de projets
 project.post('/addProject',upload.single('cover') ,ProjectController.newProject); // user/addProject: permet à l'utilisateur de créer leurs projets
 project.put('/updateProject/:id',upload.single('cover') ,ProjectController.updateProject); // user/updateProject : permet à l'utilisateur de modifier leurs projets
-project.get('/getAllProjects', ProjectController.getAllProject); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
+project.get('/getAllProjects', ProjectController.getAllProjects); // user/getAllProject:  permet d'afficher la liste des projets créé par le user
 project.delete('/deleteProject/:id', ProjectController.deleteProject); // user/deleteProject: permet à l'utilisateur de supprimer ses projets
 
 module.exports	= project;

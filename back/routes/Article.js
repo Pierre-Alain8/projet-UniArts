@@ -25,10 +25,13 @@ var upload = multer({storage: storage })
 ArticleController = require('../controllers/article'); 
 // Intitulé des routes :
 
+// const uploadsArticle = upload.fields([{name:"image", maxCount: 8}])
+// upload.array('image', 12)
+
 // back-office user(artistes): Gestion de projets
-article.post('/addArticle',upload.single('image') ,ArticleController.newArticle);
-// article.put('/updateArticle/:id',upload.single('cover') ,);
-// article.get('/getAllArticles', ); 
-// article.delete('/deleteArticle/:id', ); 
+article.post('/addArticle',upload.single('image'),ArticleController.newArticle);
+article.put('/updateArticle/:id',upload.single('image'), ArticleController.updateArticle);
+article.get('/getAllArticles', ArticleController.getAllArticles); 
+article.delete('/deleteArticle/:id',ArticleController.deleteArticle ); 
 
 module.exports	= article;

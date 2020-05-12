@@ -38,7 +38,7 @@ exports.newProject = function(req, res){
     }); 
 };
 
-exports.getAllProject = function(req, res){
+exports.getAllProjects = function(req, res){
     header = req.headers.authorization;
     const token = header.split(" ")[1];
 

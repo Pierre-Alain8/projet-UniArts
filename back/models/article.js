@@ -11,8 +11,9 @@ let articleSchema = new Schema({
         type: 'string' 
     }, 
 
-    image: {
-        type: 'string'
+    image: { 
+        type : Array , 
+        "default" : [] 
     },
 
     artistePseudo: {
@@ -23,7 +24,8 @@ let articleSchema = new Schema({
         type: 'string'
     },
 
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User"}
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User"},
+    commentId: [{type: mongoose.Schema.Types.ObjectId,  ref: "Comment" }]
 })
 
 module.exports = mongoose.model('Article', articleSchema);
