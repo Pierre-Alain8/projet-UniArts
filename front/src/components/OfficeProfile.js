@@ -92,8 +92,9 @@ const OfficeProfile = (props) =>{
 
     return(
         <div className="office-profile"> 
+        <h1 className="office-account-title">EDITION DU COMPTE</h1>
 
-            <form className="form-Avatar"> 
+            <form className="form-avatar"> 
                 <label>Avatar</label>
                 <input id="avatar" type="file" name="avatar" onChange={handleChangeAvatar }/>
                 <div className="avatar-contain">
@@ -106,8 +107,8 @@ const OfficeProfile = (props) =>{
                 value={values.about} 
                 onChange={handleChangeProfile} 
                 /> 
-                <p>{fliedAbout }</p>
-                <button type="submit">Enregistrer</button>
+                <span>{fliedAbout }</span>
+                <button className="button-save-profile" type="submit">Enregistrer</button>
             </form>
        
         </div>

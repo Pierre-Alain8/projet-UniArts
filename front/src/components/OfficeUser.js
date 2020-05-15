@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react';
-// import PropTypes from 'prop-types';
 import { withRouter} from 'react-router-dom';
 import '../css/officeUser.css'; 
-import OfficeProfile from './OfficeProfile';
-import OfficeProjects from './OfficeProjects';
-import OfficeLinks from './OfficeLinks';
+import TabsOfficeUser from './TabsOfficeUser';
+
 
 const OfficeUser = (props) =>{
 
@@ -16,14 +14,9 @@ const OfficeUser = (props) =>{
 
    return(
     <section className="officeUser">     
-        <OfficeProfile /> 
-        <OfficeProjects />
-        <OfficeLinks />
+        <TabsOfficeUser />
     </section>
    )
 }
-
-// propsType
-
 export default withRouter(OfficeUser)
 

@@ -1,131 +1,183 @@
 @media all and (min-width: 320px) and (max-width: 480px) {
+  /* Back-office des utilisateurs */
 
-
-.tabs{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.tabsLink{
-    font-family: 'Source Sans Pro', sans-serif;
-    width: 36%;
-    background-color: #404040;
-    color: #E7EAEF;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.officeUser{
+  .officeUser {
     width: 100%;
-    height: 92rem;
-    border: 1px solid tomato;
-}
+    height: 40rem;
+  }
 
-.office-profile{
-    width: 100%;
-    height:22rem;
-    background-color: palegreen;
-}
+  /* Gestion de profile de l'utilisateur */
 
-.office-projects{
-    width: 100%;
-    height: 34rem;
-    background-color: paleturquoise;
-}
-
-.office-links{
+  .office-profile {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 37rem;
-    background-color: palevioletred;
-}
+  }
 
-.form-avatar{
+  .office-account-title {
+    font-family: "Teko", sans-serif;
+    font-size: 1.5em;
+    text-decoration: underline;
+    text-decoration-color: #f16462;
+  }
+
+  .form-avatar {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.form-profile{
+  .form-avatar label {
+    font-family: "Source Sans Pro", sans-serif;
+  }
+
+  /* édition du profil de l'utilisateur */
+
+  .form-profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.avatar-contain{
+  .form-profile label {
+    font-family: "Source Sans Pro", sans-serif;
+  }
+
+  .button-save-profile {
+    width: 55%;
+  }
+  .avatar-contain {
     object-fit: contain;
     width: 6rem;
     height: 6rem;
-}
+  }
 
-.avatar{
+  .avatar {
+    border-radius: 50px;
     width: 100%;
     height: 100%;
-}
+  }
 
-.form-projects{
+  /* Back-Office : gestion de projets */
+  .office-projects {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.project-input{
-    width: 72%;
-}
-
-.cover-contain{
-    width: 26rem;
-    height: 14rem;
-}
-
-.cover-contain img{
-    height: 100%;
     width: 100%;
-}
+    height: 37rem;
+  }
 
-.projects-container{
+  .office-project-title {
+    font-family: "Teko", sans-serif;
+    font-size: 1.5em;
+    text-decoration: underline;
+    text-decoration-color: #f16462;
+  }
+
+  .form-projects {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-.list-projects{   
+  }
+
+  .project-input {
+    width: 72%;
+  }
+
+  /* Liste des projets */
+
+  .cover-contain {
+    width: 26rem;
+    height: 14rem;
+  }
+
+  .cover-contain img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .list-projects {
+    background-color: rgba(64, 64, 64, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 16rem;
+    width: 26rem;
     overflow: scroll;
-}
+  }
 
-.modal-button{
-    width: 70%;
-    height: 70%;
-}
+  .link-user {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
 
-.modal-button h1{
+  .link-user h3 {
+    font-family: "Teko", sans-serif;
+    font-size: 1.3em;
+    text-align: center;
+    margin: 0;
+  }
+
+  .link-user p {
+    font-size: 0.8em;
+    text-align: center;
+    font-family: "Muli", sans-serif;
+  }
+
+  /*  modal material ui */
+
+  .modal-button {
+    width: 100%;
+    background-color: #f16462;
+    height: 90%;
+    border-radius: 1%;
+  }
+
+  .modal-button h1 {
+    width: 11rem;
     position: relative;
     margin: 0;
-    top: 107px;
+    top: 1px;
     left: 68px;
-    font-family: 'Teko', sans-serif;
-    font-size: 1em;
-}
+    font-family: "Teko", sans-serif;
+    font-size: 1.3em;
+    text-align: center;
+  }
 
-.modal-button img{
+  .modal-button img {
     height: 100%;
     width: 100%;
-}
+  }
 
-/* projects: */
+  .close-modal-project {
+    background-color: none;
+    background-color: transparent;
+    height: 5rem;
+    width: 5rem;
+    object-fit: contain;
+    position: absolute;
+    bottom: 33rem;
+    left: 22rem;
+  }
 
-.projects-modal{
+  .close-modal-project img {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* Les projets: */
+
+  .projects-modal {
     position: fixed;
     top: 26px;
     width: 100%;
@@ -133,19 +185,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+  }
 
-.projects-content{
+  .projects-content {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #E7EAEF;
-}
+    background-color: #e7eaef;
+  }
 
-.button-container{
+  .button-container {
     position: relative;
     bottom: 5rem;
     left: 4rem;
@@ -153,43 +205,40 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
+  }
 
-.update-project{
-    background-color: #ffffff;
+  .update-project {
+    background-color: #e7eaef;
     color: #404040;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    bottom: 12.5rem;
-    left: 16rem;
-    font-size: 0.70em;
+    bottom: 9.5rem;
+    left: 15rem;
+    font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
-    
-}
+  }
 
-
-.delete-project{
-    background-color: #ffffff;
-    color: #404040;
+  .delete-project {
+    background-color: #e7eaef;
+    color: #f16462;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    bottom: 12rem;
-    left: 16rem;
-    font-size: 0.70em;
+    bottom: 9rem;
+    left: 15rem;
+    font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
-   
-}
+  }
 
-.validate-project{
-    background-color: #ffffff;
+  .validate-project {
+    background-color: #e7eaef;
     color: #404040;
     display: flex;
     flex-direction: column;
@@ -197,108 +246,116 @@
     align-items: center;
     position: relative;
     bottom: 28rem;
-    font-size: 0.70em;
+    font-size: 0.9em;
     width: 4.5rem;
     height: 3.5rem;
-}
+  }
 
-.validate-project img{
+  .validate-project img {
     height: 2rem;
     width: 2rem;
-    margin-bottom: 0.10rem
-}
+    margin-bottom: 0.1rem;
+  }
 
-.update-project img{
+  .update-project img {
     height: 2rem;
     width: 2rem;
-    margin-bottom: 0.10rem
-}
+    margin-bottom: 0.1rem;
+  }
 
-.delete-project img{
+  .delete-project img {
     height: 2rem;
     width: 2rem;
-    margin-bottom: 0.10rem
-}
+    margin-bottom: 0.1rem;
+  }
 
-.close-modal-project{
-    background-color: none;
-    background-color: transparent;
-    height: 5rem;
-    width: 5rem;
-    object-fit: contain;
-    position: absolute;
-    bottom: 36rem;
-    left: 22rem;
-}
+  /* Back-office : gestion de liens */
 
-.close-modal-project img{
-    height: 100%;
-    width: 100%;
-}
-
-.form-links {
+  .office-links {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;    
-}
+    align-items: center;
+    width: 100%;
+    height: 37rem;
+  }
 
-.list-links{
-    height: 25rem;
+  .office-links-title {
+    font-family: "Teko", sans-serif;
+    font-size: 1.5em;
+    text-decoration: underline;
+    text-decoration-color: #f16462;
+  }
+
+  .form-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-link-contenair {
+    height: 17rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .list-links {
+    height: 18rem;
     width: 100%;
     overflow: scroll;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.links-container{
+  .links-container {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.validate-link{
+  .buttons-office-link {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .validate-link {
     background-color: #ffffff;
     color: #404040;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    bottom: 28rem;
-    font-size: 0.70em;
-    width: 4.5rem;
-    height: 3.5rem;
-}
-
-.validate-link img{
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.10rem
-}
-
-.delete-link{
-    background-color: #ffffff;
-    color: #404040;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    bottom: 28rem;
-    font-size: 0.70em;
-    position: relative;
-    bottom: 2rem;
+    font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
-}
+  }
 
-.delete-link img{
+  .validate-link img {
     height: 2rem;
     width: 2rem;
-    margin-bottom: 0.10rem
+    margin-bottom: 0.1rem;
+  }
+
+  .delete-link {
+    background-color: #ffffff;
+    color: #f16462;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    width: 5rem;
+    height: 3.5rem;
+  }
+
+  .delete-link img {
+    height: 2rem;
+    width: 2rem;
+    margin-bottom: 0.1rem;
+  }
 }
-
-}
-
-

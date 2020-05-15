@@ -1,149 +1,189 @@
-import React, { useState } from 'react'; 
-import { Link } from 'react-router-dom';
-import { withRouter} from 'react-router-dom';
-import '../css/registerUser.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { Formik } from "formik";
+import styled from "styled-components";
+import validateRegister from "../validations/ValidateRegister";
+import "../css/registerUser.css";
 
+const ErrorsForm = styled.span`
+  color: red;
+  text-align: center;
+  font-size: 0.7em;
+  font-family: "Muli", sans-serif;
+`;
 
-const RegisterUser = (props) =>{
-    // Les states
-    const [values, setValues] = useState({
-        name: "", 
-        pseudo: "", 
-        email: "", 
-        password:"", 
-        password2:""
-    })
-    const [error, setError] = useState("")
+const RegisterUser = (props) => {
+  return (
+    <section className="section-register">
+      <article className="presentation-uniarts">
+        <h1>Un collectif d'artises francophones...</h1>
 
-    // Les méthodes:
-    const handleChange = (event) => { 
-        // l'évenement permettant de ciblier les valeurs des inputs
-        const {name, value} = event.target
-        setValues({...values, [name]: value}, console.log(name))
-        // récupération des valeurs de manières indépendantes 
-    }; 
+        <p>
+          UniArts est un collectif ayant pour but de mettre en avant divers
+          artistes francophones meritent plus de visibilités, UniArtsts
+          présentera chacun des artistes qui souhaitent rejoindre le collectif.
+        </p>
 
-    const handleSubmit = (event) =>{ 
-        event.preventDefault();
+        <p>
+          Car oui...Libre à vous de le rejoindre comme bon vous semble. Il vous
+          sera aussi possible de présenter vos projets, indiquer les liens où on
+          peut découvrir vos travaux, suivre votre activité !
+        </p>
+      </article>
 
-        fetch(`http://localhost:5000/user/register` , {
-            headers:{
-                'Content-Type': 'application/json'  
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          pseudo: "",
+          email: "",
+          password: "",
+          password2: "",
+        }}
+        validationSchema={validateRegister}
+        onSubmit={(values) => {
+          console.log("hello");
+          fetch(`http://localhost:5000/user/register`, {
+            headers: {
+              "Content-Type": "application/json",
             },
-            method: 'POST',
+            method: "POST",
             body: JSON.stringify(values),
-        })
-        .then((res) => {
-            switch (res.status) {
-                case 401:
-                    setError("Votre password doit contenir au moins 1 lettre minuscule, 1 lettre majuscule, 1 caractère numérique et de plus de 8 caractères")
-                    console.log(res)
-                    break;
-
-                case 409: 
-                setError("Votre password ne correspond pas au précédent, veuillez le confirmer")
-                    console.log(res)
-                    break;
+          })
+            .then((res) => {
+              switch (res.status) {
                 case 200:
-                    console.log(res)
-                    props.history.push('/LoginUser')
-                    break;
-            
+                  console.log(res);
+                  props.history.push("/LoginUser");
+                  break;
+
                 default:
-                    break;
-            }
-            return res.json()
-            
-        })
-        .catch((errors) => {console.log(errors)})
-         
-        console.log(values)
-    };
-    
-    return(
-        <section className="section-register">
+                  break;
+              }
+              return res.json();
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
 
-            <article className="presentation-uniarts">
+          console.log(values);
+        }}
+      >
+        {(props) => {
+          const {
+            values,
+            errors,
+            isSubmitting,
+            handleChange,
+            handleSubmit,
+          } = props;
+          return (
+            <form onSubmit={handleSubmit} className="form-register">
+              <h2>REGISTER</h2>
 
-                <h1>Un collectif d'artises francophones...</h1>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={values.email}
+                  onChange={handleChange}
+                />
+              </label>
+              {errors.email && <ErrorsForm>{errors.email}</ErrorsForm>}
 
-                <p>
-                    UniArts est un collectif ayant pour but de mettre en avant divers artistes francophones meritent plus de visibilités, UniArtsts présentera chacun des artistes qui souhaitent rejoindre le collectif. 
-                </p> 
+              <label>
+                Nom:
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Enter your lastName"
+                  value={values.lastName}
+                  onChange={handleChange}
+                />
+              </label>
+              {errors.lastName && <ErrorsForm>{errors.lastName}</ErrorsForm>}
 
-                <p> 
-                    Car oui...Libre à vous de le rejoindre comme bon vous semble. Il vous sera aussi possible de présenter vos projets, indiquer les liens où on peut découvrir vos travaux, suivre votre activité !  
-                </p>
+              <label>
+                Prénom:
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Enter your firstName"
+                  value={values.firstName}
+                  onChange={handleChange}
+                />
+              </label>
+              <span className="errors-register-form">
+                {errors.firstName && (
+                  <ErrorsForm>{errors.firstName}</ErrorsForm>
+                )}
+              </span>
 
-            </article>
+              <label>
+                Pseudo:
+                <input
+                  type="text"
+                  id="pseudo"
+                  name="pseudo"
+                  placeholder="Enter your pseudo"
+                  value={values.pseudo}
+                  onChange={handleChange}
+                />
+              </label>
+              <span className="errors-register-form">
+                {errors.pseudo && <ErrorsForm>{errors.pseudo}</ErrorsForm>}
+              </span>
 
-            <form className="form-register" onSubmit={handleSubmit }> 
+              <label>
+                Password:
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={values.password}
+                  onChange={handleChange}
+                />
+              </label>
 
-                <h2>REGISTER</h2>
+              {errors.password && <ErrorsForm>{errors.password}</ErrorsForm>}
 
-                <label> 
-                    Name : 
-                    <input type="text" id="name" name="name"  
-                    placeholder="Enter your name"
-                    value={values.name } 
-                    onChange={handleChange } />
+              <label>
+                Password confirm:
+                <input
+                  type="password"
+                  id="password2"
+                  name="password2"
+                  placeholder="Confirm your password"
+                  value={values.password2}
+                  onChange={handleChange}
+                />
+                {errors.password2 && (
+                  <ErrorsForm>{errors.password2}</ErrorsForm>
+                )}
+              </label>
 
-                </label> 
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
 
-                <label> 
-                    Pseudo : 
-                    <input type="text" id="pseudo" name="pseudo"  
-                    placeholder="Enter your pseudo"
-                    value={values.pseudo } 
-                    onChange={handleChange } />
-
-                </label>
-
-                <label> 
-                    Email : 
-                    <input type="email" id="email" name="email" 
-                    placeholder="Enter your email"
-                    value={values.email} 
-                    onChange={handleChange} />
-
-                </label>
-
-                <label> 
-                    Password : 
-                    <input type="password" id="password" name="password"  
-                    placeholder="Enter your password"
-                    value={values.password} 
-                    onChange={handleChange} />
-                    
-                </label>
-
-                <label> 
-                    Password confirm : 
-                    <input type="password" id="password" name="password2"  
-                    placeholder="Enter your password"
-                    value={values.password2} 
-                    onChange={handleChange} />
-                    
-                </label>
-
-                <button type="submit">INSCRIPTION</button>
-
-                <div>
-                    <Link to="/loginUser"><p>Vous avez déjà un compte ?</p></Link>
-                </div>
-
-                <div className="errorRegister">
-                    <p>
-                        {error}
-                    </p>
-                </div>
-              
+              <div>
+                <Link to="/loginUser">
+                  <p>Vous avez déjà un compte ?</p>
+                </Link>
+              </div>
             </form>
-        </section>
-         
-        )
+          );
+        }}
+      </Formik>
+    </section>
+  );
+};
 
-}
-
-
-export default withRouter(RegisterUser)
+export default withRouter(RegisterUser);

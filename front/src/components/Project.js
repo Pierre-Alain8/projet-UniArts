@@ -1,11 +1,37 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 const Project = (props) =>{
     
     // props:
     const {project} = props;
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          display: 'flex',
+          justifyContent: 'center', 
+          alignContent:'space-between',
+          width: '23rem',
+          height: '15rem',
+          '& > *': {
+            margin: theme.spacing(2),
+            width: theme.spacing(16),
+            height: theme.spacing(16),
+          },
+        },
+
+        papersStyle: {
+            width:'100%',
+            height: '90%'
+        }
+    }));
+    const classes = useStyles();
+   
     
     const dispatch = useDispatch(); // useDispatch consiste à activer les actions du reducer (liste de nos actions)
    
@@ -19,26 +45,30 @@ const Project = (props) =>{
     const handleOpenDelete = () => {
         dispatch({type: 'OPEN_MODAL_DELETE_PROJECT', project: props.project})
     }
-   
+
+    
 
     return(  
-        <div className="projects-container">
-            <div className="modal-button">
-                <h1>{project.title}</h1>
-                <img src={"http://localhost:5000/uploads/" + project.cover} alt="project" />
+        
+            <div className={classes.root}>
+                <Paper className={classes.papersStyle} elevation={3} >
+                    <div className="modal-button">
+                        <h1>{project.title}</h1>
+                        <img src={"http://localhost:5000/uploads/" + project.cover} alt="project" />
 
-                <button className="update-project" onClick={handleOpenProject} >
-                    <img src="img/button-update.png" alt="button-update"/>
-                     Modifier
-                </button>
+                        <button className="update-project" onClick={handleOpenProject} >
+                            <EditIcon />
+                            Modifier
+                        </button>
 
-                <button className="delete-project" onClick={handleOpenDelete}>
-                    <img src="img/button-delete.png" alt="button-delete"/> 
-                    Supprimer
-                </button>
+                        <button className="delete-project" onClick={handleOpenDelete}>
+                            <DeleteIcon />
+                            Supprimer
+                        </button>
+                    </div>
+                </Paper>
             </div>
-        </div>
-
+        
 )
 }
 Project.propTypes = {
