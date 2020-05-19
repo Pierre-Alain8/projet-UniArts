@@ -15,7 +15,7 @@ exports.newProject = function(req, res){
                 title: req.body.title, 
                 description: req.body.description, 
                 content: req.body.content,
-                cover: req.file.filename
+                cover: req.file ? req.file.filename : undefined
             });
             project.save({_id: decoded.id}).then((newProject)=>{
                     if(decoded.role){  // verificaion rôle, récupération de l'id du projet créé

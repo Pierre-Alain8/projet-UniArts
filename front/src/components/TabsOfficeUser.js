@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OfficeProfile from "./OfficeProfile";
 import OfficeProjects from "./OfficeProjects";
 import OfficeLinks from "./OfficeLinks";
-import UserGallery from "./UserGallery";
+import OfficeGallery from "./OfficeGallery";
 import SwipeableViews from "react-swipeable-views";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -65,7 +65,7 @@ const TabsOfficeUser = (props) => {
   };
 
   return (
-    <section className="officeUser">
+    <section className="tabOffice">
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs
@@ -113,7 +113,7 @@ const TabsOfficeUser = (props) => {
           </TabPanel>
 
           <TabPanel value={value} index={3} dir={theme.direction}>
-            <UserGallery />
+            <OfficeGallery />
           </TabPanel>
         </SwipeableViews>
       </div>

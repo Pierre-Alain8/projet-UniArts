@@ -12,8 +12,7 @@ let articleSchema = new Schema({
     }, 
 
     image: { 
-        type : Array , 
-        "default" : [] 
+        type: 'string'
     },
 
     artistePseudo: {

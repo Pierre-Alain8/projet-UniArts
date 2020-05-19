@@ -19,7 +19,7 @@ var upload = multer({
     // fileFilter: fileFilter
   });
 
-var upload = multer({storage: storage })
+  var upload = multer({ storage : storage }).array('image',2);
 
 // importation du controller
 ArticleController = require('../controllers/article'); 
@@ -29,8 +29,8 @@ ArticleController = require('../controllers/article');
 // upload.array('image', 12)
 
 // back-office user(artistes): Gestion de projets
-article.post('/addArticle',upload.single('image'),ArticleController.newArticle);
-article.put('/updateArticle/:id',upload.single('image'), ArticleController.updateArticle);
+article.post('/addArticle',upload,ArticleController.newArticle);
+article.put('/updateArticle/:id',upload, ArticleController.updateArticle);
 article.get('/getAllArticles', ArticleController.getAllArticles); 
 article.delete('/deleteArticle/:id',ArticleController.deleteArticle ); 
 

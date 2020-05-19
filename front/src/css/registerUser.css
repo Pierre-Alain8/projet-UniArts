@@ -57,7 +57,7 @@
     border: 1px solid #f16462;
   }
 
-  button {
+  .button-register {
     font-family: "Source Sans Pro", sans-serif;
     width: 53%;
     background-color: #404040;

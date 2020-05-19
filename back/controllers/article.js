@@ -11,27 +11,29 @@ exports.newArticle = function(req, res){
         if(err){
             res.status(401).json('no token provided')
         }else {
-
             let article = new Article({
                 title: req.body.title, 
                 content: req.body.content,
                 artistePseudo: req.body.artistePseudo,
                 artisteName: req.body.artisteName,
-                image: req.file.filename
+                image: req.file ? req.file.filename : undefined
             });
             article.save({_id: decoded.id}).then((newArticle)=>{
                 if(decoded.role === "Admin"){  // verificaion rôle, récupération de l'id du projet créé
+                    console.log("req file:", req.file)
                     User.updateOne({_id: decoded.id},{$push: {articleId: newArticle}})
                     .then((data) =>{   
                         res.status(200).json(data)
                     })
                     .catch((err) =>{
+                        console.log("req file:", req.file)
                         console.log(err)
                         res.status(400).json(err)
                     });
                 };
             })
             .catch((err) =>{
+                console.log("req file:", req.file)
                 res.status(400).json(err)
             });
         };

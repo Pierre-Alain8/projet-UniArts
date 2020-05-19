@@ -1,68 +1,66 @@
 @media all and (min-width: 320px) and (max-width: 480px) {
+  .section-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 36rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-    .section-login {  
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        height: 36rem;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
+  .form-login {
+    height: 36rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #d2d5da;
+  }
 
-    .form-login {
-        height: 36rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background-color: #d2d5da;
-    } 
+  input[type="text"],
+  [type="email"],
+  [type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #e7eaef;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-    input[type=text], [type=email], [type=password] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #E7EAEF;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
+  input:focus {
+    border: 1px solid #f16462;
+  }
 
-    input:focus {
-        border: 1px solid #F16462;
-    }
+  .button-login {
+    font-family: "Source Sans Pro", sans-serif;
+    width: 36%;
+    background-color: #404040;
+    color: #e7eaef;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
-    button{
-        font-family: 'Source Sans Pro', sans-serif;
-        width: 36%;
-        background-color: #404040;
-        color: #E7EAEF;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+  .form-login h2 {
+    font-family: "Teko", sans-serif;
+  }
 
-    .form-login h2 {
-        font-family: 'Teko', sans-serif;
-    }
+  .form-login p {
+    text-align: center;
+    font-family: "Muli", sans-serif;
+  }
 
-    .form-login p {
-        text-align: center;
-        font-family: 'Muli', sans-serif;
-    }
-
-    .form-login label {
-        font-family: 'Source Sans Pro', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-
-
+  .form-login label {
+    font-family: "Source Sans Pro", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

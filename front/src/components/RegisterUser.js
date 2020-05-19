@@ -169,7 +169,11 @@ const RegisterUser = (props) => {
                 )}
               </label>
 
-              <button type="submit" disabled={isSubmitting}>
+              <button
+                className="button-register"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 Submit
               </button>
 

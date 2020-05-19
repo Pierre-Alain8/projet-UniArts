@@ -1,0 +1,58 @@
+@media all and (min-width: 320px) and (max-width: 480px) {
+  /* Gestion de profile de l'utilisateur */
+
+  .office-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 37rem;
+  }
+
+  .office-account-title {
+    font-family: "Teko", sans-serif;
+    font-size: 1.5em;
+    text-decoration: underline;
+    text-decoration-color: #f16462;
+  }
+
+  .form-avatar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-avatar label {
+    font-family: "Source Sans Pro", sans-serif;
+  }
+
+  /* édition du profil de l'utilisateur */
+
+  .form-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-profile label {
+    font-family: "Source Sans Pro", sans-serif;
+  }
+
+  .button-save-profile {
+    width: 55%;
+  }
+  .avatar-contain {
+    object-fit: contain;
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .avatar {
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Project from "./Project";
 import ModalEditProject from "./ModalEditProject";
 import DeleteModalProject from "./DeleteModalProject";
+import "../css/officeProjects.css";
 
 const OfficeProjects = (props) => {
   // les states & setStates:
@@ -156,7 +157,7 @@ const OfficeProjects = (props) => {
 };
 
 OfficeProjects.propTypes = {
-  project: PropTypes.any,
+  project: PropTypes.array,
 };
 
 OfficeProjects.defaultProps = {
