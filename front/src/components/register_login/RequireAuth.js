@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import decode from "jwt-decode"; 
+import PropTypes from "prop-types";
+import decode from "jwt-decode";
 
-export default function requireAuth(ComponentToProtect) {
+function requireAuth(ComponentToProtect) {
   return class extends Component {
     constructor() {
       super();
       this.state = {
         loading: true,
-        redirect: false
+        redirect: false,
       };
     }
 
@@ -17,16 +18,16 @@ export default function requireAuth(ComponentToProtect) {
     }
 
     loggedIn() {
-      const token = this.getToken(); 
-      return !!token && !this.isTokenExpired(token); 
+      const token = this.getToken();
+      return !!token && !this.isTokenExpired(token);
     }
-  
+
     isTokenExpired(token) {
       try {
         const decoded = decode(token);
         console.log(" decoded ", decoded);
         if (decoded.exp < Date.now() / 1000) {
-          // on check la date d'expiration qui est dans le token 
+          // on check la date d'expiration qui est dans le token
           return true; // token expiré
         } else return false;
       } catch (err) {
@@ -61,4 +62,12 @@ export default function requireAuth(ComponentToProtect) {
   };
 }
 
+requireAuth.propTypes = {
+  props: PropTypes.string,
+};
 
+requireAuth.defaultProps = {
+  props: "",
+};
+
+export default requireAuth;

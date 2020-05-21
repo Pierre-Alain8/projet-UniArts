@@ -18,11 +18,11 @@ const TabPanel = (props) => {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
-      {value === index && <Box div={4}>{children}</Box>}
+      {value === index && <Box div={5}>{children}</Box>}
     </div>
   );
 };
@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#E7EAEF",
     width: "100%",
+  },
+
+  indicator: {
+    backgroundColor: "rgba(255, 255, 255, .2)",
   },
 
   labelTab: {
@@ -71,7 +75,7 @@ const TabsOfficeUser = (props) => {
           <Tabs
             value={value}
             onChange={handleChange}
-            indicatorColor="primary"
+            indicatorColor={classes.indicator}
             textColor="primary"
             variant="fullWidth"
             aria-label="full width tabs example"

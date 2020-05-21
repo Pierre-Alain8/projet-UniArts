@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Project from "./Project";
 import ModalEditProject from "./ModalEditProject";
 import DeleteModalProject from "./DeleteModalProject";
-import "../css/officeProjects.css";
+import "../../css/officeProjects.css";
 
 const OfficeProjects = (props) => {
   // les states & setStates:
@@ -141,7 +141,9 @@ const OfficeProjects = (props) => {
           className="project-input"
         />
 
-        <button type="submit">Enregistrer</button>
+        <button className="button-save-project" type="submit">
+          Enregistrer
+        </button>
         <span>{message}</span>
       </form>
 

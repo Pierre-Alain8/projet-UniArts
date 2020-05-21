@@ -1,59 +1,60 @@
 @media all and (min-width: 320px) and (max-width: 480px) {
-
-.menu-contenair {
+  .menu-contenair {
     height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #404040;
-}
+  }
 
-.burgerMenu {
+  .burgerMenu {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 60%;
     height: 4rem;
-}
+  }
 
-.bar1, .bar2, .bar3 {
+  .bar1,
+  .bar2,
+  .bar3 {
     width: 35px;
     height: 5px;
-    background-color: #E7EAEF;
+    background-color: #e7eaef;
     margin: 6px 0;
     transition: 0.4s;
   }
 
-.navbar{
+  .navbar {
     width: 100%;
     display: flex;
     padding: 0;
     justify-content: space-evenly;
     list-style: none;
-}
+  }
 
-.navbar li {
+  .navbar li {
     background-color: #404040;
     text-decoration: none;
-}
+  }
 
-.nav-links {
-    color:#404040;
-}
+  .nav-links {
+    color: #404040;
+  }
 
-.nav-logOut {
-    font-family: 'Source Sans Pro', sans-serif;
-    color: #F16462;
+  .nav-logOut {
+    font-family: "Source Sans Pro", sans-serif;
+    color: #f16462;
     font-size: 1rem;
+    border: none;
     background: transparent;
-}
+  }
 
-.nav-links:link {
-    font-family: 'Source Sans Pro', sans-serif;
+  .nav-links:link {
+    font-family: "Source Sans Pro", sans-serif;
     color: white;
     padding: 0.4rem;
     background-color: transparent;
-    text-decoration: none
-}
-
+    text-decoration: none;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Links from "./Links";
-import "../css/officeLinks.css";
+import "../../css/officeLinks.css";
 
 const OfficeLinks = (props) => {
   const [links, setLinks] = useState([]);
@@ -100,7 +100,9 @@ const OfficeLinks = (props) => {
             value={values.linkContent}
             placeholder="add the content of link"
           />
-          <button type="submit">Enregistrer</button>
+          <button className="button-save-project" type="submit">
+            Enregistrer
+          </button>
           <span>{message}</span>
         </form>
       </div>

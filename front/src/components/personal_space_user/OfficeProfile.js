@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "../css/officeProfile.css";
+import "../../css/officeProfile.css";
 
 const OfficeProfile = (props) => {
   // les states & setState:
@@ -22,7 +22,7 @@ const OfficeProfile = (props) => {
         return res.json();
       })
       .then((res) => {
-        console.log("getByid :", res);
+        console.log("getByUser :", res);
         if (res.avatar === "") {
           setAvatar("http://localhost:5000/uploads/avatarDefault.PNG");
           console.log("l'avatar par défault", res.avatar);
@@ -132,8 +132,8 @@ OfficeProfile.propTypes = {
 };
 
 OfficeProfile.defaultProps = {
-  profileAvatar: " ",
-  about: " ",
+  profileAvatar: "",
+  about: "",
 };
 
 export default OfficeProfile;

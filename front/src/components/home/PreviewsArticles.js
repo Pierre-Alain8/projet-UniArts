@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/previewsAricles.css";
+import "../../css/previewsAricles.css";
 
 const PreviewsArticles = (props) => {
   return (

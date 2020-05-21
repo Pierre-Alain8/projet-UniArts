@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserGallery from "./UserGallery";
 import ModalViewMedia from "./ModalViewMedia";
-import "../css/officeGallery.css";
+import "../../css/officeGallery.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
