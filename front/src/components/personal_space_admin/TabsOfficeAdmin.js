@@ -35,7 +35,7 @@ const a11yProps = (index) => {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#E7EAEF",
-    height: "40rem",
+    height: "50rem",
     width: "100%",
   },
 
@@ -59,7 +59,7 @@ const TabsOfficeAdmin = (props) => {
   };
 
   return (
-    <div className="office-admin">
+    <section className="office-admin">
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs
@@ -93,7 +93,7 @@ const TabsOfficeAdmin = (props) => {
           </TabPanel>
         </SwipeableViews>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "../../scss/officeArticle.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,8 +9,8 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 const useStyles = makeStyles((theme) => ({
   saveArticle: {
     backgroundColor: "rgb(64, 64, 64)",
-    color: "rgb(231, 234, 239)",
-    margin: "0.8rem;",
+    color: "rgb(255, 255, 255)",
+    marginTop: "0.8rem;",
   },
 }));
 
@@ -17,24 +18,46 @@ const OfficeArticle = (props) => {
   const classes = useStyles();
   const [values, setValues] = useState({ title: "", content: "" });
 
+  const formArticleBool = useSelector((state) => state.formArticleBool);
+  const formActive = useSelector((state) => state.formActive);
+
+  const dispatch = useDispatch();
+
   const handleChangeArticle = (event) => {
-    // l'évenement permettant de ciblier les valeurs des inputs
     const { name, value } = event.target;
     setValues({ ...values, [name]: value }, console.log(name));
-    // récupération des valeurs de manières indépendantes
   };
 
-  const addNewArticle = () => {};
+  const addNewArticle = () => {
+    dispatch({ type: "SHOW_FORM_ARTICLE_BOOL", formActive: props.formActive });
+    console.log("ajout form :", formArticleBool);
+  };
+
+  const cancelNewArticle = (event) => {
+    event.preventDefault();
+    dispatch({ type: "CANCEL_FORM_ARTICLE_BOOL", form: props.form });
+    console.log("annulation form:", formArticleBool);
+  };
 
   return (
     <div className="office-article">
+      <div className="office-title">
+        <h2>Publications d'articles</h2>
+      </div>
+
       <div className="button-article-container">
         <button onClick={addNewArticle} className="button-article">
-          Ajouter un article
+          AJOUTER UN ARTICLE
         </button>
       </div>
 
-      <form className="form-article">
+      <form
+        className={
+          formArticleBool === true
+            ? "form-article" + formActive
+            : "form-article"
+        }
+      >
         <input
           type="text"
           name="title"
@@ -60,8 +83,9 @@ const OfficeArticle = (props) => {
         <textarea
           id="content"
           name="content"
-          rows="5"
-          cols="33"
+          wrap="off"
+          rows="10"
+          cols="50"
           value={values.content}
           onChange={handleChangeArticle}
           placeholder="enter the text of article..."
@@ -75,7 +99,11 @@ const OfficeArticle = (props) => {
         >
           enregistrer
         </Button>
+
+        <button onClick={cancelNewArticle}>Annuler</button>
       </form>
+
+      <div className="list-article"></div>
     </div>
   );
 };
