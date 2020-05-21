@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Links from "./Links";
-import "../../css/officeLinks.css";
+import "../../scss/officeLinks.scss";
 
 const OfficeLinks = (props) => {
   const [links, setLinks] = useState([]);

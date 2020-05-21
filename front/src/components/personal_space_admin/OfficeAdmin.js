@@ -1,6 +1,6 @@
 import React from "react";
 import TabsOfficeAdmin from "./TabsOfficeAdmin";
-import "../../css/officeAdmin.css";
+import "../../scss/officeAdmin.scss";
 import decode from "jwt-decode";
 import { withRouter } from "react-router-dom";
 

@@ -40,10 +40,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
 
-  indicator: {
-    backgroundColor: "rgba(255, 255, 255, .2)",
-  },
-
   labelTab: {
     fontFamily: ["Source Sans Pro", "sans-serif"],
     fontSize: "1em",
@@ -75,7 +71,7 @@ const TabsOfficeUser = (props) => {
           <Tabs
             value={value}
             onChange={handleChange}
-            indicatorColor={classes.indicator}
+            indicatorColor="primary"
             textColor="primary"
             variant="fullWidth"
             aria-label="full width tabs example"

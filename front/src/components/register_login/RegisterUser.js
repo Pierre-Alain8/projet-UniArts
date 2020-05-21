@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Formik } from "formik";
 import styled from "styled-components";
 import validateRegister from "../../validations/ValidateRegister";
-import "../../css/registerUser.css";
+import "../../scss/registerUser.scss";
 
 const ErrorsForm = styled.span`
   color: red;

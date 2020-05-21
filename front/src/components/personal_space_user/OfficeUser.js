@@ -3,7 +3,7 @@ import decode from "jwt-decode";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import TabsOfficeUser from "./TabsOfficeUser";
-import "../../css/officeUser.css";
+import "../../scss/officeUser.scss";
 
 const OfficeUser = (props) => {
   let getToken = localStorage.getItem("token");

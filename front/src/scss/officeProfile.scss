@@ -1,3 +1,14 @@
+// colors
+$onyx: rgb(64, 64, 64);
+$light-gray: rgb(231, 234, 239);
+$orange-red: rgb(241, 100, 98);
+$alternate-gray: rgb(210, 213, 218);
+
+// font
+$font-teko: ("Teko", sans-serif);
+$font-muli: ("Muli", sans-serif);
+$font-sans-source-pro: ("Source Sans Pro", sans-serif);
+
 @media all and (min-width: 320px) and (max-width: 480px) {
   /* Gestion de profile de l'utilisateur */
 
@@ -9,43 +20,35 @@
     width: 100%;
     height: 37rem;
   }
-
   .office-account-title {
-    font-family: "Teko", sans-serif;
+    font-family: $font-teko;
     font-size: 1.5em;
     text-decoration: underline;
-    text-decoration-color: #f16462;
+    text-decoration-color: $orange-red;
   }
-
   .form-avatar {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    label {
+      font-family: $font-sans-source-pro;
+    }
   }
-
-  .form-avatar label {
-    font-family: "Source Sans Pro", sans-serif;
-  }
-
-  /* édition du profil de l'utilisateur */
-
   .form-profile {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    label {
+      font-family: $font-sans-source-pro;
+    }
   }
-
-  .form-profile label {
-    font-family: "Source Sans Pro", sans-serif;
-  }
-
   .button-save-profile {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: $font-sans-source-pro;
     width: 55%;
-    background-color: #404040;
-    color: #e7eaef;
+    background-color: $onyx;
+    color: $light-gray;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -57,7 +60,6 @@
     width: 6rem;
     height: 6rem;
   }
-
   .avatar {
     border-radius: 50px;
     width: 100%;

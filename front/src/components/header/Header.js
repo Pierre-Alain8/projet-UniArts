@@ -1,5 +1,5 @@
 import React from "react";
-import "../../css/header.css";
+import "../../scss/header.scss";
 import { withRouter } from "react-router-dom";
 import Navbar from "../navigation/Navbar";
 

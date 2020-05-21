@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
+import "../../scss/officeArticle.scss";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import SaveIcon from "@material-ui/icons/Save";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
+
+const useStyles = makeStyles((theme) => ({
+  saveArticle: {
+    backgroundColor: "rgb(64, 64, 64)",
+    color: "rgb(231, 234, 239)",
+    margin: "0.8rem;",
+  },
+}));
 
 const OfficeArticle = (props) => {
-  const [display, setDislay] = useState("none");
+  const classes = useStyles();
   const [values, setValues] = useState({ title: "", content: "" });
 
   const handleChangeArticle = (event) => {
@@ -15,11 +28,13 @@ const OfficeArticle = (props) => {
 
   return (
     <div className="office-article">
-      <button onClick={addNewArticle} className="button-article">
-        Ajouter un article
-      </button>
+      <div className="button-article-container">
+        <button onClick={addNewArticle} className="button-article">
+          Ajouter un article
+        </button>
+      </div>
 
-      <form className="form-article" style={{ display: display }}>
+      <form className="form-article">
         <input
           type="text"
           name="title"
@@ -29,11 +44,18 @@ const OfficeArticle = (props) => {
         />
 
         <input
-          id="image"
+          style={{ display: "none" }}
+          id="add-image"
           type="file"
           name="image"
           placeholder="sélectionner une image"
         />
+
+        <label htmlFor="add-image">
+          <Button className="add-image-article" component="span">
+            <PhotoCamera />
+          </Button>
+        </label>
 
         <textarea
           id="content"
@@ -45,9 +67,14 @@ const OfficeArticle = (props) => {
           placeholder="enter the text of article..."
         />
 
-        <button className="" type="submit">
-          Enregistrer
-        </button>
+        <Button
+          className={classes.saveArticle}
+          type="submit"
+          variant="contained"
+          startIcon={<SaveIcon />}
+        >
+          enregistrer
+        </Button>
       </form>
     </div>
   );

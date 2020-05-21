@@ -1,0 +1,91 @@
+// colors
+$onyx: rgb(64, 64, 64);
+$light-gray: rgb(231, 234, 239);
+$orange-red: rgb(241, 100, 98);
+$alternate-gray: rgb(210, 213, 218);
+
+// font
+$font-teko: ("Teko", sans-serif);
+$font-muli: ("Muli", sans-serif);
+$font-source-pro: ("Source Sans Pro", sans-serif);
+
+@media all and (min-width: 320px) and (max-width: 480px) {
+  .section-register {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 52rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .presentation-uniarts {
+    background-color: $light-gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: justify;
+    height: 11rem;
+    width: 100%;
+    h1 {
+      margin: 0;
+      font-family: $font-teko;
+    }
+    p {
+      margin: auto 2rem;
+      font-family: $font-muli;
+    }
+  }
+  .form-register {
+    height: 41rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-color: $alternate-gray;
+    h2 {
+      margin: 0;
+      font-family: $font-teko;
+    }
+    p {
+      text-align: center;
+      font-family: $font-muli;
+    }
+    label {
+      font-family: $font-source-pro;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  input[type="text"],
+  [type="email"],
+  [type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid $light-gray;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input {
+    &:focus {
+      border: 1px solid $orange-red;
+    }
+  }
+  .button-register {
+    font-family: $font-source-pro;
+    width: 32%;
+    background-color: $onyx;
+    color: $light-gray;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import "../../css/officeProfile.css";
+import "../../scss/officeProfile.scss";
 
 const OfficeProfile = (props) => {
   // les states & setState:

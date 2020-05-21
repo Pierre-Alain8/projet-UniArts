@@ -1,5 +1,15 @@
+// colors
+$onyx: rgb(64, 64, 64);
+$light-gray: rgb(231, 234, 239);
+$orange-red: rgb(241, 100, 98);
+$alternate-gray: rgb(210, 213, 218);
+
+// font
+$font-teko: ("Teko", sans-serif);
+$font-muli: ("Muli", sans-serif);
+$font-sans-source-pro: ("Source Sans Pro", sans-serif);
+
 @media all and (min-width: 320px) and (max-width: 480px) {
-  /* Back-Office : gestion de projets */
   .office-projects {
     display: flex;
     flex-direction: column;
@@ -8,29 +18,26 @@
     width: 100%;
     height: 37rem;
   }
-
   .office-project-title {
-    font-family: "Teko", sans-serif;
+    font-family: $font-teko;
     font-size: 1.5em;
     text-decoration: underline;
-    text-decoration-color: #f16462;
+    text-decoration-color: $orange-red;
   }
-
   .form-projects {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-
   .project-input {
     width: 72%;
+    width: 72%;
   }
-
   .button-save-project {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: $font-sans-source-pro;
     width: 56%;
-    background-color: #404040;
+    background-color: $onyx;
     color: #e7eaef;
     padding: 14px 20px;
     margin: 8px 0;
@@ -38,19 +45,6 @@
     border-radius: 4px;
     cursor: pointer;
   }
-
-  /* Liste des projets */
-
-  .cover-contain {
-    width: 26rem;
-    height: 14rem;
-  }
-
-  .cover-contain img {
-    height: 100%;
-    width: 100%;
-  }
-
   .list-projects {
     background-color: rgba(64, 64, 64, 0.5);
     display: flex;
@@ -60,50 +54,26 @@
     width: 26rem;
     overflow: scroll;
   }
-
-  /*  modal material ui */
-
   .modal-button {
     width: 100%;
-    background-color: #f16462;
+    background-color: $orange-red;
     height: 90%;
     border-radius: 1%;
+    h1 {
+      width: 11rem;
+      position: relative;
+      margin: 0;
+      top: 1px;
+      left: 68px;
+      font-family: $font-teko;
+      font-size: 1.3em;
+      text-align: center;
+    }
+    img {
+      height: 100%;
+      width: 100%;
+    }
   }
-
-  .modal-button h1 {
-    width: 11rem;
-    position: relative;
-    margin: 0;
-    top: 1px;
-    left: 68px;
-    font-family: "Teko", sans-serif;
-    font-size: 1.3em;
-    text-align: center;
-  }
-
-  .modal-button img {
-    height: 100%;
-    width: 100%;
-  }
-
-  .close-modal-project {
-    background-color: none;
-    background-color: transparent;
-    height: 5rem;
-    width: 5rem;
-    object-fit: contain;
-    position: absolute;
-    bottom: 33rem;
-    left: 22rem;
-  }
-
-  .close-modal-project img {
-    height: 100%;
-    width: 100%;
-  }
-
-  /* Les projets: */
-
   .projects-modal {
     position: fixed;
     top: 26px;
@@ -113,7 +83,28 @@
     align-items: center;
     justify-content: center;
   }
-
+  .cover-contain {
+    width: 26rem;
+    height: 14rem;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .close-modal-project {
+    background-color: none;
+    background-color: transparent;
+    height: 5rem;
+    width: 5rem;
+    object-fit: contain;
+    position: absolute;
+    bottom: 33rem;
+    left: 22rem;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
   .projects-content {
     display: flex;
     width: 100%;
@@ -123,7 +114,6 @@
     text-align: center;
     background-color: #e7eaef;
   }
-
   .button-container {
     position: relative;
     bottom: 5rem;
@@ -133,10 +123,9 @@
     align-items: center;
     justify-content: space-evenly;
   }
-
   .update-project {
-    background-color: #e7eaef;
-    color: #404040;
+    background-color: $light-gray;
+    color: $onyx;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
@@ -150,11 +139,15 @@
     font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
+    img {
+      height: 2rem;
+      width: 2rem;
+      margin-bottom: 0.1rem;
+    }
   }
-
   .delete-project {
-    background-color: #e7eaef;
-    color: #f16462;
+    background-color: $light-gray;
+    color: $orange-red;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
@@ -168,21 +161,24 @@
     font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
+    img {
+      height: 2rem;
+      width: 2rem;
+      margin-bottom: 0.1rem;
+    }
   }
-
   .delete-close-modal {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: $font-sans-source-pro;
     width: 23%;
-    background-color: #404040;
-    color: #e7eaef;
+    background-color: $onyx;
+    color: $light-gray;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
   }
-
   .validate-project {
-    background-color: #e7eaef;
-    color: #404040;
+    background-color: $light-gray;
+    color: $onyx;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
@@ -195,23 +191,10 @@
     font-size: 0.9em;
     width: 4.5rem;
     height: 3.5rem;
-  }
-
-  .validate-project img {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.1rem;
-  }
-
-  .update-project img {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.1rem;
-  }
-
-  .delete-project img {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.1rem;
+    img {
+      height: 2rem;
+      width: 2rem;
+      margin-bottom: 0.1rem;
+    }
   }
 }

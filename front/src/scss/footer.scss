@@ -1,0 +1,22 @@
+// colors
+$onyx: rgb(64, 64, 64);
+$light-gray: rgb(231, 234, 239);
+$orange-red: rgb(241, 100, 98);
+$alternate-gray: rgb(210, 213, 218);
+
+// font
+$font-teko: ("Teko", sans-serif);
+$font-muli: ("Muli", sans-serif);
+$font-sans-source-pro: ("Source Sans Pro", sans-serif);
+@media all and (min-width: 320px) and (max-width: 480px) {
+  .footer-Uniarts {
+    color: white;
+    background-color: $onyx;
+    height: 6rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

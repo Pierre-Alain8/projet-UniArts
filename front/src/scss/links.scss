@@ -1,51 +1,56 @@
+// colors
+$onyx: rgb(64, 64, 64);
+$light-gray: rgb(231, 234, 239);
+$orange-red: rgb(241, 100, 98);
+$alternate-gray: rgb(210, 213, 218);
+
+// font
+$font-teko: ("Teko", sans-serif);
+$font-muli: ("Muli", sans-serif);
+$font-sans-source-pro: ("Source Sans Pro", sans-serif);
+
 @media all and (min-width: 320px) and (max-width: 480px) {
   .links-container {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   .buttons-office-link {
     display: flex;
     justify-content: space-evenly;
   }
-
   .button-save-links {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: $font-sans-source-pro;
     width: 56%;
-    background-color: #404040;
-    color: #e7eaef;
+    background-color: $onyx;
+    color: $light-gray;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
-
   .link-user {
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
+    h3 {
+      font-family: $font-teko;
+      font-size: 1.3em;
+      text-align: center;
+      margin: 0;
+    }
+    p {
+      font-size: 0.8em;
+      text-align: center;
+      font-family: $font-muli;
+    }
   }
-
-  .link-user h3 {
-    font-family: "Teko", sans-serif;
-    font-size: 1.3em;
-    text-align: center;
-    margin: 0;
-  }
-
-  .link-user p {
-    font-size: 0.8em;
-    text-align: center;
-    font-family: "Muli", sans-serif;
-  }
-
   .validate-link {
     background-color: #ffffff;
-    color: #404040;
+    color: $onyx;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
@@ -56,17 +61,15 @@
     font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
+    img {
+      height: 2rem;
+      width: 2rem;
+      margin-bottom: 0.1rem;
+    }
   }
-
-  .validate-link img {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.1rem;
-  }
-
   .delete-link {
     background-color: #ffffff;
-    color: #f16462;
+    color: $orange-red;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
@@ -77,11 +80,10 @@
     font-size: 0.9em;
     width: 5rem;
     height: 3.5rem;
-  }
-
-  .delete-link img {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 0.1rem;
+    img {
+      height: 2rem;
+      width: 2rem;
+      margin-bottom: 0.1rem;
+    }
   }
 }

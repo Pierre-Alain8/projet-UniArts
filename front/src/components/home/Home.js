@@ -1,7 +1,7 @@
 import React from "react";
 import PreviewsArticles from "./PreviewsArticles";
 import { withRouter } from "react-router-dom";
-import "../../css/home.css";
+import "../../scss/home.scss";
 
 const Home = (props) => {
   const handleClickRegister = () => {

@@ -1,3 +1,14 @@
+// colors
+$onyx: rgb(64, 64, 64);
+$light-gray: rgb(231, 234, 239);
+$orange-red: rgb(241, 100, 98);
+$alternate-gray: rgb(210, 213, 218);
+
+// font
+$font-teko: ("Teko", sans-serif);
+$font-muli: ("Muli", sans-serif);
+$font-sans-source-pro: ("Source Sans Pro", sans-serif);
+
 .user-gallery {
   -webkit-column-count: 3;
   -moz-column-count: 3;
@@ -7,28 +18,24 @@
   column-gap: 10px;
   margin-top: 10px;
   overflow: hidden;
+  img {
+    width: 100%;
+    height: auto;
+    transition: 500ms;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
-
-.user-gallery img {
-  width: 100%;
-  height: auto;
-  transition: 500ms;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-
-.user-gallery img:hover {
-  opacity: 1;
-}
-
 @media all and (min-width: 320px) and (max-width: 480px) {
   .office-gallery {
     margin: 1rem;
     background-color: #ffffff;
   }
-
   .form-gallery {
-    background-color: #e7eaef;
+    background-color: $light-gray;
     position: absolute;
     width: 100%;
     top: 33rem;
@@ -38,16 +45,14 @@
     align-items: center;
     justify-content: center;
   }
-
   .button-gallery {
     width: 47%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   .save-media {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: $font-sans-source-pro;
     width: 33%;
     background-color: transparent;
     color: black;
@@ -55,15 +60,12 @@
     border: none;
     border-radius: 4px;
   }
-
   .media-contenair {
     background-color: #ffffff;
   }
-
   .gallery-container {
     height: 34.5rem;
   }
-
   .modal-container {
     display: flex;
     justify-content: center;
@@ -76,26 +78,23 @@
     margin-left: auto;
     outline: none;
   }
-
   .modal-media {
     object-fit: cover;
+    img {
+      height: 100%;
+      width: 100%;
+    }
   }
-
-  .modal-media img {
-    height: 100%;
-    width: 100%;
-  }
-
   .user-gallery {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
-  }
-  .user-gallery img {
-    width: 100%;
-    height: auto;
-    transition: 500ms;
-    margin-bottom: 0.4rem;
-    opacity: 0.8;
+    img {
+      width: 100%;
+      height: auto;
+      transition: 500ms;
+      margin-bottom: 0.4rem;
+      opacity: 0.8;
+    }
   }
 }
