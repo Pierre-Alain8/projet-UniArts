@@ -6,7 +6,7 @@ const initialState = {
   modalMediaBool: false,
   media: {},
   formArticleBool: false,
-  formActive: "-isActive",
+  formActive: "form-article isActive",
 };
 
 // la fonction reducer englobe toute les actions de l'appli
@@ -70,7 +70,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         formArticleBool: true,
-        formActive: action.formActive,
+        formActive: "form-article isActive",
       };
 
     case "CANCEL_FORM_ARTICLE_BOOL":
