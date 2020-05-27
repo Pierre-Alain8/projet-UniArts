@@ -14,14 +14,6 @@ let articleSchema = new Schema({
     type: "string",
   },
 
-  artistePseudo: {
-    type: "string",
-  },
-
-  artisteName: {
-    type: "string",
-  },
-
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   commentId: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });

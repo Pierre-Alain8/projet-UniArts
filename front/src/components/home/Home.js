@@ -2,10 +2,13 @@ import React from "react";
 import PreviewsArticles from "./PreviewsArticles";
 import { withRouter } from "react-router-dom";
 import "../../scss/home.scss";
-
 const Home = (props) => {
   const handleClickRegister = () => {
     props.history.push("/RegisterUser");
+  };
+
+  const handleClickDiscovery = () => {
+    props.history.push("/DiscoveryPage");
   };
 
   return (
@@ -27,6 +30,16 @@ const Home = (props) => {
       </div>
 
       <PreviewsArticles />
+
+      <div className="link-discovery">
+        <h1 onClick={handleClickDiscovery}>Découvrir le collectif</h1>
+        <div className="arrow-link-discovery">
+          <img
+            src="img/arrow-right.png"
+            alt="Vous voulez rejoindre le collectif ?"
+          />
+        </div>
+      </div>
     </section>
   );
 };

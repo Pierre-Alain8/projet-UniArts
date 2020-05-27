@@ -17,7 +17,7 @@ $font-sans-source-pro: ("Source Sans Pro", sans-serif);
     padding: 0;
   }
   .home-uniarts {
-    height: 36rem;
+    height: 43rem;
     width: 100%;
   }
   .title-home {
@@ -59,14 +59,39 @@ $font-sans-source-pro: ("Source Sans Pro", sans-serif);
   }
   .arrow-link {
     position: absolute;
-    top: 128px;
+    top: 123px;
     left: 242px;
     object-fit: cover;
-    height: 29px;
+    height: 38px;
     width: 57px;
     img {
-      height: 100%;
+      height: 80%;
       width: 100%;
+    }
+  }
+
+  .link-discovery {
+    justify-content: center;
+    height: 4rem;
+    display: flex;
+    width: 100%;
+    h1 {
+      margin-right: 2rem;
+      font-family: "Teko", sans-serif;
+      font-size: 1.3rem;
+    }
+  }
+  .arrow-link-discovery {
+    position: absolute;
+    /* bottom: 0rem; */
+    top: 43.4rem;
+    left: 15.8rem;
+    height: 5rem;
+    width: 11rem;
+    object-fit: contain;
+    img {
+      height: 57%;
+      width: 34%;
     }
   }
 }

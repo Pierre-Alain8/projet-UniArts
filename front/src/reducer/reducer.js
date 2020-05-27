@@ -6,7 +6,8 @@ const initialState = {
   modalMediaBool: false,
   media: {},
   formArticleBool: false,
-  formActive: "form-article isActive",
+  article: {},
+  formEditArticle: false,
 };
 
 // la fonction reducer englobe toute les actions de l'appli
@@ -78,6 +79,18 @@ function reducer(state = initialState, action) {
         ...state,
         formArticleBool: false,
         formActive: "",
+      };
+
+    case "SHOW_FORM_EDIT_ARTICLE":
+      return {
+        ...state,
+        formEditArticle: true,
+      };
+
+    case "CLOSE_FORM_EDIT_ARTICLE":
+      return {
+        ...state,
+        formEditArticle: false,
       };
 
     default:

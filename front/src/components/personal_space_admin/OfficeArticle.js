@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import ArticlesPost from "./ArticlesPost";
+import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import "../../scss/officeArticle.scss";
+import { Editor } from "@tinymce/tinymce-react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
@@ -28,6 +31,45 @@ const OfficeArticle = (props) => {
   const [file, setFile] = useState("");
   const [articles, setArticles] = useState([]);
 
+  const getArticles = () => {
+    let token = localStorage.getItem("token");
+
+    return fetch(`http://localhost:5000/user/adm/getAllArticles`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      method: "GET",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        setArticles(res.articleId);
+
+        console.log("getAllArticles ", res);
+        console.log("articles: ", res.articleId);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // ComponentDitMount, ComponentWillMount & ComponentDitUpdate:
+  useEffect(() => {
+    getArticles()
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        setArticles(res.articleId);
+
+        console.log("getAllArticles ", res);
+        console.log("articles: ", res.articleId);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   // useSelector consiste à rappeler un state général définis dans le store
   const formArticleBool = useSelector((state) => state.formArticleBool);
   const formActive = useSelector((state) => state.formActive);
@@ -36,7 +78,6 @@ const OfficeArticle = (props) => {
   const dispatch = useDispatch();
 
   // Méthodes
-
   const addNewArticle = () => {
     dispatch({ type: "SHOW_FORM_ARTICLE_BOOL", formActive: props.formActive });
   };
@@ -49,6 +90,11 @@ const OfficeArticle = (props) => {
   const handleChangeArticle = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value }, console.log(name));
+  };
+
+  const handleEditorChange = (content, editor) => {
+    setValues({ ...values, content });
+    console.log("contenue article:", values);
   };
 
   const handleChangeImage = (event) => {
@@ -90,79 +136,98 @@ const OfficeArticle = (props) => {
   };
 
   return (
-    <div className="office-article">
+    <section className="office-article">
       <div className="office-title">
         <h2>Publications d'articles</h2>
       </div>
 
       <div className="button-article-container">
-        <button onClick={addNewArticle} className="button-article">
+        <button onClick={addNewArticle} className="show-article">
           AJOUTER UN ARTICLE
         </button>
       </div>
 
-      <form
-        className={formArticleBool === true ? formActive : "form-article"}
-        onSubmit={subFormArticle}
-      >
-        <input
-          className="input-title"
-          type="text"
-          name="title"
-          value={values.title}
-          onChange={handleChangeArticle}
-          placeholder="title of article"
-        />
+      <div className="form-container">
+        <form
+          className={formArticleBool === true ? formActive : "form-article"}
+          onSubmit={subFormArticle}
+        >
+          <input
+            className="input-title"
+            type="text"
+            name="title"
+            value={values.title}
+            onChange={handleChangeArticle}
+            placeholder="title of article"
+          />
 
-        <input
-          style={{ display: "none" }}
-          id="add-image"
-          type="file"
-          name="image"
-          placeholder="sélectionner une image"
-          onChange={handleChangeImage}
-        />
+          <input
+            style={{ display: "none" }}
+            id="add-image"
+            type="file"
+            name="image"
+            placeholder="sélectionner une image"
+            onChange={handleChangeImage}
+          />
 
-        <label htmlFor="add-image">
-          <Button className="add-image-article" component="span">
-            ajouter une image
-            <PhotoCamera />
-          </Button>
-        </label>
+          <label htmlFor="add-image">
+            <Button className="add-image-article" component="span">
+              ajouter une image
+              <PhotoCamera />
+            </Button>
+          </label>
 
-        <textarea
-          id="content"
-          name="content"
-          wrap="off"
-          rows="10"
-          cols="50"
-          value={values.content}
-          onChange={handleChangeArticle}
-          placeholder="enter the text of article..."
-        />
-        <span className="buttons-form">
-          <Button
-            className={classes.saveArticle}
-            type="submit"
-            variant="contained"
-            startIcon={<SaveIcon />}
-          >
-            enregistrer
-          </Button>
+          <div className="editor-article">
+            <Editor
+              name="content"
+              initialValue="<p>This is the initial content of the editor</p>"
+              apiKey="g4yqdpo1so4x0pnr2jl6g2i1zoiu3mmyyhwkr5xmbz95bm6f"
+              init={{
+                width: "100%",
+                height: "100%",
+                menubar: false,
+              }}
+              onEditorChange={handleEditorChange}
+            />
+          </div>
 
-          <Button
-            className={classes.cancelArticle}
-            startIcon={<CancelIcon />}
-            onClick={cancelNewArticle}
-          >
-            Annuler
-          </Button>
-        </span>
-      </form>
-
-      <div className="list-article"></div>
-    </div>
+          <span className="buttons-form">
+            <Button
+              className={classes.saveArticle}
+              type="submit"
+              variant="contained"
+              startIcon={<SaveIcon />}
+            >
+              enregistrer
+            </Button>
+            <Button
+              className={classes.cancelArticle}
+              startIcon={<CancelIcon />}
+              onClick={cancelNewArticle}
+            >
+              Annuler
+            </Button>
+          </span>
+        </form>
+      </div>
+      <div className="list-article">
+        <div className="list-article-title">
+          <h2>Articles publiés</h2>
+        </div>
+        {articles.map((article, index) => {
+          return <ArticlesPost key={index} article={article} />;
+        })}
+      </div>
+    </section>
   );
+};
+
+OfficeArticle.propTypes = {
+  article: PropTypes.array,
+};
+
+OfficeArticle.defaultProps = {
+  article: [],
 };
 
 export default OfficeArticle;

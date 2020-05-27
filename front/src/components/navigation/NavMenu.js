@@ -14,11 +14,12 @@ const NavMenu = (props) => {
   const dispatch = useDispatch(); // useDispatch consiste à activer les actions du reducer (liste de nos actions)
 
   // state
-  const [token] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   // méthodes:
   const showMenu = (event) => {
+    setToken(localStorage.getItem("token"));
     setAnchorEl(event.currentTarget);
     dispatch({ type: "OPEN_NAV_MENU_BOOL" });
   };
@@ -29,6 +30,7 @@ const NavMenu = (props) => {
   };
 
   const logOut = () => {
+    setToken(null);
     dispatch({ type: "CLOSE_NAV_MENU_BOOL" });
     props.logOut();
   };
@@ -36,6 +38,7 @@ const NavMenu = (props) => {
   let userAccount = null;
   let userProfile = null;
   let userLogOut = null;
+  let officeAdmin = null;
 
   if (token) {
     let decoded = jwtDecode(token);
@@ -62,6 +65,15 @@ const NavMenu = (props) => {
       decoded.role === "Artiste" ? (
         <MenuItem onClick={logOut}>
           <button className="nav-logOut">DECONEXION</button>
+        </MenuItem>
+      ) : null;
+
+    officeAdmin =
+      decoded.role === "Admin" ? (
+        <MenuItem onClick={handleClose}>
+          <Link className="nav-links" to="/ArtsUnit/power/admin/auth">
+            OFFICE ADMIN
+          </Link>
         </MenuItem>
       ) : null;
   }
@@ -109,6 +121,7 @@ const NavMenu = (props) => {
         {userAccount}
         {userProfile}
         {userLogOut}
+        {officeAdmin}
       </Menu>
     </div>
   );

@@ -35,7 +35,7 @@ const a11yProps = (index) => {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#E7EAEF",
-    height: "50rem",
+    height: "60rem",
     width: "100%",
   },
 

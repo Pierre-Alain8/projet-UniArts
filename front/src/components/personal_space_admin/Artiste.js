@@ -1,9 +1,11 @@
 import React from "react";
-
+import "../../scss/listArtist.scss";
 const Artiste = (props) => {
   return (
-    <div className="artiste-list">
-      <h2>liste des artistes</h2>
+    <div className="artist-list">
+      <div className="artist-list-title">
+        <h2>Liste des artistes du collectif</h2>
+      </div>
     </div>
   );
 };
