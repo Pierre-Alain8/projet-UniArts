@@ -85,12 +85,14 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         formEditArticle: true,
+        article: action.article,
       };
 
     case "CLOSE_FORM_EDIT_ARTICLE":
       return {
         ...state,
         formEditArticle: false,
+        article: {},
       };
 
     default:

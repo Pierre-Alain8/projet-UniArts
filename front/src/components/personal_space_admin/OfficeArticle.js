@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ArticlesPost from "./ArticlesPost";
+import FormEditArticle from "./FormEditArticle";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import "../../scss/officeArticle.scss";
@@ -32,22 +33,16 @@ const OfficeArticle = (props) => {
   const [articles, setArticles] = useState([]);
 
   const getArticles = () => {
-    let token = localStorage.getItem("token");
-
     return fetch(`http://localhost:5000/user/adm/getAllArticles`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
       method: "GET",
     })
       .then((res) => {
         return res.json();
       })
       .then((res) => {
-        setArticles(res.articleId);
+        setArticles(res);
 
         console.log("getAllArticles ", res);
-        console.log("articles: ", res.articleId);
       })
       .catch((error) => console.log(error));
   };
@@ -62,10 +57,9 @@ const OfficeArticle = (props) => {
         return res.json();
       })
       .then((res) => {
-        setArticles(res.articleId);
+        setArticles(res);
 
         console.log("getAllArticles ", res);
-        console.log("articles: ", res.articleId);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -214,9 +208,12 @@ const OfficeArticle = (props) => {
         <div className="list-article-title">
           <h2>Articles publiés</h2>
         </div>
-        {articles.map((article, index) => {
-          return <ArticlesPost key={index} article={article} />;
-        })}
+
+        {articles &&
+          articles.map((article, index) => {
+            return <ArticlesPost key={index} article={article} />;
+          })}
+        <FormEditArticle />
       </div>
     </section>
   );
