@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import "../../scss/articlesPost.scss";
-import { Editor } from "@tinymce/tinymce-react";
+// import CKEditor from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
+// import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
+// import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
+// import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic";
+// import Heading from "@ckeditor/ckeditor5-heading/src/heading";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -17,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
   deleteArticle: {
     color: "rgb(241, 100, 98)",
     border: "1px solid rgb(241, 100, 98)",
+  },
+  modal: {
+    borderRadius: "1rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 
@@ -41,11 +53,6 @@ const FormEditArticle = (props) => {
 
   const handleCloseArticle = () => {
     dispatch({ type: "CLOSE_FORM_EDIT_ARTICLE" });
-  };
-
-  const handleEditorChange = (content, editor) => {
-    setValues({ ...values, content });
-    console.log("contenue article:", values);
   };
 
   const handleEditArticle = (event) => {
@@ -91,8 +98,12 @@ const FormEditArticle = (props) => {
       });
   };
   return (
-    <Modal open={formEditArticle} onClose={handleCloseArticle}>
-      <div id={article._id}>
+    <Modal
+      className={classes.modal}
+      open={formEditArticle}
+      onClose={handleCloseArticle}
+    >
+      <div className="form-edit-container" id={article._id}>
         {/* className={classeEdit} */}
         <form className="form-edit-article" onSubmit={updateFormArticle}>
           <input
@@ -121,18 +132,13 @@ const FormEditArticle = (props) => {
             </Button>
           </label>
 
-          <div className="editor">
-            <Editor
-              name="content"
-              initialValue={articleEdit.content}
-              apiKey="g4yqdpo1so4x0pnr2jl6g2i1zoiu3mmyyhwkr5xmbz95bm6f"
-              init={{
-                width: "100%",
-                height: "100%",
-                menubar: false,
-              }}
-              onEditorChange={handleEditorChange}
-            />
+          <div id="editor" className="editor-update-article">
+            {/* <CKEditor
+              onInit={(editor) =>
+                console.log("Editor is ready to use!", editor)
+              }
+              editor={ClassicEditor}
+            /> */}
           </div>
 
           <span className="buttons-edit-form">

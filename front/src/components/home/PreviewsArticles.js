@@ -23,7 +23,7 @@ const PreviewsArticles = (props) => {
   return (
     <article className="random-reviews">
       {articles &&
-        articles.map((article, index) => {
+        articles.slice(0, 3).map((article, index) => {
           return (
             <div
               className="random-articles"

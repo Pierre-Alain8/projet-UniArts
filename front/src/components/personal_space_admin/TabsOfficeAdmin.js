@@ -59,7 +59,7 @@ const TabsOfficeAdmin = (props) => {
   };
 
   return (
-    <section className="office-admin">
+    <section className="tab-office-admin">
       <div className={classes.root}>
         <AppBar position="static" color="default">
           <Tabs

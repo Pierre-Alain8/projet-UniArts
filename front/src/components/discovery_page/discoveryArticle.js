@@ -18,7 +18,6 @@ const DiscoveryArticle = (props) => {
       <div className="article-discovery-content">
         <span className="article-discovery-text">
           <h3>{article.title}</h3>
-          <p>{article.content}</p>
         </span>
 
         <span className="button-read-container">

@@ -8,22 +8,16 @@ const Discovery = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
-
     fetch(`http://localhost:5000/user/adm/getAllArticles`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
       method: "GET",
     })
       .then((res) => {
         return res.json();
       })
       .then((res) => {
-        setArticles(res.articleId);
+        setArticles(res);
 
-        console.log("getAllArticles ", res);
-        console.log("articles: ", res.articleId);
+        console.log("getAllArticles", res);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -49,9 +43,10 @@ const Discovery = () => {
         <div className="list-discovery-content">
           <div className="list-discovery-article">
             <div className="article-discovery">
-              {articles.map((article, index) => {
-                return <DiscoveryArticle key={index} article={article} />;
-              })}
+              {articles &&
+                articles.map((article, index) => {
+                  return <DiscoveryArticle key={index} article={article} />;
+                })}
             </div>
           </div>
         </div>

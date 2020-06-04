@@ -10,12 +10,12 @@ $font-muli: ("Muli", sans-serif);
 $font-sans-source-pro: ("Source Sans Pro", sans-serif);
 
 @media all and (min-width: 320px) and (max-width: 480px) {
-  .office-admin {
+  .tabs-office-admin {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 60rem;
+    height: 66rem;
     width: 100%;
     background-color: $light-gray;
   }

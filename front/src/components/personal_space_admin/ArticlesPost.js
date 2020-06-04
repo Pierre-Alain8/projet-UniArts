@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import "../../scss/articlesPost.scss";
@@ -25,7 +25,7 @@ const ArticlesPost = (props) => {
 
   // states
   const classes = useStyles();
-  const [classeEdit, setClasseEdit] = useState("form-edit-container");
+  // const [classeEdit, setClasseEdit] = useState("form-edit-container");
 
   // useSelector consiste à rappeler un state général définis dans le store
   const formEditArticle = useSelector((state) => state.formEditArticle);
@@ -47,7 +47,7 @@ const ArticlesPost = (props) => {
         type: "SHOW_FORM_EDIT_ARTICLE",
         article: props.article,
       });
-      setClasseEdit("form-edit-container isActive");
+      // setClasseEdit("form-edit-container isActive");
     } else {
       console.log("oui");
       console.log(formEditArticle);

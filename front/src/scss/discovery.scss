@@ -56,29 +56,29 @@ $font-sans-source-pro: ("Source Sans Pro", sans-serif);
 }
 .cover-article-container {
   height: 8rem;
-  width: 10rem;
+  width: 8rem;
   background-color: $onyx;
-  .cover-article {
-    position: relative;
-    top: 1rem;
-    left: 1.5rem;
-    width: 10rem;
-    height: 8rem;
-    object-fit: contain;
-    background-color: #e7eaef;
-    img {
-      height: 100%;
-      width: 100%;
-    }
+}
+.cover-article {
+  position: relative;
+  top: 2rem;
+  left: 1.5rem;
+  width: 7rem;
+  height: 7rem;
+  object-fit: contain;
+  background-color: #e7eaef;
+  img {
+    height: 100%;
+    width: 100%;
   }
 }
 
 .article-discovery-content {
   width: 15rem;
-  height: 8rem;
-  margin-top: 1rem;
+  height: 7rem;
+  margin-top: 2rem;
   background-color: white;
-  margin-left: 1.5rem;
+  margin-left: 0.5rem;
 
   .article-discovery-text {
     display: inline-flex;
@@ -87,11 +87,18 @@ $font-sans-source-pro: ("Source Sans Pro", sans-serif);
     height: 6.6rem;
     width: 100%;
     align-items: center;
-    h3 {
-      margin: 0;
-    }
-    p {
+
+    .article-content {
+      color: grey;
       text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 16px;
+    }
+    h3 {
+      font-family: $font-teko;
+      font-size: 1.2rem;
+      margin: 0;
     }
   }
 
@@ -99,6 +106,21 @@ $font-sans-source-pro: ("Source Sans Pro", sans-serif);
     display: inline-flex;
     justify-content: flex-end;
     width: 100%;
+    position: relative;
+    bottom: 2.5rem;
+    right: 1rem;
+
+    button {
+      font-family: "Source Sans Pro", sans-serif;
+      width: 35%;
+      background-color: #404040;
+      color: #e7eaef;
+      padding: 7px 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   }
 }
 
