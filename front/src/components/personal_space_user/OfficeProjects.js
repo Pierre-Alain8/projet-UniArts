@@ -46,10 +46,6 @@ const OfficeProjects = (props) => {
       })
       .then((res) => {
         setProjects(res.projectId);
-
-        console.log("getAllProjects: ", res);
-        console.log("projects: ", res.projectId);
-        console.log("cover: ", res.cover);
       })
       .catch((error) => console.log(error));
   }, []);

@@ -10,6 +10,7 @@ import Home from "./components/home/Home";
 import Discovery from "./components/discovery_page/discovery";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import Article from "./components/article_page/Article";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/DiscoveryPage" component={Discovery} />
+        <Route path="/ArticlePage" component={Article} />
         <Route path="/RegisterUser" component={RegisterUser} />
         <Route path="/LoginUser" component={LoginUser} />
         <Route path="/OfficeUser" component={RequireAuth(OfficeUser)} />

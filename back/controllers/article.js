@@ -59,6 +59,26 @@ exports.getAllArticles = function (req, res) {
     });
 };
 
+exports.getArticleById = function (req, res) {
+  Article.findOne({ _id: req.params.id }, function (err, article) {
+    if (err) {
+      console.log(res);
+      res.status(400).json(err);
+    } else {
+      console.log(article);
+      res.status(200).json(article);
+    }
+  });
+  // .then((article) => {
+  //   console.log(article);
+  //   res.status(200).json(article);
+  // })
+  // .catch((err) => {
+  //   console.log(res);
+  //   res.status(400).json(err);
+  // });
+};
+
 exports.updateArticle = function (req, res) {
   header = req.headers.authorization;
   const token = header.split(" ")[1];

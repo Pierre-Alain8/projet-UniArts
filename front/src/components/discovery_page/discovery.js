@@ -44,7 +44,7 @@ const Discovery = () => {
           <div className="list-discovery-article">
             <div className="article-discovery">
               {articles &&
-                articles.map((article, index) => {
+                articles.slice(0, 3).map((article, index) => {
                   return <DiscoveryArticle key={index} article={article} />;
                 })}
             </div>

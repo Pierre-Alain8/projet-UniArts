@@ -40,6 +40,7 @@ article.put(
   ArticleController.updateArticle
 );
 article.get("/getAllArticles", ArticleController.getAllArticles);
+article.get("/getArticleById/:id", ArticleController.getArticleById);
 article.delete("/deleteArticle/:id", ArticleController.deleteArticle);
 
 module.exports = article;

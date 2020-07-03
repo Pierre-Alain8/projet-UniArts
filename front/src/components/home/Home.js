@@ -2,6 +2,7 @@ import React from "react";
 import PreviewsArticles from "./PreviewsArticles";
 import { withRouter } from "react-router-dom";
 import "../../scss/home.scss";
+
 const Home = (props) => {
   const handleClickRegister = () => {
     props.history.push("/RegisterUser");

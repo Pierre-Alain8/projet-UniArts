@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import "../../scss/articlesPost.scss";
-// import CKEditor from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
-// import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
-// import Bold from "@ckeditor/ckeditor5-basic-styles/src/bold";
-// import Italic from "@ckeditor/ckeditor5-basic-styles/src/italic";
-// import Heading from "@ckeditor/ckeditor5-heading/src/heading";
+import CKEditor from "ckeditor4-react";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -58,6 +52,13 @@ const FormEditArticle = (props) => {
   const handleEditArticle = (event) => {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value }, console.log(name));
+  };
+
+  const handleCekditorState = (event) => {
+    console.log(event.editor.getData());
+    const data = event.editor.getData();
+    setValues({ ...values, content: data });
+    console.log("data:", data);
   };
 
   const handleEditImage = (event) => {
@@ -132,13 +133,111 @@ const FormEditArticle = (props) => {
             </Button>
           </label>
 
-          <div id="editor" className="editor-update-article">
-            {/* <CKEditor
-              onInit={(editor) =>
-                console.log("Editor is ready to use!", editor)
-              }
-              editor={ClassicEditor}
-            /> */}
+          <div className={classes.editor}>
+            <CKEditor
+              data="<p>Entrez du texte!</p>"
+              onChange={handleCekditorState}
+              config={{
+                toolbar: [
+                  {
+                    name: "document",
+                    items: [
+                      "Source",
+                      "-",
+                      "Save",
+                      "NewPage",
+                      "Preview",
+                      "Print",
+                      "-",
+                      "Templates",
+                    ],
+                  },
+                  {
+                    name: "clipboard",
+                    items: [
+                      "Cut",
+                      "Copy",
+                      "Paste",
+                      "PasteText",
+                      "PasteFromWord",
+                      "-",
+                      "Undo",
+                      "Redo",
+                    ],
+                  },
+                  {
+                    name: "editing",
+                    items: ["Find", "Replace", "-", "SelectAll", "-", "Scayt"],
+                  },
+                  {
+                    name: "forms",
+                    items: [
+                      "TextField",
+                      "Textarea",
+                      "Select",
+                      "Button",
+                      "ImageButton",
+                      "HiddenField",
+                    ],
+                  },
+                  "/",
+                  {
+                    name: "basicstyles",
+                    items: [
+                      "Bold",
+                      "Italic",
+                      "Underline",
+                      "Strike",
+                      "Subscript",
+                      "Superscript",
+                      "-",
+                      "CopyFormatting",
+                      "RemoveFormat",
+                    ],
+                  },
+                  {
+                    name: "paragraph",
+                    items: [
+                      "NumberedList",
+                      "BulletedList",
+                      "-",
+                      "Outdent",
+                      "Indent",
+                      "-",
+                      "Blockquote",
+                      "CreateDiv",
+                      "-",
+                      "JustifyLeft",
+                      "JustifyCenter",
+                      "JustifyRight",
+                      "JustifyBlock",
+                      "-",
+                      "BidiLtr",
+                      "BidiRtl",
+                      "Language",
+                    ],
+                  },
+                  { name: "links", items: ["Link", "Unlink", "Anchor"] },
+                  {
+                    name: "insert",
+                    items: [
+                      "Image",
+                      "Flash",
+                      "SpecialChar",
+                      "PageBreak",
+                      "Iframe",
+                    ],
+                  },
+                  "/",
+                  {
+                    name: "styles",
+                    items: ["Styles", "Format", "Font", "FontSize"],
+                  },
+                  { name: "colors", items: ["TextColor", "BGColor"] },
+                  { name: "tools", items: ["Maximize", "ShowBlocks"] },
+                ],
+              }}
+            />
           </div>
 
           <span className="buttons-edit-form">

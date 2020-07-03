@@ -53,7 +53,6 @@ const FormAddArticle = (props) => {
       .catch((error) => console.log(error));
   };
 
-  // ComponentDitMount, ComponentWillMount & ComponentDitUpdate:
   useEffect(() => {
     getArticles()
       .then((res) => {
@@ -133,7 +132,7 @@ const FormAddArticle = (props) => {
   };
 
   return (
-    <div>
+    <>
       <div className="form-container">
         <form
           className={formArticleBool === true ? formActive : "form-article"}
@@ -203,9 +202,6 @@ const FormAddArticle = (props) => {
                   {
                     name: "forms",
                     items: [
-                      "Form",
-                      "Checkbox",
-                      "Radio",
                       "TextField",
                       "Textarea",
                       "Select",
@@ -257,9 +253,6 @@ const FormAddArticle = (props) => {
                     items: [
                       "Image",
                       "Flash",
-                      "Table",
-                      "HorizontalRule",
-                      "Smiley",
                       "SpecialChar",
                       "PageBreak",
                       "Iframe",
@@ -272,7 +265,6 @@ const FormAddArticle = (props) => {
                   },
                   { name: "colors", items: ["TextColor", "BGColor"] },
                   { name: "tools", items: ["Maximize", "ShowBlocks"] },
-                  { name: "about", items: ["About"] },
                 ],
               }}
             />
@@ -308,7 +300,7 @@ const FormAddArticle = (props) => {
           })}
         <FormEditArticle />
       </div>
-    </div>
+    </>
   );
 };
 
