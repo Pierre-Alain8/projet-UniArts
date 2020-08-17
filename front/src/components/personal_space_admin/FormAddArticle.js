@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ArticlesPost from "./ArticlesPost";
 import FormEditArticle from "./FormEditArticle";
+import DeleteModalArticle from "./DeleteModalArticle";
 import CKEditor from "ckeditor4-react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
@@ -299,6 +300,7 @@ const FormAddArticle = (props) => {
             return <ArticlesPost key={index} article={article} />;
           })}
         <FormEditArticle />
+        <DeleteModalArticle getArticles={getArticles} />
       </div>
     </>
   );

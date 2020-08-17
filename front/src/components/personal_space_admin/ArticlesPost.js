@@ -57,6 +57,10 @@ const ArticlesPost = (props) => {
     console.log("target data:", targetData);
   };
 
+  const handleOpenDeleteArticle = () => {
+    dispatch({ type: "OPEN_MODAL_DELETE_ARTICLE", article: props.article });
+  };
+
   return (
     <div className="edit-container">
       <div className="article">
@@ -78,7 +82,10 @@ const ArticlesPost = (props) => {
             edit
           </Button>
 
-          <Button className={classes.deleteArticle}>
+          <Button
+            className={classes.deleteArticle}
+            onClick={handleOpenDeleteArticle}
+          >
             <DeleteIcon />
             supprimer
           </Button>

@@ -8,6 +8,7 @@ const initialState = {
   formArticleBool: false,
   article: {},
   formEditArticle: false,
+  modalDeleteArticle: false,
 };
 
 // la fonction reducer englobe toute les actions de l'appli
@@ -92,6 +93,20 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         formEditArticle: false,
+        article: {},
+      };
+
+    case "OPEN_MODAL_DELETE_ARTICLE":
+      return {
+        ...state,
+        modalDeleteArticle: true,
+        article: action.article,
+      };
+
+    case "CLOSE_MODAL_DELETE_ARTICLE":
+      return {
+        ...state,
+        modalDeleteArticle: false,
         article: {},
       };
 
